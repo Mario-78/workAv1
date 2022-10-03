@@ -1,5 +1,13 @@
 package workAv1_negocios;
 
-public class Empresa {
-
+public abstract class Empresa {
+	
+	private Integer id;
+	private String name;
+	
+	public Empresa(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 }
