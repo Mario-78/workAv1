@@ -3,18 +3,23 @@ package workAv1_recursosHumanos;
 import java.util.HashSet;
 import java.util.Set;
 
-import workAv1_negociosProdutos.Conta;
+import workAv1_negociosProdutos.ContaCorrente;
+import workAv1_negociosProdutos.ContaPoupanca;
 
 public abstract class Pessoa {
 	
-	private Integer id;
-	private String name;
-	private String cpf;
-	private Set<Conta> conta = new HashSet<Conta>();
+	protected Integer id;
+	protected String name;
+	protected String cpf;
+	protected Set<ContaCorrente> contaC = new HashSet<ContaCorrente>();
+	protected Set<ContaPoupanca> contaP = new HashSet<ContaPoupanca>();
 	
-	public Pessoa(Integer id, String name) {
+	public Pessoa(Integer id, String name, String cpf) {
 		this.id = id;
 		this.name = name;
+		this.cpf = cpf;
 	}
+	
+	
 	
 }

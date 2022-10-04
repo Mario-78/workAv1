@@ -1,18 +1,38 @@
 package workAv1_recursosHumanos;
 
-import workAv1_negociosProdutos.Conta;
-
 public class Aluno extends Pessoa implements PessoaFisica {
+	
+	private String matricula;
 
-	public Aluno(Integer id, String name) {
-		super(id, name);
+	public Aluno(Integer id, String name, String cpf) {
+		super(id, name, cpf);
 
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
 	}
 
 	@Override
-	public void cadCpf(String cpf) {
-		
-		
+	public boolean pessoaFisica() {
+		return true;
 	}
+
 
 }

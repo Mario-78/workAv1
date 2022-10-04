@@ -1,24 +1,26 @@
 package workAv1_recursosHumanos;
 
-import workAv1_estruturaOrganizacional.Diretoria;
+public class Presidente extends Funcionario {
 
-public class Presidente extends Funcionario implements PessoaFisica, Diretoria  {
-
-	public Presidente(Integer id, String name, String função) {
-		super(id, name, função);
+	public Presidente(Integer id, String name, String cpf, String função) {
+		super(id, name, cpf, função);
 		
 	}
 
+
 	@Override
-	public void cadCpf(String cpf) {
-		
-		
+	public boolean secretaria() {
+		return false;
 	}
 
 	@Override
-	public void cadHierarquia() {
-		
-		
+	public boolean diretoria() {
+		return true;
+	}
+
+	@Override
+	public boolean pessoaFisica() {
+		return true;
 	}
 
 }
