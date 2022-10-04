@@ -7,6 +7,10 @@ import workAv1_negociosProdutos.ContaCorrente;
 public abstract class Funcionario extends Pessoa implements PessoaFisica, Diretoria, Secretaria{
 	
 	protected String função;
+	
+	public Funcionario() {
+		
+	}
 
 	public Funcionario(Integer id, String name, String cpf, String função) {
 		super(id, name, cpf);

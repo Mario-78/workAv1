@@ -14,6 +14,10 @@ public abstract class Pessoa {
 	protected Set<ContaCorrente> contaC = new HashSet<ContaCorrente>();
 	protected Set<ContaPoupanca> contaP = new HashSet<ContaPoupanca>();
 	
+	public Pessoa() {
+		
+	}
+	
 	public Pessoa(Integer id, String name, String cpf) {
 		this.id = id;
 		this.name = name;

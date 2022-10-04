@@ -5,21 +5,37 @@ import java.util.Set;
 
 public class Professor extends Funcionario implements PessoaFisica {
 	
-	private Set<Aluno> fila = new HashSet<Aluno>();
+	private Set<Object> filaAlunos = new HashSet<Object>();	
 	
-	
-
-	public Professor(Integer id, String name, String função) {
-		super(id, name, função);
+	public Professor() {
 		
 	}
 
-
+	public Professor(Integer id, String name, String cpf, String função) {
+		super(id, name, cpf, função);		
+	}
+	
+	public void addFilaAlunos(Object aluno) {
+		filaAlunos.add(aluno);
+	}
+	
+	public void removeFilaAluno(Object aluno) {
+		filaAlunos.remove(aluno);
+	}	
 
 	@Override
-	public void cadCpf(String cpf) {
-		
-		
+	public boolean diretoria() {
+		return true;
+	}
+
+	@Override
+	public boolean secretaria() {
+		return false;
+	}
+
+	@Override
+	public boolean pessoaFisica() {
+		return true;
 	}
 
 }

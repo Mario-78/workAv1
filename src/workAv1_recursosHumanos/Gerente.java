@@ -7,6 +7,10 @@ public class Gerente extends Funcionario  {
 	
 	private Integer idAgencia;
 	private Set<Object> filaPessoas = new HashSet<Object>();
+	
+	public Gerente() {
+		
+	}
 
 	public Gerente(Integer id, String name, String cpf, String funcao, Integer idAgencia) {
 		super(id, name, cpf, funcao);

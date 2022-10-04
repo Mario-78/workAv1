@@ -1,12 +1,14 @@
 package workAv1_recursosHumanos;
 
 public class Presidente extends Funcionario {
-
-	public Presidente(Integer id, String name, String cpf, String função) {
-		super(id, name, cpf, função);
+	
+	public Presidente() {
 		
 	}
 
+	public Presidente(Integer id, String name, String cpf, String função) {
+		super(id, name, cpf, função);		
+	}
 
 	@Override
 	public boolean secretaria() {

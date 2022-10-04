@@ -3,29 +3,36 @@ package workAv1_recursosHumanos;
 import java.util.HashSet;
 import java.util.Set;
 
-import workAv1_estruturaOrganizacional.Diretoria;
-
-public class Diretor extends Funcionario implements PessoaFisica, Diretoria {
+public class Diretor extends Funcionario {
 	
+	private Set<Object> filaCoordenadores = new HashSet<Object>();	
 	
-	
-	public Diretor(Integer id, String name, String função) {
-		super(id, name, função);
-
+	public Diretor() {
+		
 	}
-
-	private Set<Coordenador> coordenador = new HashSet<Coordenador>();
-
-	@Override
-	public void cadCpf(String cpf) {
-		
-		
+	
+	public Diretor(Integer id, String name, String cpf, String função) {
+		super(id, name, cpf, função);
+	}
+	
+	public void addFilaCoordenadores(Object coordenador) {
+		filaCoordenadores.add(coordenador);
 	}
 
 	@Override
-	public void cadHierarquia() {
-	
-		
+	public boolean pessoaFisica() {
+		return true;
 	}
 
+	@Override
+	public boolean diretoria() {
+		return true;
+	}
+
+	@Override
+	public boolean secretaria() {
+		return false;
+	}
+
+	
 }

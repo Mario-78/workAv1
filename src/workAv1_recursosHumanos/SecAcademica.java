@@ -3,28 +3,39 @@ package workAv1_recursosHumanos;
 import java.util.HashSet;
 import java.util.Set;
 
-import workAv1_estruturaOrganizacional.Secretaria;
-
-public class SecAcademica extends Funcionario implements PessoaFisica, Secretaria {
+public class SecAcademica extends Funcionario {
 	
-	private Set<Aluno> fila = new HashSet<Aluno>();
+	private Set<Object> filaAlunos = new HashSet<Object>();
+	
+	public SecAcademica() {
+		
+	}
 
-	public SecAcademica(Integer id, String name, String função) {
-		super(id, name, função);
-
-
+	public SecAcademica(Integer id, String name, String cpf, String função) {
+		super(id, name, cpf, função);
+	}
+	
+	public void addFilaAluno(Object aluno) {
+		filaAlunos.add(aluno);
+	}
+	
+	public void removeFilaAluno(Object aluno) {
+		filaAlunos.remove(aluno);
 	}
 
 	@Override
-	public void cadCpf(String cpf) {
-		
-		
+	public boolean pessoaFisica() {
+		return true;
 	}
 
 	@Override
-	public void cadSetorEspecializado() {
-		// TODO Auto-generated method stub
-		
+	public boolean diretoria() {
+		return false;
 	}
 
+	@Override
+	public boolean secretaria() {
+		return true;
+	}
+	
 }

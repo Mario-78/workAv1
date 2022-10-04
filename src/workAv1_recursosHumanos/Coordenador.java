@@ -4,12 +4,12 @@ import workAv1_estruturaOrganizacional.Diretoria;
 
 public class Coordenador extends Funcionario implements PessoaFisica, Diretoria {
 	
-	
+	public Coordenador() {
+		
+	}
 
 	public Coordenador(Integer id, String name, String cpf, String função) {
 		super(id, name, cpf, função);
-
-
 	}
 
 	@Override

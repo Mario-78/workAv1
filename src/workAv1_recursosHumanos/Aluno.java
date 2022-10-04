@@ -2,11 +2,15 @@ package workAv1_recursosHumanos;
 
 public class Aluno extends Pessoa implements PessoaFisica {
 	
-	private String matricula;
+	private Integer matricula;
+	
+	public Aluno() {
+		
+	}
 
-	public Aluno(Integer id, String name, String cpf) {
+	public Aluno(Integer id, String name, String cpf, Integer matricula) {
 		super(id, name, cpf);
-
+		this.matricula = matricula;
 	}
 	
 	public Integer getId() {
@@ -21,11 +25,11 @@ public class Aluno extends Pessoa implements PessoaFisica {
 		return cpf;
 	}
 
-	public String getMatricula() {
+	public Integer getMatricula() {
 		return matricula;
 	}
 
-	public void setMatricula(String matricula) {
+	public void setMatricula(Integer matricula) {
 		this.matricula = matricula;
 	}
 

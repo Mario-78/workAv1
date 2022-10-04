@@ -2,9 +2,13 @@ package workAv1_negocios;
 
 public abstract class Empresa implements PessoaJuridica {
 	
-	private Integer id;
-	private String name;
-	private String cnpj;
+	protected Integer id;
+	protected String name;
+	protected String cnpj;
+	
+	public Empresa() {
+		
+	}
 	
 	public Empresa(Integer id, String name, String cnpj) {
 		super();
