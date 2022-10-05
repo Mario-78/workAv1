@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import workAv1_negocios.Agencia;
 import workAv1_negocios.Banco;
+import workAv1_negocios.Faculdade;
 import workAv1_negociosProdutos.Curso;
 import workAv1_negociosProdutos.Disciplina;
 import workAv1_recursosHumanos.Aluno;
@@ -23,7 +24,7 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		int op = 0, idPessoa = 0, idEmpresa = 0, matri = 100, idDis = 0, idCurso = 0, idBanco = 0;
+		int op = 0, idPessoa = 0, idEmpresa = 0, matri = 100, idDis = 0, idCurso = 0, idBanco = 0, idFacul = 0;
 		
 		Aluno aluno = new Aluno();
 		Coordenador coordenador = new Coordenador();
@@ -80,6 +81,28 @@ public class Main {
 		Curso curso1 = new Curso(++idCurso, "Medicina", coordenador1.getId());
 		
 		Banco banco0 = new Banco(++idBanco, "Santander", "85.875.897/0001-50");
+		
+		Faculdade faculdade0 = new Faculdade(++idFacul, "Estácio", "66.859.821/0001-96", diretor0.getId());
+		faculdade0.addListaCoordenador(coordenador0);
+		faculdade0.addListaCoordenador(coordenador1);
+		faculdade0.addListaCurso(curso0);
+		faculdade0.addListaCurso(curso1);
+		faculdade0.addListaSecAcademica(secAcademica0);
+		faculdade0.addListaSecAcademica(secAcademica1);
+		faculdade0.addSecFinanceira(secFinanceira0);
+		faculdade0.addSecFinanceira(secFinanceira1);
+		
+		curso0.addDisciplina(disciplina0);
+		curso0.addDisciplina(disciplina1);
+		curso0.addDisciplina(disciplina2);
+		curso0.addDisciplina(disciplina3);
+		
+		curso1.addDisciplina(disciplina4);
+		curso1.addDisciplina(disciplina5);
+		curso1.addDisciplina(disciplina6);
+		curso1.addDisciplina(disciplina7);
+		
+		
 		
 		
 		op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
