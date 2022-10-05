@@ -2,20 +2,24 @@ package workAv1_negocios;
 
 import java.util.Objects;
 
-public class Agencia  {
+public class Agencia extends Banco {
 	
-	private Integer id;
+	private Integer idAg;
+	private String nameAg;
 	private Integer idGerente;
 	
 	public Agencia() {
 		
 	}
-	
-	public Agencia(Integer id, Integer idGerente) {
-		super();
-		this.id = id;
+
+	public Agencia(Integer idBanco, String nameBanco, String cnpj, Integer idAg, String nameAg, Integer idGerente) {
+		super(idBanco, nameBanco, cnpj);
+		this.idAg = idAg;
+		this.nameAg = nameAg;
 		this.idGerente = idGerente;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -23,6 +27,22 @@ public class Agencia  {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getNameAg() {
+		return nameAg;
+	}
+
+	public void setNameAg(String nameAg) {
+		this.nameAg = nameAg;
 	}
 
 	public Integer getIdGerente() {
