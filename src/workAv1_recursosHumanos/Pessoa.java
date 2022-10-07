@@ -10,20 +10,34 @@ public abstract class Pessoa {
 	
 	protected Integer id;
 	protected String name;
-	protected String cpf;
-	protected Set<ContaCorrente> contaC = new HashSet<ContaCorrente>();
-	protected Set<ContaPoupanca> contaP = new HashSet<ContaPoupanca>();
+	protected String cpf_cnpj;
+	protected Set<ContaCorrente> listaContaC = new HashSet<ContaCorrente>();
+	protected Set<ContaPoupanca> listaContaP = new HashSet<ContaPoupanca>();
 	
 	public Pessoa() {
 		
 	}
 	
-	public Pessoa(Integer id, String name, String cpf) {
+	public Pessoa(Integer id, String name, String cpf_cnpj) {
 		this.id = id;
 		this.name = name;
-		this.cpf = cpf;
+		this.cpf_cnpj = cpf_cnpj;
 	}
 	
+	public void addContaCorrente(ContaCorrente conta) {
+		listaContaC.add(conta);
+	}
 	
+	public void removeContaCorrente(ContaCorrente conta) {
+		listaContaC.remove(conta);
+	}
+	
+	public void addContaPoupanca(ContaPoupanca conta) {
+		listaContaP.add(conta);
+	}
+	
+	public void removeContaPoupanca(ContaPoupanca conta) {
+		listaContaP.remove(conta);
+	}
 	
 }

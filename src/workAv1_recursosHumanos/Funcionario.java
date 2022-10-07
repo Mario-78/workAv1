@@ -2,7 +2,6 @@ package workAv1_recursosHumanos;
 
 import workAv1_estruturaOrganizacional.Diretoria;
 import workAv1_estruturaOrganizacional.Secretaria;
-import workAv1_negociosProdutos.ContaCorrente;
 
 public abstract class Funcionario extends Pessoa implements PessoaFisica, Diretoria, Secretaria{
 	
@@ -26,7 +25,7 @@ public abstract class Funcionario extends Pessoa implements PessoaFisica, Direto
 	}
 	
 	public String getCpf() {
-		return cpf;
+		return cpf_cnpj;
 	}
 
 	public String getFunção() {
@@ -37,15 +36,4 @@ public abstract class Funcionario extends Pessoa implements PessoaFisica, Direto
 		this.função = função;
 	}	
 	
-	public void addContaCorrente(ContaCorrente conta) {
-		contaC.add(conta);
-	}
-	
-	public void removeContaCorrente(ContaCorrente conta) {
-		contaC.remove(conta);
-	}
-	
-	public void listarContasCorrente() {
-		
-	}
 }

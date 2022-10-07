@@ -34,5 +34,13 @@ public class Diretor extends Funcionario {
 		return false;
 	}
 
+	public String GetDiretorName(Integer id) {
+		return name;
+	}
+	
+	public void printDiretor() {
+			System.out.println("Diretor:         " + getName());
+			System.out.println("Id do diretor:   " + getId());
+	}
 	
 }

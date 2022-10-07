@@ -1,6 +1,8 @@
 package workAv1_negociosProdutos;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Curso {
@@ -8,7 +10,7 @@ public class Curso {
 	private Integer id;
 	private String name;
 	private Integer idCoordenador;
-	private Set<Object> disciplinas = new HashSet<Object>();
+	private Set<Disciplina > listaDisciplinas = new HashSet<Disciplina >();
 	
 	public Curso() {
 		
@@ -45,17 +47,40 @@ public class Curso {
 		this.idCoordenador = idCoordenador;
 	}
 	
-	public void addDisciplina(Object disciplina) {
-		disciplinas.add(disciplina);
+	public Set<Disciplina> getDisciplina(){
+		return listaDisciplinas;
 	}
 	
-	public void removeDisciplina(Object disciplina) {
-		disciplinas.add(disciplina);
+	public void addDisciplina(Disciplina  disciplina) {
+		listaDisciplinas.add(disciplina);
 	}
 	
-	public void listarDisciplinas() {
-		System.out.println("Disciplinas que compõem o curso " + this.name);
-		disciplinas.forEach(d -> System.out.println(d.toString()));
+	public void removeDisciplina(Disciplina  disciplina) {
+		listaDisciplinas.add(disciplina);
+	}
+	
+	public void listarDisciplinas(Curso curso) {
+		System.out.println("Lista de disciplinas: ");
+		for(Disciplina disc : curso.listaDisciplinas) {
+			System.out.println("Nome: " + disc.getName() + "  Id: " + disc.getId());
+		}
+	}
+	
+	public Disciplina findDisciplina(Integer idDisc, Curso curso) {
+		Disciplina disciplina = new Disciplina();
+		for(Disciplina d : curso.listaDisciplinas) {
+			if(d.getId() == idDisc) {
+				disciplina = d;
+			}
+		}
+		return disciplina;
 	}
 
+	public List<Disciplina> findListaDisciplinas(Curso curso) {
+		List<Disciplina> listFindDisc = new ArrayList<Disciplina>();
+		for(Disciplina disc : curso.listaDisciplinas) {
+			listFindDisc.add(disc);
+		}
+		return listFindDisc;
+	}
 }

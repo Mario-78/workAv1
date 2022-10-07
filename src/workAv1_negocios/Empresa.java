@@ -1,22 +1,17 @@
 package workAv1_negocios;
 
-public abstract class Empresa implements PessoaJuridica {
-	
-	protected Integer id;
-	protected String name;
-	protected String cnpj;
+import workAv1_recursosHumanos.Pessoa;
+
+public abstract class Empresa extends Pessoa implements PessoaJuridica {
 	
 	public Empresa() {
 		
 	}
-	
-	public Empresa(Integer id, String name, String cnpj) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.cnpj = cnpj;
-	}
 
+	public Empresa(Integer id, String name, String cnpj) {
+		super(id, name, cnpj);
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -34,12 +29,11 @@ public abstract class Empresa implements PessoaJuridica {
 	}
 
 	public String getCnpj() {
-		return cnpj;
+		return cpf_cnpj;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setCnpj(String cpf_cnpj) {
+		this.cpf_cnpj = cpf_cnpj;
 	}
-	
 	
 }

@@ -28,10 +28,6 @@ public class Faculdade extends Empresa {
 	public Integer getIdDiretor() {
 		return idDiretor;
 	}
-
-	public void setIdDiretor(Integer idDiretor) {
-		this.idDiretor = idDiretor;
-	}
 	
 	public void addListaCurso(Curso curso) {
 		listaCursos.add(curso);
@@ -42,8 +38,20 @@ public class Faculdade extends Empresa {
 	}
 	
 	public void listarCursos() {
-		System.out.println("Cursos disponíveis: ");
-		listaCursos.forEach(c -> System.out.println(c.toString()));
+		System.out.println("\nCursos disponíveis: \n");
+		for(Curso c : listaCursos) {
+			System.out.println("Nome do curso:  " + c.getName()	+ "\nId do curso:    " + c.getId() + "\n");
+		}
+	}
+	
+	public Curso findCurso(Integer id) {
+		Curso curso = new Curso();
+		for(Curso c : listaCursos) {
+			if(c.getId() == id) {
+				curso = c;
+			}
+		}
+		return curso;
 	}
 	
 	public void addListaCoordenador(Coordenador coordenador) {
@@ -89,5 +97,10 @@ public class Faculdade extends Empresa {
 	public boolean pessoaJuridica() {
 		return true;
 	}
-
+	
+	public void printDadosFaculdade() {
+		System.out.println("Faculdade:       " + getName());
+		System.out.println("CNPJ:            " + getCnpj());
+		System.out.println("Id da faculdade: " + getId());
+	}
 }

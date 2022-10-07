@@ -3,29 +3,48 @@ package workAv1_negociosProdutos;
 import java.util.HashSet;
 import java.util.Set;
 
+import workAv1_recursosHumanos.Aluno;
+
 public class Disciplina {
 	
 	private Integer id;
+	private Integer idCurso;
 	private String name;
 	private Integer idProfessor;
-	private Set<Object> listaAlunos = new HashSet<Object>();
+	private Set<Aluno> listaAlunos = new HashSet<Aluno>();
 	
 	public Disciplina() {
 		
 	}
 	
-	public Disciplina(Integer id, String name, Integer idProfessor) {
+	public Disciplina(Integer id, Integer idCurso, String name, Integer idProfessor) {
 		this.id = id;
 		this.name = name;
 		this.idProfessor = idProfessor;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getIdCurso() {
+		return idCurso;
+	}
+
+	public void setIdCurso(Integer idCurso) {
+		this.idCurso = idCurso;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Integer getIdProfessor() {
@@ -36,17 +55,31 @@ public class Disciplina {
 		this.idProfessor = idProfessor;
 	}	
 	
-	public void addListaAluno(Object aluno) {
+	public void addListaAluno(Aluno aluno) {
 		listaAlunos.add(aluno);
 	}
 	
-	public void removeListaAluno(Object aluno) {
+	public void removeListaAluno(Aluno aluno) {
 		listaAlunos.remove(aluno);
 	}
 	
-	public void listarAlunos() {
-		System.out.println("Lista de alunos matriculados na disciplina " + this.name);
-		listaAlunos.forEach(a -> System.out.println(a.toString()));
+	
+	public void listarAlunos(Disciplina disciplina) {
+		System.out.println("\nAlunos Matriculados: \n");
+		for(Aluno a : disciplina.listaAlunos) {
+			System.out.println("Nome do aluno:  " + a.getName() + "Id do aluno:    " + a.getId());
+		}
+	}
+	
+	
+	public Aluno findAluno(Integer id, Disciplina disciplina) {
+		Aluno findAluno = new Aluno();
+		for(Aluno aluno : disciplina.listaAlunos) {
+			if(id == aluno.getId()) {
+				findAluno = aluno;
+			}
+		}
+		return findAluno;
 	}
 
 }
