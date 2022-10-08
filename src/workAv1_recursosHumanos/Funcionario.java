@@ -15,18 +15,6 @@ public abstract class Funcionario extends Pessoa implements PessoaFisica, Direto
 		super(id, name, cpf);
 		this.função = função;
 	}
-	
-	public Integer getId() {
-		return id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public String getCpf() {
-		return cpf_cnpj;
-	}
 
 	public String getFunção() {
 		return função;

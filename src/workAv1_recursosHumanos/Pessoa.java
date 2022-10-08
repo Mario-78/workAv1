@@ -24,10 +24,34 @@ public abstract class Pessoa {
 		this.cpf_cnpj = cpf_cnpj;
 	}
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCpf_cnpj() {
+		return cpf_cnpj;
+	}
+
+	public void setCpf_cnpj(String cpf_cnpj) {
+		this.cpf_cnpj = cpf_cnpj;
+	}
+	
 	public void addContaCorrente(ContaCorrente conta) {
 		listaContaC.add(conta);
 	}
-	
+
 	public void removeContaCorrente(ContaCorrente conta) {
 		listaContaC.remove(conta);
 	}

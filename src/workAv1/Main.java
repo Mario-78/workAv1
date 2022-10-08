@@ -1,7 +1,5 @@
 package workAv1;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -62,9 +60,26 @@ public class Main {
 		Professor professor2 = new Professor(++idPessoa, "Thales Joaquim Freitas", "604.902.050-70", "professor");
 		Professor professor3 = new Professor(++idPessoa, "Mateus Manoel da Rocha", "407.334.973-22", "professor");
 		
+		professor0.addFilaAlunos(aluno8);
+		professor0.addFilaAlunos(aluno5);
+		professor0.addFilaAlunos(aluno3);
+		
+		
 		
 		Coordenador coordenador0 = new Coordenador(++idPessoa, "Arthur Jorge Fogaça", "056.308.323-95", "coordenador");
 		Coordenador coordenador1 = new Coordenador(++idPessoa, "Alessandra Luana Cecília Baptista", "135.766.013-84", "coordenador");
+		
+		coordenador0.addFilaAluno(aluno5);
+		coordenador0.addFilaAluno(aluno2);
+		coordenador0.addFilaAluno(aluno7);
+		coordenador0.addFilaProfessor(professor3);
+		coordenador0.addFilaProfessor(professor0);
+		coordenador1.addFilaAluno(aluno5);
+		coordenador1.addFilaAluno(aluno1);
+		coordenador1.addFilaProfessor(professor0);
+		coordenador1.addFilaProfessor(professor2);
+		coordenador1.addFilaProfessor(professor3);
+		
 		
 		SecAcademica secAcademica0 = new SecAcademica(++idPessoa, "Anderson Fábio Mário Santos", "596.002.023-89", "secretario academico");
 		SecAcademica secAcademica1 = new SecAcademica(++idPessoa, "Elisa Olivia Juliana Melo", "775.919.453-60", "secretaria academica");
@@ -77,7 +92,6 @@ public class Main {
 		
 		Gerente gerente1 = new Gerente(++idPessoa, "Danilo Alexandre Marcos Viana", "785.738.333-35", "gerente", agencia.getId());
 		agencia = new Agencia(banco.getId(), banco.getName(), banco.getCnpj(), ++idAgencia, "Dirceu", gerente1.getId());
-		
 		
 		diretor = new Diretor(++idPessoa, "Rafael Anthony Nicolas Peixoto", "256.443.233-66", "diretor");
 		
@@ -121,8 +135,7 @@ public class Main {
 		disciplina6.addListaAluno(aluno5);
 		disciplina7.addListaAluno(aluno0);
 		disciplina7.addListaAluno(aluno3); 
-		disciplina7.addListaAluno(aluno5);
-		
+		disciplina7.addListaAluno(aluno5);		
 		
 		Banco banco0 = new Banco(++idEmpresa, "Santander", "85.875.897/0001-50");
 		
@@ -135,6 +148,10 @@ public class Main {
 		faculdade.addListaSecAcademica(secAcademica1);
 		faculdade.addSecFinanceira(secFinanceira0);
 		faculdade.addSecFinanceira(secFinanceira1);
+		faculdade.addProfessor(professor0);
+		faculdade.addProfessor(professor1);
+		faculdade.addProfessor(professor2);
+		faculdade.addProfessor(professor3);
 		
 		curso0.addDisciplina(disciplina0);
 		curso0.addDisciplina(disciplina1);
@@ -245,96 +262,114 @@ public class Main {
 					+ "05 Para sair do app"));
 			
 			if(op == 1) {
-				op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-						+ "01 Para cadastrar aluno: \n"
-						+ "02 Para cadastrar professor: \n"
-						+ "03 Para cadastrar coordenador: \n"
-						+ "04 Para cadastrar secretário(a) acadêmico(a): \n"
-						+ "05 Para cadastrar secretário(a) financeiro(a): \n"
-						+ "06 Para cadastrar diretor(a): \n"
-						+ "07 para cadastrar gerente: \n"
-						+ "08 Para cadastrar presidente"));
-				
-				if(op == 1) {
-					Integer id = ++idPessoa;
-					System.out.println("Informe o nome: ");
-					String name = sc.nextLine();
-					System.out.println("Informe o cpf: ");
-					String cpf = sc.nextLine();				
-					aluno = new Aluno(id, name, cpf, ++matri);
-				}else {
-					Integer id = ++idPessoa;
-					System.out.println("Informe o nome: ");
-					String name = sc.nextLine();
-					System.out.println("Informe o cpf: ");
-					String cpf = sc.nextLine();
+				do {
+					op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
+							+ "01 Para cadastrar aluno: \n"
+							+ "02 Para cadastrar professor: \n"
+							+ "03 Para cadastrar coordenador: \n"
+							+ "04 Para cadastrar secretário(a) acadêmico(a): \n"
+							+ "05 Para cadastrar secretário(a) financeiro(a): \n"
+							+ "06 Para cadastrar diretor(a): \n"
+							+ "07 para cadastrar gerente: \n"
+							+ "08 Para cadastrar presidente \n"));
 					
-					switch (op) {
-					case 2: {
-						String funcao = "Professor";
-						professor = new Professor(id, name, cpf, funcao);
-					}
-					case 3: {
-						String funcao = "Coordenador";
-						coordenador = new Coordenador(id, name, cpf, funcao);
-					}
-					case 4: {
-						String funcao = "Secretário(a) acadêmico(a)";
-						secAcademica = new SecAcademica(id, name, cpf, funcao);
-					}
-					case 5: {
-						String funcao = "Secretário(a) financeiro(a)";
-						secFinanceiro = new SecFinanceira(id, name, cpf, funcao);
-					}
-					case 6: {
-						String funcao = "Diretor";
-						diretor = new Diretor(id, name, cpf, funcao);
-					}
-					case 7: {
-						String funcao = "Gerente";
-						gerente = new Gerente(id, name, cpf, funcao, agencia.getId());
-					}
-					case 8: {
-						String função = "Presidente";
-						presidente = new Presidente(id, name, cpf, função);
-					}
-					default:
-						throw new IllegalArgumentException("Unexpected value: " + op);
-					}
-				}
+					if(op == 1) {
+						Integer id = ++idPessoa;
+						System.out.println("Informe o nome: \n");
+						String name = sc.nextLine();
+						System.out.println("Informe o cpf: \n");
+						String cpf = sc.nextLine();				
+						aluno = new Aluno(id, name, cpf, ++matri);
+					}else {
+						Integer id = ++idPessoa;
+						System.out.println("Informe o nome: \n");
+						String name = sc.nextLine();
+						System.out.println("Informe o cpf: \n");
+						String cpf = sc.nextLine();
+						
+						switch (op) {
+						case 2: {
+							String funcao = "Professor";
+							Professor newProfessor = new Professor(id, name, cpf, funcao);
+							faculdade.addProfessor(newProfessor);
+							break;
+						}
+						case 3: {
+							String funcao = "Coordenador";
+							Coordenador newCoordenador = new Coordenador(id, name, cpf, funcao);
+							faculdade.addListaCoordenador(newCoordenador);
+							break;
+						}
+						case 4: {
+							String funcao = "Secretário(a) acadêmico(a)";
+							SecAcademica newSecAcademica = new SecAcademica(id, name, cpf, funcao);
+							faculdade.addListaSecAcademica(newSecAcademica);
+							break;
+						}
+						case 5: {
+							String funcao = "Secretário(a) financeiro(a)";
+							SecFinanceira newSecFinanceiro = new SecFinanceira(id, name, cpf, funcao);
+							faculdade.addSecFinanceira(newSecFinanceiro);
+							break;
+						}
+						case 6: {
+							String funcao = "Diretor";
+							Diretor newDiretor = new Diretor(id, name, cpf, funcao);
+							break;
+						}
+						case 7: {
+							String funcao = "Gerente";
+							Gerente newGerente = new Gerente(id, name, cpf, funcao, agencia.getId());
+							break;						
+						}
+						case 8: {
+							String função = "Presidente";
+							Presidente newPresidente = new Presidente(id, name, cpf, função);
+							break;
+						}
+						default:
+							System.out.println("Opção incorreta!!!");
+							System.out.println("Informe um valor entre 1 e 9");;
+						}
+					}					
+				}while(op != 9);
 				
 			}else if(op == 2){
-				op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-						+ "01 Para Cadastrar uma faculdade \n"
-						+ "02 Para cadastrar um banco \n"
-						+ "03 Para cadastrar agência"));
-				
-				switch (op) {
-				case 1: {
-					System.out.println("Informe o nome: ");
-					String name = sc.nextLine();
-					System.out.println("Informe o cnpj: ");
-					String cnpj = sc.nextLine();
-					faculdade = new Faculdade(++idEmpresa, name, cnpj, diretor.getId());
-					break;
-				}
-				case 2: {
-					System.out.println("Informe o nome: ");
-					String name = sc.nextLine();
-					System.out.println("Informe o cnpj: ");
-					String cnpj = sc.nextLine();
-					banco = new Banco(++idEmpresa, name, cnpj);
-					break;
-				}
-				case 3: {
-					System.out.println("Informe o nome: ");
-					String name = sc.nextLine();
-					agencia = new Agencia(banco.getId(), banco.getName(), banco.getCnpj(), ++idAgencia, name, gerente.getId());	
-					break;
-				}
-				default:
-					throw new IllegalArgumentException("Unexpected value: ");
-				}
+				do {
+					op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
+							+ "01 Para Cadastrar uma faculdade \n"
+							+ "02 Para cadastrar um banco \n"
+							+ "03 Para cadastrar agência \n"
+							+ "04 Para sair \n"));
+					
+					switch (op) {
+					case 1: {
+						System.out.println("Informe o nome: ");
+						String name = sc.nextLine();
+						System.out.println("Informe o cnpj: ");
+						String cnpj = sc.nextLine();
+						faculdade = new Faculdade(++idEmpresa, name, cnpj, diretor.getId());
+						break;
+					}
+					case 2: {
+						System.out.println("Informe o nome: ");
+						String name = sc.nextLine();
+						System.out.println("Informe o cnpj: ");
+						String cnpj = sc.nextLine();
+						banco = new Banco(++idEmpresa, name, cnpj);
+						break;
+					}
+					case 3: {
+						System.out.println("Informe o nome: ");
+						String name = sc.nextLine();
+						agencia = new Agencia(banco.getId(), banco.getName(), banco.getCnpj(), ++idAgencia, name, gerente.getId());	
+						break;
+					}
+					default:
+						System.out.println("Opção incorreta!!!");
+						System.out.println("Informe um valor entre 1 e 4");;
+					}
+				}while(op != 4);
 				
 			}else if(op == 3){
 				op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
@@ -349,96 +384,179 @@ public class Main {
 				
 				if(op == 1) {
 					contaCorrente = new ContaCorrente(id, idTitual, agencia.getIdGerente(), null);
-				}else {
+				}else
+				if(op == 2){
 					contaPoupanca = new ContaPoupanca(id, idTitual, agencia.getIdGerente());
 				}
-				
-				contaCorrente = new ContaCorrente(id, idTitual, agencia.getIdGerente(), null);
-			}else {
+			}else if(op == 4){
 				op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-						+ "01 Para consultas sobre dados da faculdade \n"
-						+ "02 Para consultas do aluno \n"
-						+ "03 Para consultar filas de atendimento"));
+						+ "01 Para consultar dados da faculdade \n"
+						+ "02 Para consultar dados de cursos e disciplinas \n"
+						+ "03 Para consultar dados de alunos \n"
+						+ "04 Para consultar dados de professores \n"
+						+ "05 Para consultar dados de coordenadores \n"
+						+ "06 Para consultar dados de secretários(as) academicos(as) \n"
+						+ "07 Para consultar dados de secretários(as) financeiros(as) \n"));
 				
-				if(op == 1) {
-					op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-							+ "01 Para listar dados da empresa \n"							
-							+ "02 Para listar as disciplinas de um curso \n"
-							+ "03 Para listar alunos de uma disciplina"));
-					
-					switch (op) {
-					case 1: {
-						faculdade.printDadosFaculdade();
-						diretor.printDiretor();
-						faculdade.listarCursos();
-						break;
-					}
-					case 2:{
-						faculdade.listarCursos();
-						System.out.println("Informe o id do curso:");
-						op = sc.nextInt();
-						Curso findCurso = faculdade.findCurso(op);
-						//List<Disciplina> listaDisc = curso.findListaDisciplinas(findCurso);
-						curso.listarDisciplinas(findCurso);						
-						break;
-					}
-					case 3: {
-						System.out.println("Para listar os dados de um aluno");
-						faculdade.listarCursos();
-						System.out.println("Informe o id do curso:");
-						op = sc.nextInt();
-						Curso findCurso = faculdade.findCurso(op);
-						curso.listarDisciplinas(findCurso);
-						System.out.println("Informe o id da disciplina: ");
-						op = sc.nextInt();
-						System.out.println(op);
-						Disciplina findDisciplina = curso.findDisciplina(op, findCurso);
-						System.out.println(findDisciplina.getName());
-						disciplina.listarAlunos(findDisciplina);
-						System.out.println("Informe o id do aluno: ");
-						op = sc.nextInt();
-						Aluno findAluno = disciplina.findAluno(op, findDisciplina);
-						aluno.listarContasAluno(findAluno);
-						break;
-					}
-					default:
-						//throw new IllegalArgumentException("Unexpected value: " + op);
-					}
-				}else if(op == 2) {
-					op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-							+ "01 Para listar contas de um cliente \n"
-							+ "02 Para listar uma conta específica \n"
-							+ "03 Para imprimir saldo \n"
-							+ "04 Para depositar \n"
-							+ "05 Para sacar"));
-					
-					switch (op) {
-					case 1: {
-						System.out.println("Informe o id do cliente: \n");
-						op = sc.nextInt();
-						
-						break;
-					}
-					case 2: {
-						System.out.println("Informe o id do cliente: \n");
-						op = sc.nextInt();
-						break;
-					}
-					default:
-						throw new IllegalArgumentException("Unexpected value: " + op);
-					}
-					
-				}else if(op == 3){
-					op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n\n"
-							+ "01 Para listar fila de coordenadores\nagardando atendimento do diretor \n"
-							+ "02 Para listar fila de professores e\nalunos aguardando atendimento do coordenador \n\n"
-							+ "03 Para listar fila de alunos aguardando\natendimento do professor \n\n"
-							+ "04 Para listar fila de alunos aguardando\natendimento do(a) secretário(a) academico(a) \n\n"
-							+ "05 Para listar fila de pessoas aguardando\natendimento do(a) secretário(a) financeiro(a) \n\n"
-							+ "06 Para listar fila de pessoas aguardando\natendimento do(a) gerente"));
-				}else {
-					//To-do
+				
+				switch (op) {
+				case 1: {
+					faculdade.printDadosFaculdade();
+					diretor.printDiretor();
+					faculdade.listarCursos();
+					break;
 				}
+				case 2:{
+					faculdade.listarCursos();
+					System.out.println("Informe o id do curso:");
+					op = sc.nextInt();
+					Curso findCurso = faculdade.findCurso(op);
+					//List<Disciplina> listaDisc = curso.findListaDisciplinas(findCurso);
+					curso.listarDisciplinas(findCurso);						
+					break;
+				}
+				case 3: {
+					System.out.println("Para listar os alunos de uma disciplina: \n");
+					faculdade.listarCursos();
+					System.out.println("Informe o id do curso: \n");
+					op = sc.nextInt();
+					Curso findCurso = faculdade.findCurso(op);
+					curso.listarDisciplinas(findCurso);
+					System.out.println("Informe o id da disciplina: \n");
+					op = sc.nextInt();
+					Disciplina findDisciplina = curso.findDisciplina(op, findCurso);
+					System.out.println("Disciplina:  " + findDisciplina.getName());
+					disciplina.listarAlunos(findDisciplina);
+					do {
+						op = Integer.parseInt(JOptionPane.showInputDialog("01 Para listar dados de um aluno específico \n"
+								+ "02 Para imprimir informações financeiras do aluno \n"
+								+ "03 Para sair \n"));
+					
+						if(op == 1) {						
+							System.out.println("Informe o id do aluno: \n");
+							op = sc.nextInt();
+							Aluno findAluno = disciplina.findAluno(op, findDisciplina);
+							aluno.listarDadosAluno(findAluno);
+						}else 
+						if(op == 2) {
+								System.out.println("Informe o id do aluno: ");
+								op = sc.nextInt();
+								Aluno findAluno = disciplina.findAluno(op, findDisciplina);
+								aluno.listarContasAluno(findAluno);
+						}						
+					}while (op != 3);
+					break;
+				}
+				case 4: {
+					faculdade.listarProfessores();
+					do {
+						op = Integer.parseInt(JOptionPane.showInputDialog("01 Para listar dados de um professor específico \n"
+								+ "02 Para listar informações financeiras do professor \n"
+								+ "03 Para listar fila de alunos aguardando atendimento \n"
+								+ "04 Para atender o primeiro aluno da fila \n"
+								+ "05 Para sair \n"));
+					
+						if(op == 1) {
+							System.out.println("Informe o id do professor: \n");
+							op = sc.nextInt();
+							Professor findProfessor = faculdade.findProfessor(op);
+							professor.listarDadosProfessor(findProfessor);
+						}else
+						if(op == 2) {
+							System.out.println("Informe o id do professor: \n");
+							op = sc.nextInt();
+							Professor findProfessor = faculdade.findProfessor(op);
+							professor.listarContasProfessor(findProfessor);
+						}else
+						if(op == 3) {
+							faculdade.listarProfessores();
+							System.out.println("Informe o id do professor: \n");
+							op = sc.nextInt();
+							Professor findProfessor = faculdade.findProfessor(op);
+							professor.listarFilaAlunos(findProfessor);
+						}else 
+						if(op == 4) {
+							System.out.println("Informe o id do professor que vai realizar o atendimento: \n");
+							op = sc.nextInt();
+							Professor findProfessor = faculdade.findProfessor(op);
+							professor.listarFilaAlunos(findProfessor);
+							Aluno findAluno = professor.realizarAtendimento(findProfessor);
+							findProfessor.removeFilaAluno(findAluno);
+							professor.listarFilaAlunos(findProfessor);
+						}
+					}while (op != 4);
+				}
+				case 5: {
+					faculdade.listarCoordenadores();
+					do {
+						op = Integer.parseInt(JOptionPane.showInputDialog("01 Para listar dados de um coordenador específico \n"
+								+ "02 Para imprimir informações financeiras do coordenador \n"
+								+ "03 Para imprimir fila de professores aguardando atendimento \n"
+								+ "04 Para imprimir fila de alunos aguardando atendimento \n"
+								+ "05 Para atender o primeiro professor da fila \n"
+								+ "06 Para atender o primeiro aluno da fila \n"
+								+ "07 Para sair \n"));
+						System.out.println();
+						switch (op) {
+						case 1: {
+							System.out.println("Informe o id do coordenador: \n");
+							op = sc.nextInt();
+							Coordenador findCoordenador = faculdade.findCoordenador(op);
+							coordenador.listarDadosCoordenador(findCoordenador);
+							break;
+						}
+						case 2: {
+							System.out.println("Informe o id do coordenador: \n");
+							op = sc.nextInt();
+							Coordenador findCoordenador = faculdade.findCoordenador(op);
+							coordenador.listarContasCoordenador(findCoordenador);
+							break;
+						}
+						case 3: {
+							System.out.println("Informe o id do coordenador: \n");
+							op = sc.nextInt();
+							Coordenador findCoordenador = faculdade.findCoordenador(op);
+							coordenador.listarFilaProfessores(findCoordenador);
+							break;
+						}
+						case 4: {
+							System.out.println("Informe o id do coordenador: \n");
+							op = sc.nextInt();
+							Coordenador findCoordenador = faculdade.findCoordenador(op);
+							coordenador.listarFilaAlunos(findCoordenador);
+							break;
+						}
+						case 5: {
+							System.out.println("Informe o id do coordenador que vai realizar o atendimento: \n");
+							op = sc.nextInt();
+							Coordenador findCoordenador = faculdade.findCoordenador(op);							
+							coordenador.listarFilaProfessores(findCoordenador);
+							Professor findProfessor = coordenador.realizarAtendimentoProfessor(findCoordenador);
+							findCoordenador.removeFilaProfessor(findProfessor);
+							coordenador.listarFilaProfessores(findCoordenador);
+							break;
+						}
+						case 6: {
+							System.out.println("Informe o id do coordenador que vai realizar o atendimento: \n");
+							op = sc.nextInt();
+							Coordenador findCoordenador = faculdade.findCoordenador(op);
+							coordenador.listarFilaAlunos(findCoordenador);
+							Aluno findAluno = coordenador.realizarAtendimentoAluno(findCoordenador);
+							findCoordenador.removeFilaAluno(findAluno);
+							coordenador.listarFilaAlunos(findCoordenador);
+							break;
+						}
+						default:
+							System.out.println("Opção incorreta!!!");
+							System.out.println("Informe um valor entre 1 e 7");;
+						}
+					}while(op != 7);
+				}
+				default:
+					System.out.println("Opção incorreta!!!");
+					System.out.println("Informe um valor entre 1 e 7");;
+				}
+				
 			}
 			
 		}while(op != 5);

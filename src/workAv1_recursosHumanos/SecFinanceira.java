@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class SecFinanceira extends Funcionario {
 	
-	private Set<Object> filaPessoas = new HashSet<Object>();
+	private Set<Pessoa> filaPessoas = new HashSet<Pessoa>();
 	
 	public SecFinanceira() {
 		
@@ -15,11 +15,11 @@ public class SecFinanceira extends Funcionario {
 		super(id, name, cpf, função);
 	}
 	
-	public void addFilaPessoa(Object pessoa) {
+	public void addFilaPessoa(Pessoa pessoa) {
 		filaPessoas.add(pessoa);
 	}
 	
-	public void removeFilaPessoa(Object pessoa) {
+	public void removeFilaPessoa(Pessoa pessoa) {
 		filaPessoas.remove(pessoa);
 	}
 

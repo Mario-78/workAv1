@@ -67,8 +67,10 @@ public class Disciplina {
 	public void listarAlunos(Disciplina disciplina) {
 		System.out.println("\nAlunos Matriculados: \n");
 		for(Aluno a : disciplina.listaAlunos) {
-			System.out.println("Nome do aluno:  " + a.getName() + "Id do aluno:    " + a.getId());
+			System.out.println("Nome do aluno:      " + a.getName());
+			System.out.println("Id do aluno:        " + a.getId());
 		}
+		System.out.println();
 	}
 	
 	
