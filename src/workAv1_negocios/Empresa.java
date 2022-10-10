@@ -1,8 +1,16 @@
 package workAv1_negocios;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import workAv1_recursosHumanos.Diretor;
 import workAv1_recursosHumanos.Pessoa;
+import workAv1_recursosHumanos.Presidente;
 
 public abstract class Empresa extends Pessoa implements PessoaJuridica {
+	
+	private Set<Faculdade> listaFaculdades = new HashSet<Faculdade>();
+	private Set<Banco> listaBancos = new HashSet<Banco>();
 	
 	public Empresa() {
 		
@@ -34,6 +42,62 @@ public abstract class Empresa extends Pessoa implements PessoaJuridica {
 
 	public void setCnpj(String cpf_cnpj) {
 		this.cpf_cnpj = cpf_cnpj;
+	}
+	
+	
+	
+	public void addListaFaculdade(Faculdade faculdade) {
+		listaFaculdades.add(faculdade);
+	}
+	
+	public void removeListaFaculdade(Faculdade faculdade) {
+		listaFaculdades.remove(faculdade);
+	}
+	
+	public void listarFaculdades() {
+		for(Faculdade f : listaFaculdades) {
+			System.out.println("Nome da faculdade:      " + f.name);
+			System.out.println("Id da faculdade:        " + f.id);
+			System.out.println("CNPJ da faculdade:      " + f.cpf_cnpj);
+			System.out.println();
+		}
+		System.out.println();
+	}
+	
+	public Faculdade findFaculdade(Integer id) {
+		Faculdade findFaculdade = new Faculdade();
+		for(Faculdade f : listaFaculdades) {
+			if(f.id == id) {
+				findFaculdade = f;
+			}
+		}
+		return findFaculdade;
+	}
+	
+	public void addListaBanco(Banco banco) {
+		listaBancos.add(banco);
+	}
+	
+	public void removeListaBanco(Banco banco) {
+		listaBancos.remove(banco);
+	}
+	
+	public void listarBancos() {
+		for(Banco b : listaBancos) {
+			System.out.println("Nome do banco:           " + b.name);
+			System.out.println("Id do banco:             " + b.id);
+			System.out.println("CNPJ do banco:           " + b.cpf_cnpj);
+		}
+	}
+	
+	public Banco findBanco(Integer id) {
+		Banco findBanco = new Banco();
+		for(Banco b : listaBancos) {
+			if(b.id == id) {
+				findBanco = b;
+			}
+		}
+		return findBanco;
 	}
 	
 }

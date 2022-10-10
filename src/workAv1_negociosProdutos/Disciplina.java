@@ -3,7 +3,9 @@ package workAv1_negociosProdutos;
 import java.util.HashSet;
 import java.util.Set;
 
+import workAv1_negocios.Faculdade;
 import workAv1_recursosHumanos.Aluno;
+import workAv1_recursosHumanos.Professor;
 
 public class Disciplina {
 	
@@ -65,10 +67,10 @@ public class Disciplina {
 	
 	
 	public void listarAlunos(Disciplina disciplina) {
-		System.out.println("\nAlunos Matriculados: \n");
+		System.out.println("\nAlunos Matriculados: ");
 		for(Aluno a : disciplina.listaAlunos) {
-			System.out.println("Nome do aluno:      " + a.getName());
-			System.out.println("Id do aluno:        " + a.getId());
+			System.out.println("\nNome do aluno:           " + a.getName());
+			System.out.println("\nId do aluno:             " + a.getId());
 		}
 		System.out.println();
 	}
@@ -82,6 +84,15 @@ public class Disciplina {
 			}
 		}
 		return findAluno;
+	}
+	
+	public void listarDadosDiscilina(Disciplina d, Curso c, Professor p, Faculdade f) {
+		System.out.println("\nDados da disciplina: ");
+		System.out.println("\nNome da faculdade:       " + f.getName());
+		System.out.println("\nNome do curso:           " + c.getName());
+		System.out.println("\nNome da disciplina:      " + d.name);
+		System.out.println("\nId da disciplina:        " + d.id);
+		System.out.println("\nNome do professor:       " + p.getName());
 	}
 
 }

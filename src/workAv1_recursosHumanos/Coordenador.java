@@ -49,7 +49,7 @@ public class Coordenador extends Funcionario {
 			System.out.println("Nome do titular:      " + coordenador.name);
 			System.out.println("Conta corrente nº     " + cc.getId());
 		}
-		for(ContaPoupanca cp : listaContaP) {
+		for(ContaPoupanca cp : coordenador.listaContaP) {
 			System.out.println("Nome do titular:      " + coordenador.name);
 			System.out.println("Conta corrente nº     " + cp.getId());
 		}
@@ -57,9 +57,9 @@ public class Coordenador extends Funcionario {
 	
 	public void listarFilaProfessores(Coordenador coordenador) {
 		System.out.println("Lista de professores aguardando atendimento: \n");
-		for(Professor professor : coordenador.filaProfessores) {
-			System.out.println("Nome do professor:              " + professor.name);
-			System.out.println("Posição do professor na fila:   " + coordenador.filaProfessores.indexOf(professor));
+		for(Professor p : coordenador.filaProfessores) {
+			System.out.println("Nome do professor:              " + p.name);
+			System.out.println("Posição do professor na fila:   " + coordenador.filaProfessores.indexOf(p));
 		}
 	}
 	

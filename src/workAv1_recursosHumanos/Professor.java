@@ -1,13 +1,17 @@
 package workAv1_recursosHumanos;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import workAv1_negociosProdutos.ContaCorrente;
 import workAv1_negociosProdutos.ContaPoupanca;
+import workAv1_negociosProdutos.Disciplina;
 
 public class Professor extends Funcionario implements PessoaFisica {
 	
+	private Set<Disciplina> listaDiciplinas = new HashSet<Disciplina>();
 	private List<Aluno> filaAlunos = new ArrayList<Aluno>();	
 	
 	public Professor() {
@@ -16,6 +20,21 @@ public class Professor extends Funcionario implements PessoaFisica {
 
 	public Professor(Integer id, String name, String cpf, String função) {
 		super(id, name, cpf, função);		
+	}
+	
+	public void addDisciplina(Disciplina disciplina) {
+		listaDiciplinas.add(disciplina);
+	}
+	
+	public void removeDisciplina(Disciplina disciplina) {
+		listaDiciplinas.remove(disciplina);
+	}
+	
+	public void listarDisciplinas(Professor professor) {
+		for(Disciplina d : professor.listaDiciplinas) {
+			System.out.println("Nome da disciplina:      " + d.getName());
+			System.out.println("Id da disciplina:        " + d.getId());
+		}
 	}
 	
 	public void addFilaAlunos(Aluno aluno) {
@@ -81,5 +100,5 @@ public class Professor extends Funcionario implements PessoaFisica {
 	public boolean pessoaFisica() {
 		return true;
 	}
-
+		
 }

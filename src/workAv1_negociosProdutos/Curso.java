@@ -60,11 +60,12 @@ public class Curso {
 	}
 	
 	public void listarDisciplinas(Curso curso) {
-		System.out.println("Lista de disciplinas: \n");
+		System.out.println("Lista de disciplinas: \n" + curso.name);
 		for(Disciplina disc : curso.listaDisciplinas) {
 			System.out.println("Nome:      " + disc.getName());
 			System.out.println("Id:        " + disc.getId());
 		}
+		System.out.println();
 	}
 	
 	public Disciplina findDisciplina(Integer idDisc, Curso curso) {

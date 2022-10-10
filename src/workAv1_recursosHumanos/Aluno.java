@@ -1,5 +1,6 @@
 package workAv1_recursosHumanos;
 
+import java.util.Random;
 import java.util.Set;
 
 import workAv1_negociosProdutos.ContaCorrente;
@@ -50,6 +51,17 @@ public class Aluno extends Pessoa implements PessoaFisica {
 	
 	public Set<ContaCorrente> getListContaC(){
 		return listaContaC;
+	}
+	
+	public Integer geraMatricula() {
+		Random random = new Random();
+		int rand = 0;
+		while (true){
+		    rand = random.nextInt(1000);
+		    if(rand !=0) break;
+		}
+		System.out.println("Matrícula: " + rand);
+		return rand;
 	}
 
 	@Override
