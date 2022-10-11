@@ -1,6 +1,5 @@
 package workAv1;
 
-import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -41,8 +40,6 @@ public class Main {
 		Agencia agencia = new Agencia();
 		Banco banco = new Banco();
 		Faculdade faculdade = new Faculdade();
-		ContaCorrente contaCorrente = new ContaCorrente();
-		ContaPoupanca contaPoupanca = new ContaPoupanca();
 		Disciplina disciplina = new Disciplina();
 		Curso curso = new Curso();
 		Empresa empresa = new Faculdade();
@@ -63,25 +60,16 @@ public class Main {
 		Professor professor2 = new Professor(++idPessoa, "Thales Joaquim Freitas", "604.902.050-70", "professor");
 		Professor professor3 = new Professor(++idPessoa, "Mateus Manoel da Rocha", "407.334.973-22", "professor");
 		
-		professor0.addFilaAlunos(aluno8);
-		professor0.addFilaAlunos(aluno5);
-		professor0.addFilaAlunos(aluno3);
+		professor0.addFilaAlunos(aluno8);professor0.addFilaAlunos(aluno5);professor0.addFilaAlunos(aluno3);
 		
 		
 		
 		Coordenador coordenador0 = new Coordenador(++idPessoa, "Arthur Jorge Fogaça", "056.308.323-95", "coordenador");
 		Coordenador coordenador1 = new Coordenador(++idPessoa, "Alessandra Luana Cecília Baptista", "135.766.013-84", "coordenador");
 		
-		coordenador0.addFilaAluno(aluno5);
-		coordenador0.addFilaAluno(aluno2);
-		coordenador0.addFilaAluno(aluno7);
-		coordenador0.addFilaProfessor(professor3);
-		coordenador0.addFilaProfessor(professor0);
-		coordenador1.addFilaAluno(aluno5);
-		coordenador1.addFilaAluno(aluno1);
-		coordenador1.addFilaProfessor(professor0);
-		coordenador1.addFilaProfessor(professor2);
-		coordenador1.addFilaProfessor(professor3);
+		coordenador0.addFilaAluno(aluno5);coordenador0.addFilaAluno(aluno2);coordenador0.addFilaAluno(aluno7);
+		coordenador0.addFilaProfessor(professor3);coordenador0.addFilaProfessor(professor0);coordenador1.addFilaAluno(aluno5);
+		coordenador1.addFilaAluno(aluno1);coordenador1.addFilaProfessor(professor0);coordenador1.addFilaProfessor(professor2);coordenador1.addFilaProfessor(professor3);
 		
 		
 		SecAcademica secAcademica0 = new SecAcademica(++idPessoa, "Anderson Fábio Mário Santos", "596.002.023-89", "secretario academico");
@@ -90,12 +78,12 @@ public class Main {
 		SecFinanceira secFinanceira0 = new SecFinanceira(++idPessoa, "Bryan Bento Henrique Gonçalves", "847.708.383-52", "secretario academico");
 		SecFinanceira secFinanceira1 = new SecFinanceira(++idPessoa, "Vitória Eduarda dos Santos", "424.361.063-04", "secretaria academica");
 		
-		Diretor diretor0 = new Diretor(++idPessoa, "Rafael Anthony Nicolas Peixoto", "256.443.233-66", "diretor");
+		Diretor diretor0 = new Diretor(++idPessoa, "Rafael Anthony Nicolas Peixoto", "177.985.974-09", "Diretor(a)");
+		Diretor diretor1 = new Diretor(++idPessoa, "Sarah Isabelle da Costa", "256.443.233-66", "Diretor(a)");
 		
 		Presidente presidente0 = new Presidente(++idPessoa, "Renata Mariana Isadora da Cruz", "935.180.683-93|", "Presidente");
 		Presidente presidente1 = new Presidente(++idPessoa, "Elisa Olivia dos Santos", "155.443.233-93|", "Presidente");
-		empresa.addPresidente(presidente0);
-		empresa.addPresidente(presidente1);
+		empresa.addPresidente(presidente0);empresa.addPresidente(presidente1);
 		
 		Curso curso0 = new Curso(++idCurso, "Ciência da Computação", coordenador0.getId());
 		Curso curso1 = new Curso(++idCurso, "Medicina", coordenador1.getId());
@@ -111,42 +99,20 @@ public class Main {
 		
 		
 		
-		professor2.addDisciplina(disciplina0);
-		professor2.addDisciplina(disciplina1);
-		professor0.addDisciplina(disciplina2);
-		professor0.addDisciplina(disciplina3);
-		professor1.addDisciplina(disciplina4);
-		professor1.addDisciplina(disciplina5);
-		professor3.addDisciplina(disciplina6);
-		professor3.addDisciplina(disciplina7);
+		professor2.addDisciplina(disciplina0);professor2.addDisciplina(disciplina1);
+		professor0.addDisciplina(disciplina2);professor0.addDisciplina(disciplina3);
+		professor1.addDisciplina(disciplina4);professor1.addDisciplina(disciplina5);
+		professor3.addDisciplina(disciplina6);professor3.addDisciplina(disciplina7);
 		
-		disciplina0.addListaAluno(aluno9);
-		disciplina0.addListaAluno(aluno1);
-		disciplina0.addListaAluno(aluno4);
-		disciplina0.addListaAluno(aluno7);
-		disciplina1.addListaAluno(aluno6);
-		disciplina1.addListaAluno(aluno8);
-		disciplina1.addListaAluno(aluno2);
-		disciplina1.addListaAluno(aluno1);
-		disciplina2.addListaAluno(aluno9);
-		disciplina2.addListaAluno(aluno1);
-		disciplina2.addListaAluno(aluno4);
-		disciplina2.addListaAluno(aluno7);
-		disciplina3.addListaAluno(aluno2);
-		disciplina3.addListaAluno(aluno8);
-		
-		disciplina4.addListaAluno(aluno0);
-		disciplina4.addListaAluno(aluno3); 
-		disciplina4.addListaAluno(aluno5);
-		disciplina5.addListaAluno(aluno0);
-		disciplina5.addListaAluno(aluno3); 
-		disciplina5.addListaAluno(aluno5);
-		disciplina6.addListaAluno(aluno0);
-		disciplina6.addListaAluno(aluno3); 
-		disciplina6.addListaAluno(aluno5);
-		disciplina7.addListaAluno(aluno0);
-		disciplina7.addListaAluno(aluno3); 
-		disciplina7.addListaAluno(aluno5);		
+		disciplina0.addListaAluno(aluno9);disciplina0.addListaAluno(aluno1);disciplina0.addListaAluno(aluno4);disciplina0.addListaAluno(aluno7);
+		disciplina0.addListaAluno(aluno0);disciplina0.addListaAluno(aluno2);disciplina0.addListaAluno(aluno5);disciplina0.addListaAluno(aluno9);
+		disciplina1.addListaAluno(aluno6);disciplina1.addListaAluno(aluno8);disciplina1.addListaAluno(aluno2);disciplina1.addListaAluno(aluno1);
+		disciplina2.addListaAluno(aluno9);disciplina2.addListaAluno(aluno1);disciplina2.addListaAluno(aluno4);disciplina2.addListaAluno(aluno7);
+		disciplina3.addListaAluno(aluno2);disciplina3.addListaAluno(aluno8);	
+		disciplina4.addListaAluno(aluno0);disciplina4.addListaAluno(aluno3);disciplina4.addListaAluno(aluno5);disciplina5.addListaAluno(aluno0);
+		disciplina5.addListaAluno(aluno3);disciplina5.addListaAluno(aluno5);
+		disciplina6.addListaAluno(aluno0);disciplina6.addListaAluno(aluno3);disciplina6.addListaAluno(aluno5);
+		disciplina7.addListaAluno(aluno0);disciplina7.addListaAluno(aluno3);disciplina7.addListaAluno(aluno5);		
 		
 		Banco banco0 = new Banco(++idEmpresa, "Santander", "85.875.897/0001-50");
 		
@@ -157,49 +123,30 @@ public class Main {
 		Agencia agencia1 = new Agencia(banco0.getId(), banco0.getName(), banco0.getCnpj(), ++idAgencia, "Dirceu", gerente1.getId());
 		
 		empresa.addListaBanco(banco0);
-		banco0.addListaGerente(gerente1);
-		banco0.addListaGerente(gerente0);
+		banco0.addListaGerente(gerente1);banco0.addListaGerente(gerente0);
+		banco0.addListaAgencia(agencia1);banco0.addListaAgencia(agencia0);
 		
-		Faculdade faculdade0 = new Faculdade(++idEmpresa, "Estácio", "66.859.821/0001-96", diretor.getId());
-		faculdade0.addDiretor(diretor0);
-		empresa.addListaFaculdade(faculdade0);
+		Faculdade faculdade0 = new Faculdade(++idEmpresa, "Estácio", "66.859.821/0001-96", diretor0.getId());
+		Faculdade faculdade1 = new Faculdade(++idEmpresa, "Mauricio de Nassau", "06.681.430/0001-00", diretor1.getId());
+		faculdade0.addListaDiretor(diretor0);faculdade0.addListaDiretor(diretor1);
+		faculdade1.addListaDiretor(diretor1);faculdade1.addListaDiretor(diretor0);
+		empresa.addListaFaculdade(faculdade0);empresa.addListaFaculdade(faculdade1);
 		
-		faculdade0.addListaDisciplina(disciplina7);
-		faculdade0.addListaDisciplina(disciplina6);
-		faculdade0.addListaDisciplina(disciplina5);
-		faculdade0.addListaDisciplina(disciplina4);
-		faculdade0.addListaDisciplina(disciplina3);
-		faculdade0.addListaDisciplina(disciplina2);
-		faculdade0.addListaDisciplina(disciplina1);
-		faculdade0.addListaDisciplina(disciplina0);
+		faculdade0.addListaDisciplina(disciplina7);faculdade0.addListaDisciplina(disciplina6);faculdade0.addListaDisciplina(disciplina5);faculdade0.addListaDisciplina(disciplina4);
+		faculdade0.addListaDisciplina(disciplina3);	faculdade0.addListaDisciplina(disciplina2);	faculdade0.addListaDisciplina(disciplina1);faculdade0.addListaDisciplina(disciplina0);
 		
 		
-		faculdade0.addListaCoordenador(coordenador0);
-		faculdade0.addListaCoordenador(coordenador1);
-		faculdade0.addListaCurso(curso0);
-		faculdade0.addListaCurso(curso1);
-		faculdade0.addListaSecAcademica(secAcademica0);
-		faculdade0.addListaSecAcademica(secAcademica1);
-		faculdade0.addSecFinanceira(secFinanceira0);
-		faculdade0.addSecFinanceira(secFinanceira1);
-		faculdade0.addProfessor(professor0);
-		faculdade0.addProfessor(professor1);
-		faculdade0.addProfessor(professor2);
-		faculdade0.addProfessor(professor3);
+		faculdade0.addListaCoordenador(coordenador0);faculdade0.addListaCoordenador(coordenador1);
+		faculdade0.addListaCurso(curso0);faculdade0.addListaCurso(curso1);
+		faculdade0.addListaSecAcademica(secAcademica0);faculdade0.addListaSecAcademica(secAcademica1);
+		faculdade0.addSecFinanceira(secFinanceira0);faculdade0.addSecFinanceira(secFinanceira1);
+		faculdade0.addProfessor(professor0);faculdade0.addProfessor(professor1);faculdade0.addProfessor(professor2);faculdade0.addProfessor(professor3);
 		
-		curso0.addDisciplina(disciplina0);
-		curso0.addDisciplina(disciplina1);
-		curso0.addDisciplina(disciplina2);
-		curso0.addDisciplina(disciplina3);
+		curso0.addDisciplina(disciplina0);curso0.addDisciplina(disciplina1);curso0.addDisciplina(disciplina2);curso0.addDisciplina(disciplina3);
 		
-		curso1.addDisciplina(disciplina4);
-		curso1.addDisciplina(disciplina5);
-		curso1.addDisciplina(disciplina6);
-		curso1.addDisciplina(disciplina7);
+		curso1.addDisciplina(disciplina4);curso1.addDisciplina(disciplina5);curso1.addDisciplina(disciplina6);curso1.addDisciplina(disciplina7);
 		
-		secFinanceira0.addFilaPessoa(professor2);
-		secFinanceira0.addFilaPessoa(aluno1);
-		secFinanceira0.addFilaPessoa(gerente0);
+		secFinanceira0.addFilaPessoa(professor2);secFinanceira0.addFilaPessoa(aluno1);	secFinanceira0.addFilaPessoa(gerente0);
 		
 		ContaCorrente contaCorrente0 = new ContaCorrente(++idConta, faculdade.getId(), gerente0.getId(), null);
 		ContaCorrente contaCorrente1 = new ContaCorrente(++idConta, professor0.getId(), gerente1.getId(), null);
@@ -247,16 +194,14 @@ public class Main {
 		
 		
 		faculdade0.addContaCorrente(contaCorrente0);
-		professor0.addContaCorrente(contaCorrente1);
-		professor1.addContaCorrente(contaCorrente2);
+		professor0.addContaCorrente(contaCorrente1);professor1.addContaCorrente(contaCorrente2);
 		professor2.addContaCorrente(contaCorrente3);
 		professor3.addContaCorrente(contaCorrente4);
 		coordenador0.addContaCorrente(contaCorrente5);
 		coordenador1.addContaCorrente(contaCorrente6);
 		secAcademica0.addContaCorrente(contaCorrente7);
-		secAcademica1.addContaCorrente(contaCorrente8);
+		secAcademica1.addContaCorrente(contaCorrente8);secFinanceira1.addContaCorrente(contaCorrente10);
 		secFinanceira0.addContaCorrente(contaCorrente9);
-		secFinanceira1.addContaCorrente(contaCorrente10);
 		gerente0.addContaCorrente(contaCorrente11);
 		gerente1.addContaCorrente(contaCorrente12);
 		presidente0.addContaCorrente(contaCorrente13);
@@ -274,9 +219,8 @@ public class Main {
 		professor2.addContaPoupanca(contaPoupanca2);
 		coordenador1.addContaPoupanca(contaPoupanca3);
 		secAcademica0.addContaPoupanca(contaPoupanca4);
-		secAcademica1.addContaPoupanca(contaPoupanca5);
+		secAcademica1.addContaPoupanca(contaPoupanca5);secFinanceira1.addContaPoupanca(contaPoupanca7);
 		secFinanceira0.addContaPoupanca(contaPoupanca6);
-		secFinanceira1.addContaPoupanca(contaPoupanca7);
 		gerente0.addContaPoupanca(contaPoupanca8);
 		gerente1.addContaPoupanca(contaPoupanca9);
 		presidente0.addContaPoupanca(contaPoupanca10);
@@ -338,7 +282,7 @@ public class Main {
 							case 2: {
 																
 								empresa.listarFaculdades();
-								System.out.println("\nInforme o id da faculdade para consultar os dados: ");
+								System.out.println("\nInforme o id da faculdade para consultar seus dados: ");
 								op = sc.nextInt();
 								Faculdade findFaculdade = empresa.findFaculdade(op);
 																
@@ -350,39 +294,43 @@ public class Main {
 										+ "\n00 Para ir ao próximo menu : "));
 								
 								//Listar as contas bancárias de uma faculdade
-								if(op != 0) {
+								if(op == 1) {
 																		
 									faculdade.listarContasBancarias(findFaculdade);
 									
 								}
 								
 								op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-										+ "\n01 Para cadastrar uma conta corrente: "
-										+ "\n02 Para cadastrar uma conta poupança: "
+										+ "\n01 Para cadastrar uma conta bancária: "
 										+ "\n00 Para ir ao próximo menu : "));
 								
 								//Criar conta bancária da faculdade
-								if(op != 0) {									
+								if(op == 1) {									
 																		
 									empresa.listarBancos();
 									System.out.println("\nInforme o id do banco: ");
 									op = sc.nextInt();
 									Banco findBanco = empresa.findBanco(op);
 									
-									banco.listaAgencias(findBanco);
-									System.out.println("\nInforme o id da agência: ");
+									banco.listarAgencias(findBanco);
+									System.out.println("Informe o id da agência: ");
 									op = sc.nextInt();
 									Agencia findAgencia = banco.findAgencia(op, findBanco);
 									
-									Integer id = ++idConta;
+									op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+											+ "\n01 Para cadastrar uma conta corrente: "
+											+ "\n02 Para cadastrar uma conta poupança: "
+											+ "\n00 Para ir ao próximo menu : "));
 									if(op == 1) {
-										ContaCorrente newContaCorrente = new ContaCorrente(id, findFaculdade.getId(), findAgencia.getIdGerente(), null);
+										ContaCorrente newContaCorrente = new ContaCorrente(++idConta, findFaculdade.getId(), findAgencia.getIdGerente(), null);
 										findFaculdade.addContaCorrente(newContaCorrente	);
-									}else
-									if(op == 2){
-										ContaPoupanca newContaPoupanca = new ContaPoupanca(id, findFaculdade.getId(), findAgencia.getIdGerente());
+									}
+									else if(op == 2){
+										ContaPoupanca newContaPoupanca = new ContaPoupanca(++idConta, findFaculdade.getId(), findAgencia.getIdGerente());
 										findFaculdade.addContaPoupanca(newContaPoupanca);
 									}
+									
+									faculdade.listarContasBancarias(findFaculdade);
 									
 								}
 																								
@@ -391,7 +339,7 @@ public class Main {
 										+ "\n00 Para ir ao próximo menu : "));
 								
 								//Listar os professores da faculdade
-								if(op != 0) {
+								if(op == 1) {
 																											
 									faculdade.listarProfessores(findFaculdade);									
 									
@@ -402,16 +350,18 @@ public class Main {
 										+ "\n00 Para ir ao próximo menu : "));
 								
 								// Excluir os dados de uma faculdade
-								if(op != 0) {
+								if(op == 1) {
 																	
+									op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+											+ "\n01 Para confirmar a exclusão dos dados da faculdade!!!!: "											
+											+ "\n00 Para retornar ao menu principal do item faculdade: "));
 									
-									System.out.println("\nInforme 01 para confirmar a exclusão: ");
-									op = sc.nextInt();
 									if(op == 1) {
 										empresa.removeListaFaculdade(findFaculdade);	
 									}
 									
-								}								
+								}
+								//Flag de controle de fluxo da aplicação
 								op = 1;
 								break;
 							}
@@ -422,6 +372,7 @@ public class Main {
 								}
 							}
 						}while(op != 0);
+						//Flag de controle de fluxo da aplicação
 						op = 1;
 						break;
 					}
@@ -756,7 +707,7 @@ public class Main {
 												op = sc.nextInt();
 												Banco findBanco = empresa.findBanco(op);
 												
-												banco.listaAgencias(findBanco);
+												banco.listarAgencias(findBanco);
 												System.out.println("Informe o id da agência: \n");
 												op = sc.nextInt();
 												Agencia findAgencia = banco.findAgencia(op, findBanco);
@@ -969,7 +920,7 @@ public class Main {
 												op = sc.nextInt();
 												Banco findBanco = empresa.findBanco(op);
 												
-												banco.listaAgencias(findBanco);
+												banco.listarAgencias(findBanco);
 												System.out.println("Informe o id da agência: \n");
 												op = sc.nextInt();
 												Agencia findAgencia = banco.findAgencia(op, findBanco);
@@ -1199,7 +1150,7 @@ public class Main {
 											op = sc.nextInt();
 											Banco findBanco = empresa.findBanco(op);
 											
-											banco.listaAgencias(findBanco);
+											banco.listarAgencias(findBanco);
 											System.out.println("Informe o id da agência: \n");
 											op = sc.nextInt();
 											Agencia findAgencia = banco.findAgencia(op, findBanco);
@@ -1444,7 +1395,7 @@ public class Main {
 											op = sc.nextInt();
 											Banco findBanco = empresa.findBanco(op);
 											
-											banco.listaAgencias(findBanco);
+											banco.listarAgencias(findBanco);
 											System.out.println("Informe o id da agência: \n");
 											op = sc.nextInt();
 											Agencia findAgencia = banco.findAgencia(op, findBanco);
@@ -1649,7 +1600,7 @@ public class Main {
 										op = sc.nextInt();
 										Banco findBanco = empresa.findBanco(op);
 										
-										banco.listaAgencias(findBanco);
+										banco.listarAgencias(findBanco);
 										System.out.println("Informe o id da agência: \n");
 										op = sc.nextInt();
 										Agencia findAgencia = banco.findAgencia(op, findBanco);
@@ -1776,7 +1727,7 @@ public class Main {
 								
 								Diretor newDiretor = new Diretor(op, name, cpf, funcao);
 								
-								faculdade.addDiretor(newDiretor);
+								findFaculdade.addListaDiretor(newDiretor);
 								
 								break;
 							}
@@ -1827,7 +1778,7 @@ public class Main {
 										op = sc.nextInt();
 										Banco findBanco = empresa.findBanco(op);
 										
-										banco.listaAgencias(findBanco);
+										banco.listarAgencias(findBanco);
 										System.out.println("Informe o id da agência: \n");
 										op = sc.nextInt();
 										Agencia findAgencia = banco.findAgencia(op, findBanco);
@@ -1901,7 +1852,7 @@ public class Main {
 										System.out.println("Informe 01 para confirmar a exclusão \n");
 										op = sc.nextInt();
 										if(op == 1) {
-											faculdade.removeDiretor(findDiretor);
+											faculdade.removeListaDiretor(findDiretor);
 										}
 										
 										op = 0;	
@@ -2042,7 +1993,7 @@ public class Main {
 								op = sc.nextInt();
 								Banco findBanco = empresa.findBanco(op);
 								
-								banco.listaAgencias(findBanco);
+								banco.listarAgencias(findBanco);
 								System.out.println("\nInforme o id da agência a qual deseja listar as informações:");
 								op = sc.nextInt();
 								Agencia findAgencia = banco.findAgencia(op, findBanco);
@@ -2124,7 +2075,7 @@ public class Main {
 									op = sc.nextInt();
 									Banco findBanco = empresa.findBanco(op);
 									
-									banco.listaAgencias(findBanco);
+									banco.listarAgencias(findBanco);
 									System.out.println("Informe o id da agência: \n");
 									op = sc.nextInt();
 									Agencia findAgencia = banco.findAgencia(op, findBanco);
@@ -2198,7 +2149,7 @@ public class Main {
 								op = sc.nextInt();
 								Banco FindBanco = empresa.findBanco(op);
 								
-								banco.listaAgencias(FindBanco);
+								banco.listarAgencias(FindBanco);
 								System.out.println("\nInforme o id da agência na qual o gerente assumirá a gestão: ");
 								op = sc.nextInt();
 								Agencia findAgencia = banco.findAgencia(op, FindBanco);
@@ -2256,7 +2207,7 @@ public class Main {
 									op = sc.nextInt();
 									Banco findBanco = empresa.findBanco(op);
 									
-									banco.listaAgencias(findBanco);
+									banco.listarAgencias(findBanco);
 									System.out.println("Informe o id da agência: \n");
 									op = sc.nextInt();
 									Agencia findAgencia = banco.findAgencia(op, findBanco);

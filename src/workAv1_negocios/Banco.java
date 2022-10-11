@@ -66,13 +66,16 @@ public class Banco extends  Empresa{
 		listaAgencias.remove(agencia);
 	}
 	
-	public void listaAgencias(Banco banco) {
+	public void listarAgencias(Banco banco) {
+		System.out.println("\nLista de agências disponíveis: \n");
 		for(Agencia a : banco.listaAgencias) {
 			System.out.println("Nome do banco:     " + a.name);
 			System.out.println("Id do banco:       " + a.id);
 			System.out.println("Nome da agência:   " + a.getNameAgencia());
 			System.out.println("Id da agência:     " + a.getIdAgencia());
+			System.out.println();
 		}
+		System.out.println("\n");
 	}
 	
 	public void listarDadosAgencias(Banco banco) {

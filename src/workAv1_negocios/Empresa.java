@@ -80,6 +80,7 @@ public abstract class Empresa extends Pessoa implements PessoaJuridica {
 	}
 	
 	public void listarFaculdades() {
+		System.out.println("\nLista de faculdades disponíveis: \n");
 		for(Faculdade f : listaFaculdades) {
 			System.out.println("Nome da faculdade:      " + f.name);
 			System.out.println("Id da faculdade:        " + f.id);
@@ -108,11 +109,13 @@ public abstract class Empresa extends Pessoa implements PessoaJuridica {
 	}
 	
 	public void listarBancos() {
+		System.out.println("\nLista de bancos disponíveis: \n");
 		for(Banco b : listaBancos) {
 			System.out.println("Nome do banco:           " + b.name);
 			System.out.println("Id do banco:             " + b.id);
 			System.out.println("CNPJ do banco:           " + b.cpf_cnpj);
 		}
+		System.out.println();
 	}
 	
 	public Banco findBanco(Integer id) {

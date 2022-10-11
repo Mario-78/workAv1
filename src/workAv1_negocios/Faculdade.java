@@ -60,6 +60,7 @@ public class Faculdade extends Empresa {
 		for(Curso c : faculdade.listaCursos) {
 			System.out.println("Nome do curso:  " + c.getName());
 			System.out.println("Id do curso:    " + c.getId());
+			System.out.println();
 		}
 		System.out.println();
 	}
@@ -86,8 +87,10 @@ public class Faculdade extends Empresa {
 		System.out.println("\nLista de disciplinas: \n");
 		for(Disciplina d : faculdade.listaDisciplinas) {
 			System.out.println("Nome da disciplina:      " + d.getName());
-			System.out.println("Id da disciplina:        \n" + d.getId());			
+			System.out.println("Id da disciplina:        \n" + d.getId());	
+			System.out.println();
 		}
+		System.out.println();
 	}
 	
 	public void addListaCoordenador(Coordenador coordenador) {
@@ -103,6 +106,7 @@ public class Faculdade extends Empresa {
 		for(Coordenador c : faculdade.listaCoordenadores) {
 			System.out.println("Nome:    " + c.getName());
 			System.out.println("Id:      " + c.getId());
+			System.out.println();
 		}
 		System.out.println();
 	}
@@ -131,6 +135,7 @@ public class Faculdade extends Empresa {
 		for(SecAcademica sec : faculdade.listaSecAcademicas) {
 			System.out.println("Nome:        " + sec.getName());
 			System.out.println("Id:          " + sec.getId());
+			System.out.println();
 		}
 		System.out.println();
 	}
@@ -158,6 +163,7 @@ public class Faculdade extends Empresa {
 		for(SecFinanceira sec : faculdade.listaSecFinanceiras) {
 			System.out.println("Nome:      " + sec.getName());
 			System.out.println("Id:        " + sec.getId());
+			System.out.println();
 		}
 		System.out.println();
 	}
@@ -172,22 +178,25 @@ public class Faculdade extends Empresa {
 		return findSec;
 	}
 	
-	public void addDiretor(Diretor diretor) {
+	public void addListaDiretor(Diretor diretor) {
 		listaDiretores.add(diretor);
 	}
 	
-	public void removeDiretor(Diretor diretor) {
+	public void removeListaDiretor(Diretor diretor) {
 		listaDiretores.remove(diretor);
 	}
 	
 	public void listarDiretores(Faculdade faculdade) {
+		System.out.println("\nLista de diretores(as) disponíveis da faculdade " + faculdade.name);
 		for(Diretor d : faculdade.listaDiretores) {
 			System.out.println("\nNome do diretor:         " + d.getName());
 			System.out.println("\nId do diretor:           " + d.getId());
 			System.out.println("\nNome da faculdade:       " + faculdade.name);
 			System.out.println("\nCNPJ:                    " + faculdade.cpf_cnpj);
 			System.out.println("\nId da faculdade:         " + faculdade.id);
+			System.out.println();
 		}
+		System.out.println();
 	}
 	
 	public Diretor findDiretor(Integer id, Faculdade faculdade) {
@@ -200,11 +209,6 @@ public class Faculdade extends Empresa {
 		return findDiretor;
 	}
 	
-	public void listarDadosDiretor(Diretor diretor) {
-		System.out.println("\nNome do diretor:         " + diretor.getName());
-		System.out.println("\nId do diretor:           " + diretor.getId());
-	}
-	
 	public void addProfessor(Professor professor) {
 		listaProfessores.add(professor);
 	}
@@ -215,9 +219,11 @@ public class Faculdade extends Empresa {
 	
 	public void listarProfessores(Faculdade faculdade) {
 		System.out.println("\nLista de professores da faculdade " + faculdade.name);
+		System.out.println();
 		for(Professor p : faculdade.listaProfessores) {
-			System.out.println("\nNome:                    " + p.getName());
-			System.out.println("\nId:                      " + p.getId());
+			System.out.println("Nome:                    " + p.getName());
+			System.out.println("Id:                      " + p.getId());
+			System.out.println();
 		}
 		System.out.println();
 	}
@@ -233,17 +239,35 @@ public class Faculdade extends Empresa {
 	}
 	
 	public void listarContasBancarias(Faculdade faculdade) {
-		System.out.println("Dados das contas bancárias da faculdade " + faculdade.name);
-		for(ContaCorrente cc : faculdade.listaContaC) {
-			System.out.println("\nConta corrente nº:        " + cc.getId());
-			System.out.println("\nNome titular da conta:    " + faculdade.name);
+		System.out.println("\nDados das contas bancárias da faculdade " + faculdade.name);
+		if(faculdade.listaContaC.isEmpty() == true) {
+			System.out.println("\nNão há contas corrente cadastradas para a faculdade " + faculdade.name);
 		}
-		for(ContaPoupanca cp : faculdade.listaContaP) {
-			System.out.println("\nConta corrente nº:        " + cp.getId());
-			System.out.println("\nNome titular da conta:    " + faculdade.name);
+		
+		else {
+			System.out.println("\nLista das contas corrente: \n");
+			for(ContaCorrente cc : faculdade.listaContaC) {
+				System.out.println("Conta corrente nº:        " + cc.getId());
+				System.out.println("Nome titular da conta:    " + faculdade.name);
+				System.out.println();
+			}
+			System.out.println();
 		}
-		System.out.println();
+		
+		if(faculdade.listaContaP.isEmpty() == true) {
+			System.out.println("Não há contas poupança cadastradas para a faculdade " + faculdade.name);
+		}
+		else { 
+			System.out.println("\nLista das contas poupança: \n");
+			for(ContaPoupanca cp : faculdade.listaContaP) {
+				System.out.println("Conta corrente nº:        " + cp.getId());
+				System.out.println("Nome titular da conta:    " + faculdade.name);
+				System.out.println();
+			}
+			System.out.println("\n");
+		}
 	}
+
 
 	@Override
 	public boolean pessoaJuridica() {
@@ -251,9 +275,10 @@ public class Faculdade extends Empresa {
 	}
 	
 	public void listarDadosFaculdade(Faculdade faculdade) {
-		System.out.println("\nFaculdade:               " + faculdade.name);
-		System.out.println("\nCNPJ:                    " + faculdade.cpf_cnpj);
-		System.out.println("\nId da faculdade:         " + faculdade.id);
+		System.out.println("\nDados da empresa: \n");
+		System.out.println("Nome da faculdade:       " + faculdade.name);
+		System.out.println("CNPJ:                    " + faculdade.cpf_cnpj);
+		System.out.println("Id da faculdade:         " + faculdade.id);
 		System.out.println();
 	}
 }
