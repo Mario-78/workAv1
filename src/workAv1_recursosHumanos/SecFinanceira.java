@@ -1,14 +1,14 @@
 package workAv1_recursosHumanos;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import workAv1_negociosProdutos.ContaCorrente;
 import workAv1_negociosProdutos.ContaPoupanca;
 
 public class SecFinanceira extends Funcionario {
 	
-	private Set<Pessoa> filaPessoas = new HashSet<Pessoa>();
+	private List<Pessoa> filaPessoas = new ArrayList<Pessoa>();
 	
 	public SecFinanceira() {
 		
@@ -25,6 +25,24 @@ public class SecFinanceira extends Funcionario {
 	public void removeFilaPessoa(Pessoa pessoa) {
 		filaPessoas.remove(pessoa);
 	}
+	
+	
+	
+	public void listarFilaPessoas(SecFinanceira sec) {
+		System.out.println("\nPessoas na fila aguardando atendimento do(a) secretário(a) financeiro(a)");
+		if(sec.filaPessoas.isEmpty()) {
+			System.out.println("\nNão há pessoas aguardando na fila!!!!!");
+		}else {
+			for(Pessoa p : sec.filaPessoas) {
+				System.out.println("\nNome:                         " + p.name);
+				System.out.println("\nCPF:                          " + p.cpf_cnpj);
+				System.out.println("\nPosição da pessoa na fila:    " + sec.filaPessoas.indexOf(p));
+			System.out.println();
+			}
+		}
+		System.out.println();
+	}
+		
 	
 	public void listarDadosSecFinanceira(SecFinanceira sec) {
 		System.out.println("\nDados pessoais do secretário(a) financeiro(a)");
@@ -45,6 +63,26 @@ public class SecFinanceira extends Funcionario {
 			System.out.println("Conta corrente nº     " + cp.getId());
 		}
 		System.out.println();
+	}	
+	
+	public Integer findIdPrimeiraPessoaFila(SecFinanceira sec) {
+		Integer i = 0, findId = 0;
+		for(Pessoa p : sec.filaPessoas) {
+			if(i == sec.filaPessoas.size()) {
+				findId = p.id;
+			}
+			i++;
+		}
+		
+		return findId;
+	}
+	
+	public void realizarAtendimento(Integer id, SecFinanceira sec) {
+		for(Pessoa p : sec.filaPessoas) {
+			if(p.id == id) {
+				sec.removeFilaPessoa(p);
+			}
+		}
 	}
 
 	@Override

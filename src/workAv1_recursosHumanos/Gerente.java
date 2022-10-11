@@ -1,12 +1,17 @@
 package workAv1_recursosHumanos;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+import workAv1_negociosProdutos.ContaCorrente;
+import workAv1_negociosProdutos.ContaPoupanca;
 
 public class Gerente extends Funcionario  {
 	
+	private Fila<Pessoa> fila = new Fila<Pessoa>();
 	private Integer idAgencia;
-	private Set<Object> filaPessoas = new HashSet<Object>();
+	private List<Pessoa> filaPessoas = new ArrayList<Pessoa>();
+	
 	
 	public Gerente() {
 		
@@ -17,6 +22,14 @@ public class Gerente extends Funcionario  {
 		this.idAgencia = idAgencia;
 	}
 	
+	public void addFila(Pessoa pessoa) {
+		fila.addFila(pessoa);
+	}
+	
+	public void removeFila(Pessoa pessoa) {
+		fila.removeFila(pessoa);
+	}
+	
 	public Integer getIdAgencia() {
 		return idAgencia;
 	}
@@ -25,12 +38,48 @@ public class Gerente extends Funcionario  {
 		this.idAgencia = idAgencia;
 	}
 	
-	public void addFilaPessoas(Object pessoa) {
+	public void addFilaPessoas(Pessoa pessoa) {
 		filaPessoas.add(pessoa);
 	}
 	
-	public void removeFilaPessoas(Object pessoa) {
+	public void removeFilaPessoas(Pessoa pessoa) {
 		filaPessoas.remove(pessoa);
+	}
+	
+	public void listarContasGernte(Gerente gerente) {
+		System.out.println("Dados financeiros do gerente: \n");
+		for(ContaCorrente cc : gerente.listaContaC) {
+			System.out.println("Nome do titular:      " + gerente.getName());
+			System.out.println("Conta corrente nº:    " + cc.getId());
+		}
+		System.out.println();
+		for(ContaPoupanca cp : gerente.listaContaP) {
+			System.out.println("Nome do titular:      " + gerente.getName());
+			System.out.println("Conta poupança nº:    " + cp.getId());
+		}
+		System.out.println();
+	}
+	
+	public void listarFilaPessoas(Gerente gerente){
+		System.out.println("\nPessoas na fila aguardando atendimento do(a) gerente: ");
+		if(gerente.filaPessoas.isEmpty()) {
+			System.out.println("\nNão há pessoas aguardando na fila!!!!!");
+		}else {
+			for(Pessoa p : gerente.filaPessoas) {
+				System.out.println("\nNome:                         " + p.name);
+				System.out.println("\nCPF:                          " + p.cpf_cnpj);
+				System.out.println("\nPosição da pessoa na fila:    " + gerente.filaPessoas.indexOf(p) + 1);
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+	
+	public void listarDadosGerente(Gerente gerente) {
+		System.out.println("\nDados do gerente: ");
+		System.out.println("\nNome:                         " + gerente.name);
+		System.out.println("\nId:                           " + gerente.id);
+		System.out.println("\nCPF:                          " + gerente.cpf_cnpj);
 	}
 
 	@Override

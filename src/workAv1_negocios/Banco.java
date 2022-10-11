@@ -8,7 +8,7 @@ import workAv1_recursosHumanos.Presidente;
 
 public class Banco extends  Empresa{
 	
-	private Set<Presidente> listaPresidentes = new HashSet<Presidente>();
+	private Presidente presidente = null;
 	private Set<Gerente> listaGerentes = new HashSet<Gerente>();
 	private Set<Agencia> listaAgencias = new HashSet<Agencia>();
 	
@@ -19,34 +19,15 @@ public class Banco extends  Empresa{
 	public Banco(Integer id, String name, String cnpj) {
 		super(id, name, cnpj);
 	}	
-	
-	public void addListaPresidente(Presidente presidente) {
-		listaPresidentes.add(presidente);
+
+	public Presidente getPresidente() {
+		return presidente;
 	}
-	
-	public void removeListaPresidente(Presidente presidente) {
-		listaPresidentes.remove(presidente);
+
+	public void setPresidente(Presidente presidente) {
+		this.presidente = presidente;
 	}
-	
-	public void listarPresidentes(Banco banco) {
-		for(Presidente p : banco.listaPresidentes) {
-			System.out.println("Nome do presidente:      " + p.getName());
-			System.out.println("Id do presidente:        " + p.getId());
-			System.out.println("Nome do banco:           " + banco.name);
-			System.out.println("Id do banco:             " + banco.id);
-			System.out.println("CNPJ do banco:           " + banco.cpf_cnpj);
-		}
-	}
-	
-	public Presidente findPresidente(Integer id, Banco banco) {
-		Presidente findPresidente = new Presidente();
-		for(Presidente p : banco.listaPresidentes) {
-			if(p.getId() == id) {
-				findPresidente = p;
-			}
-		}
-		return findPresidente;
-	}
+
 	public void addListaGerente(Gerente gerente) {
 		listaGerentes.add(gerente);
 	}
@@ -59,12 +40,11 @@ public class Banco extends  Empresa{
 		for(Gerente g : banco.listaGerentes) {
 			System.out.println("Nome do gerente:   " + g.getName());
 			System.out.println("Id do gerente:     " + g.getId());
-			for(Agencia a : listaAgencias) {
-				if(g.getId() == a.getIdGerente()) {
-					System.out.println("Nome da agencia:   " + a.getNameAg());
-					System.out.println("Id da agência:     " + a.getIdAg());
-				}
-			}
+			/*
+			 * for(Agencia a : listaAgencias) { if(g.getId() == a.getIdGerente()) {
+			 * System.out.println("Nome da agencia:   " + a.getNameAg());
+			 * System.out.println("Id da agência:     " + a.getIdAg()); } }
+			 */
 		}
 	}
 	
@@ -88,8 +68,10 @@ public class Banco extends  Empresa{
 	
 	public void listaAgencias(Banco banco) {
 		for(Agencia a : banco.listaAgencias) {
-			System.out.println("Nome da agência:   " + a.getNameAg());
-			System.out.println("Id da agência:     " + a.getIdAg());
+			System.out.println("Nome do banco:     " + a.name);
+			System.out.println("Id do banco:       " + a.id);
+			System.out.println("Nome da agência:   " + a.getNameAgencia());
+			System.out.println("Id da agência:     " + a.getIdAgencia());
 		}
 	}
 	
@@ -97,8 +79,8 @@ public class Banco extends  Empresa{
 		for(Agencia a : banco.listaAgencias) {
 			System.out.println("Nome do banco:     " + a.name);
 			System.out.println("Id do banco:       " + a.id);
-			System.out.println("Nome da agência:   " + a.getNameAg());
-			System.out.println("Id da agência:     " + a.getIdAg());
+			System.out.println("Nome da agência:   " + a.getNameAgencia());
+			System.out.println("Id da agência:     " + a.getIdAgencia());
 			for(Gerente g : banco.listaGerentes) {
 				System.out.println("Nome do gerente:   " + g.getName());
 				System.out.println("Id do gerente:     " + g.getId());

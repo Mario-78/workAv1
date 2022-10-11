@@ -3,6 +3,9 @@ package workAv1_recursosHumanos;
 import java.util.ArrayList;
 import java.util.List;
 
+import workAv1_negociosProdutos.ContaCorrente;
+import workAv1_negociosProdutos.ContaPoupanca;
+
 public class Diretor extends Funcionario {
 	
 	private List<Coordenador> filaCoordenadores = new ArrayList<Coordenador>();	
@@ -32,16 +35,6 @@ public class Diretor extends Funcionario {
 		System.out.println();
 	}
 	
-	public Coordenador findCoordenador(Integer id, Diretor diretor) {
-		Coordenador findCoordenador = new Coordenador();
-		for(Coordenador c : diretor.filaCoordenadores) {
-			if(c.id == id) {
-				findCoordenador = c;
-			}
-		}
-		return findCoordenador;
-	}
-	
 	public Coordenador realizarAtendimento(Diretor diretor) {
 		Coordenador findCoordenador = new Coordenador();
 		int i = 0;
@@ -51,6 +44,19 @@ public class Diretor extends Funcionario {
 			}
 		}
 		return findCoordenador;
+	}
+	
+	public void listarContasDiretor(Diretor diretor) {
+		System.out.println("Dados financeiros do diretor: \n");
+		for(ContaCorrente cc : diretor.listaContaC) {
+			System.out.println("Nome do titular:      " + diretor.getName());
+			System.out.println("Conta corrente nº:    " + cc.getId());
+		}
+		System.out.println();
+		for(ContaPoupanca cp : diretor.listaContaP) {
+			System.out.println("Nome do titular:      " + diretor.getName());
+			System.out.println("Conta poupança nº:    " + cp.getId());
+		}
 	}
 
 	@Override

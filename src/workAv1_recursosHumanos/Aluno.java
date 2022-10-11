@@ -1,7 +1,8 @@
 package workAv1_recursosHumanos;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import workAv1_negociosProdutos.ContaCorrente;
 import workAv1_negociosProdutos.ContaPoupanca;
@@ -49,8 +50,16 @@ public class Aluno extends Pessoa implements PessoaFisica {
 		System.out.println();
 	}
 	
-	public Set<ContaCorrente> getListContaC(){
-		return listaContaC;
+	public List<Integer> findIdGerente(Aluno aluno){
+		List<Integer> findIdList = new ArrayList<Integer>();
+		for(ContaCorrente cc : aluno.listaContaC) {
+			findIdList.add(cc.getIdGerente());
+		}
+		System.out.println();
+		for(ContaPoupanca cp : aluno.listaContaP) {
+			findIdList.add(cp.getIdGerente());
+		}
+		return findIdList;
 	}
 	
 	public Integer geraMatricula() {

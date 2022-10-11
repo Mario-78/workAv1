@@ -9,12 +9,14 @@ import workAv1_negociosProdutos.Curso;
 import workAv1_negociosProdutos.Disciplina;
 import workAv1_recursosHumanos.Coordenador;
 import workAv1_recursosHumanos.Diretor;
+import workAv1_recursosHumanos.Presidente;
 import workAv1_recursosHumanos.Professor;
 import workAv1_recursosHumanos.SecAcademica;
 import workAv1_recursosHumanos.SecFinanceira;
 
 public class Faculdade extends Empresa {
 	
+	private Presidente presidente = null;
 	private Integer idDiretor;
 	private Set<Curso> listaCursos = new HashSet<Curso>();
 	private Set<Disciplina> listaDisciplinas = new HashSet<Disciplina>();
@@ -31,7 +33,15 @@ public class Faculdade extends Empresa {
 	public Faculdade(Integer id, String name, String cnpj, Integer idDiretor) {
 		super(id, name, cnpj);
 		this.idDiretor = idDiretor;
-	}	
+	}
+	
+	public Presidente getPresidente() {
+		return presidente;
+	}
+
+	public void setPresidente(Presidente presidente) {
+		this.presidente = presidente;
+	}
 
 	public Integer getIdDiretor() {
 		return idDiretor;
