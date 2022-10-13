@@ -8,9 +8,9 @@ import workAv1_negociosProdutos.ContaPoupanca;
 
 public class Gerente extends Funcionario  {
 	
-	private Fila<Pessoa> fila = new Fila<Pessoa>();
+	private Fila<Pessoa> filaPessoas = new Fila<Pessoa>();
 	private Integer idAgencia;
-	private List<Pessoa> filaPessoas = new ArrayList<Pessoa>();
+	
 	
 	
 	public Gerente() {
@@ -22,12 +22,8 @@ public class Gerente extends Funcionario  {
 		this.idAgencia = idAgencia;
 	}
 	
-	public void addFila(Pessoa pessoa) {
-		fila.addFila(pessoa);
-	}
-	
-	public void removeFila(Pessoa pessoa) {
-		fila.removeFila(pessoa);
+	public Fila<Pessoa> getFilaPessoas(){
+		return filaPessoas;
 	}
 	
 	public Integer getIdAgencia() {
@@ -36,14 +32,6 @@ public class Gerente extends Funcionario  {
 
 	public void setIdAgencia(Integer idAgencia) {
 		this.idAgencia = idAgencia;
-	}
-	
-	public void addFilaPessoas(Pessoa pessoa) {
-		filaPessoas.add(pessoa);
-	}
-	
-	public void removeFilaPessoas(Pessoa pessoa) {
-		filaPessoas.remove(pessoa);
 	}
 	
 	public void listarContasGernte(Gerente gerente) {
@@ -60,7 +48,7 @@ public class Gerente extends Funcionario  {
 		System.out.println();
 	}
 	
-	public void listarFilaPessoas(Gerente gerente){
+	/*public void listarFilaPessoas(Gerente gerente){
 		System.out.println("\nPessoas na fila aguardando atendimento do(a) gerente: ");
 		if(gerente.filaPessoas.isEmpty()) {
 			System.out.println("\nNão há pessoas aguardando na fila!!!!!");
@@ -73,7 +61,7 @@ public class Gerente extends Funcionario  {
 			System.out.println();
 		}
 		System.out.println();
-	}
+	}*/
 	
 	public void listarDadosGerente(Gerente gerente) {
 		System.out.println("\nDados do gerente: ");

@@ -1,14 +1,11 @@
 package workAv1_recursosHumanos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import workAv1_negociosProdutos.ContaCorrente;
 import workAv1_negociosProdutos.ContaPoupanca;
 
 public class SecFinanceira extends Funcionario {
 	
-	private List<Pessoa> filaPessoas = new ArrayList<Pessoa>();
+	private Fila<Pessoa> filaPessoas = new Fila<Pessoa>();
 	
 	public SecFinanceira() {
 		
@@ -18,18 +15,9 @@ public class SecFinanceira extends Funcionario {
 		super(id, name, cpf, função);
 	}
 	
-	public void addFilaPessoa(Pessoa pessoa) {
-		filaPessoas.add(pessoa);
-	}
-	
-	public void removeFilaPessoa(Pessoa pessoa) {
-		filaPessoas.remove(pessoa);
-	}
-	
-	
-	
-	public void listarFilaPessoas(SecFinanceira sec) {
+	/*public void listarFilaPessoas(SecFinanceira sec) {
 		System.out.println("\nPessoas na fila aguardando atendimento do(a) secretário(a) financeiro(a)");
+		System.out.println();
 		if(sec.filaPessoas.isEmpty()) {
 			System.out.println("\nNão há pessoas aguardando na fila!!!!!");
 		}else {
@@ -41,6 +29,10 @@ public class SecFinanceira extends Funcionario {
 			}
 		}
 		System.out.println();
+	}*/
+	
+	public Fila<Pessoa> getFilaPessoas(){
+		return filaPessoas;
 	}
 		
 	
@@ -65,7 +57,7 @@ public class SecFinanceira extends Funcionario {
 		System.out.println();
 	}	
 	
-	public Integer findIdPrimeiraPessoaFila(SecFinanceira sec) {
+	/*public Integer findIdPrimeiraPessoaFila(SecFinanceira sec) {
 		Integer i = 0, findId = 0;
 		for(Pessoa p : sec.filaPessoas) {
 			if(i == sec.filaPessoas.size()) {
@@ -83,7 +75,7 @@ public class SecFinanceira extends Funcionario {
 				sec.removeFilaPessoa(p);
 			}
 		}
-	}
+	}*/
 
 	@Override
 	public boolean pessoaFisica() {

@@ -15,7 +15,7 @@ public abstract class Empresa extends Pessoa implements PessoaJuridica {
 	public Empresa() {
 		
 	}
-
+	
 	public Empresa(Integer id, String name, String cnpj) {
 		super(id, name, cnpj);
 	}
@@ -53,12 +53,14 @@ public abstract class Empresa extends Pessoa implements PessoaJuridica {
 	}
 	
 	public void listarPresidentes() {
-		System.out.println("\nLista de presidentes: ");
+		System.out.println("\nLista de presidentes: \n");
 		for(Presidente p : listaPresidentes) {
 			System.out.println("\nNome:      " + p.getName());
 			System.out.println("\nId:        " + p.getId());
 			//System.out.println("\nCPF:       " + p.getCpf_cnpj());
+			System.out.println();
 		}
+		System.out.println();
 	}
 	
 	public Presidente findPresidente(Integer id) {
@@ -114,6 +116,7 @@ public abstract class Empresa extends Pessoa implements PessoaJuridica {
 			System.out.println("Nome do banco:           " + b.name);
 			System.out.println("Id do banco:             " + b.id);
 			System.out.println("CNPJ do banco:           " + b.cpf_cnpj);
+			System.out.println();
 		}
 		System.out.println();
 	}

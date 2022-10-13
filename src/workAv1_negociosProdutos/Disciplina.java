@@ -67,10 +67,12 @@ public class Disciplina {
 	
 	
 	public void listarAlunos(Disciplina disciplina) {
-		System.out.println("\nAlunos Matriculados: ");
+		System.out.println("\nAlunos matriculados na disciplina " + disciplina.name);
+		System.out.println();
 		for(Aluno a : disciplina.listaAlunos) {
-			System.out.println("\nNome do aluno:           " + a.getName());
-			System.out.println("\nId do aluno:             " + a.getId());
+			System.out.println("Nome do aluno:           " + a.getName());
+			System.out.println("Id do aluno:             " + a.getId());
+			System.out.println();
 		}
 		System.out.println();
 	}
@@ -87,12 +89,13 @@ public class Disciplina {
 	}
 	
 	public void listarDadosDiscilina(Disciplina d, Curso c, Professor p, Faculdade f) {
-		System.out.println("\nDados da disciplina: ");
-		System.out.println("\nNome da faculdade:       " + f.getName());
-		System.out.println("\nNome do curso:           " + c.getName());
-		System.out.println("\nNome da disciplina:      " + d.name);
-		System.out.println("\nId da disciplina:        " + d.id);
-		System.out.println("\nNome do professor:       " + p.getName());
+		System.out.println("\nDados da disciplina: " + d.name);
+		System.out.println();
+		System.out.println("Nome da faculdade:       " + f.getName());
+		System.out.println("Nome do curso:           " + c.getName());
+		System.out.println("Nome da disciplina:      " + d.name);
+		System.out.println("Id da disciplina:        " + d.id);
+		System.out.println("Nome do professor:       " + p.getName());
+		System.out.println();
 	}
-
 }

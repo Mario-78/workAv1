@@ -1,8 +1,6 @@
 package workAv1_recursosHumanos;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import workAv1_negociosProdutos.ContaCorrente;
@@ -11,8 +9,9 @@ import workAv1_negociosProdutos.Disciplina;
 
 public class Professor extends Funcionario implements PessoaFisica {
 	
+	private Fila<Aluno> fila = new Fila<Aluno>();
 	private Set<Disciplina> listaDiciplinas = new HashSet<Disciplina>();
-	private List<Aluno> filaAlunos = new ArrayList<Aluno>();	
+		
 	
 	public Professor() {
 		
@@ -22,6 +21,18 @@ public class Professor extends Funcionario implements PessoaFisica {
 		super(id, name, cpf, função);		
 	}
 	
+	public Fila<Aluno> getFilaAlunos() {
+		return fila;
+	}
+	
+	public void addFila(Pessoa p) {
+		fila.fila.add(p);
+	}
+	
+	public void removeFila(Pessoa p) {
+		fila.fila.remove(p);
+	}
+
 	public void addDisciplina(Disciplina disciplina) {
 		listaDiciplinas.add(disciplina);
 	}
@@ -37,22 +48,6 @@ public class Professor extends Funcionario implements PessoaFisica {
 		}
 	}
 	
-	public void addFilaAlunos(Aluno aluno) {
-		filaAlunos.add(aluno);
-	}
-	
-	public void removeFilaAluno(Aluno aluno) {
-		filaAlunos.remove(aluno);
-	}
-	
-	public void listarDadosProfessor(Professor professor) {
-		System.out.println("Dados do professor: \n");
-		System.out.println("Nome:      " + professor.name);
-		System.out.println("Id:        " + professor.id);
-		System.out.println("CPF:       " + professor.cpf_cnpj);
-		System.out.println();
-	}
-	
 	public void listarContasProfessor(Professor professor) {
 		System.out.println("Dados financeiros do professor: \n");
 		for(ContaCorrente cc : professor.listaContaC) {
@@ -66,26 +61,14 @@ public class Professor extends Funcionario implements PessoaFisica {
 		}
 	}
 	
-	public void listarFilaAlunos(Professor professor) {
-		System.out.println("Lista de alunos aguardando atendimento: \n");
-		for(Aluno aluno : professor.filaAlunos) {
-			System.out.println("Nome do aluno:              " + aluno.name);
-			System.out.println("Posição do aluno na fila:   " + professor.filaAlunos.indexOf(aluno));
-		}
+	public void listarDadosProfessor(Professor professor) {
+		System.out.println("Dados do professor: \n");
+		System.out.println("Nome:      " + professor.name);
+		System.out.println("Id:        " + professor.id);
+		System.out.println("CPF:       " + professor.cpf_cnpj);
+		System.out.println();
 	}
 	
-	public Aluno realizarAtendimento(Professor professor) {
-		Aluno findAluno = new Aluno();
-		int i = 0;
-		for(Aluno aluno : professor.filaAlunos) {
-			if(i == filaAlunos.size()) {
-				findAluno = aluno;			
-			}
-			i++;
-		}
-		return findAluno;
-	}
-
 	@Override
 	public boolean diretoria() {
 		return false;

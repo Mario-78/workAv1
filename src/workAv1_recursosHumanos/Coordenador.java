@@ -1,15 +1,12 @@
 package workAv1_recursosHumanos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import workAv1_negociosProdutos.ContaCorrente;
 import workAv1_negociosProdutos.ContaPoupanca;
 
 public class Coordenador extends Funcionario {
 	
-	private List<Aluno> filaAlunos = new ArrayList<Aluno>();
-	private List<Professor> filaProfessores = new ArrayList<Professor>();
+	private Fila<Aluno> filaAlunos = new Fila<Aluno>();
+	private Fila<Professor> filaProfessores = new Fila<Professor>();
 	
 	public Coordenador() {
 		
@@ -19,20 +16,12 @@ public class Coordenador extends Funcionario {
 		super(id, name, cpf, função);
 	}
 	
-	public void addFilaAluno(Aluno aluno) {
-		filaAlunos.add(aluno);
+	public Fila<Aluno> getFilaAlunos(){
+		return filaAlunos;
 	}
 	
-	public void removeFilaAluno(Aluno aluno) {
-		filaAlunos.remove(aluno);
-	}
-	
-	public void addFilaProfessor(Professor professor) {
-		filaProfessores.add(professor);
-	}
-	
-	public void removeFilaProfessor(Professor professor) {
-		filaProfessores.remove(professor);
+	public Fila<Professor> getFilaProfessores(){
+		return filaProfessores;
 	}
 	
 	public void listarDadosCoordenador(Coordenador coordenador) {
@@ -53,46 +42,6 @@ public class Coordenador extends Funcionario {
 			System.out.println("Nome do titular:      " + coordenador.name);
 			System.out.println("Conta corrente nº     " + cp.getId());
 		}
-	}
-	
-	public void listarFilaProfessores(Coordenador coordenador) {
-		System.out.println("Lista de professores aguardando atendimento: \n");
-		for(Professor p : coordenador.filaProfessores) {
-			System.out.println("Nome do professor:              " + p.name);
-			System.out.println("Posição do professor na fila:   " + coordenador.filaProfessores.indexOf(p));
-		}
-	}
-	
-	public Professor realizarAtendimentoProfessor(Coordenador coordenador) {
-		Professor findProfessor = new Professor();
-		int i = 0;
-		for(Professor professor : coordenador.filaProfessores) {
-			if(i == filaProfessores.size()) {
-				findProfessor = professor;			
-			}
-			i++;
-		}
-		return findProfessor;
-	}
-	
-	public void listarFilaAlunos(Coordenador coordenador) {
-		System.out.println("Lista de alunos aguardando atendimento: \n");
-		for(Aluno aluno : coordenador.filaAlunos) {
-			System.out.println("Nome do aluno:              " + aluno.name);
-			System.out.println("Posição do aluno na fila:   " + coordenador.filaAlunos.indexOf(aluno));
-		}
-	}
-	
-	public Aluno realizarAtendimentoAluno(Coordenador coordenador) {
-		Aluno findAluno = new Aluno();
-		int i = 0;
-		for(Aluno aluno : coordenador.filaAlunos) {
-			if(i == filaAlunos.size()) {
-				findAluno = aluno;			
-			}
-			i++;
-		}
-		return findAluno;
 	}
 	
 	@Override

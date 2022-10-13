@@ -60,10 +60,12 @@ public class Curso {
 	}
 	
 	public void listarDisciplinas(Curso curso) {
-		System.out.println("Lista de disciplinas: \n" + curso.name);
+		System.out.println("\nLista de disciplinas do curso: " + curso.name);
+		System.out.println();
 		for(Disciplina disc : curso.listaDisciplinas) {
 			System.out.println("Nome:      " + disc.getName());
 			System.out.println("Id:        " + disc.getId());
+			System.out.println();
 		}
 		System.out.println();
 	}
@@ -77,12 +79,5 @@ public class Curso {
 		}
 		return disciplina;
 	}
-
-	public List<Disciplina> findListaDisciplinas(Curso curso) {
-		List<Disciplina> listFindDisc = new ArrayList<Disciplina>();
-		for(Disciplina disc : curso.listaDisciplinas) {
-			listFindDisc.add(disc);
-		}
-		return listFindDisc;
-	}
+		
 }
