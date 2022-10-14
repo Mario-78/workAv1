@@ -1,14 +1,11 @@
 package workAv1_recursosHumanos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import workAv1_negociosProdutos.ContaCorrente;
 import workAv1_negociosProdutos.ContaPoupanca;
 
 public class SecAcademica extends Funcionario {
 	
-	private List<Aluno> filaAlunos = new ArrayList<Aluno>();
+	private Fila<Pessoa> filaAlunos = new Fila<Pessoa>();
 	
 	public SecAcademica() {
 		
@@ -18,12 +15,8 @@ public class SecAcademica extends Funcionario {
 		super(id, name, cpf, função);
 	}
 	
-	public void addFilaAluno(Aluno aluno) {
-		filaAlunos.add(null);
-	}
-	
-	public void removeFilaAluno(Object aluno) {
-		filaAlunos.remove(aluno);
+	public Fila<Pessoa> getFilaAlunos(){
+		return filaAlunos;
 	}
 	
 	public void listarDadosSecAcademica(SecAcademica sec) {
@@ -45,26 +38,6 @@ public class SecAcademica extends Funcionario {
 			System.out.println("Conta corrente nº     " + cp.getId());
 		}
 		System.out.println();
-	}
-	
-	public void listarFilaAlunos(SecAcademica sec) {
-		System.out.println("Lista de alunos aguardando atendimento: \n");
-		for(Aluno a : sec.filaAlunos) {
-			System.out.println("\nNome do aluno:           " + a.name);
-			System.out.println("\nPosição do aluno na fila " + sec.filaAlunos.indexOf(a));
-		}
-	}
-	
-	public Aluno realizarAtendimentoAluno(SecAcademica sec) {
-		Aluno findAluno = new Aluno();
-		int i = 0;
-		for(Aluno a : sec.filaAlunos) {
-			if(i == sec.filaAlunos.size()) {
-				findAluno = a;
-			}
-			i++;
-		}
-		return findAluno;
 	}
 
 	@Override

@@ -24,14 +24,6 @@ public class Professor extends Funcionario implements PessoaFisica {
 	public Fila<Aluno> getFilaAlunos() {
 		return fila;
 	}
-	
-	public void addFila(Pessoa p) {
-		fila.fila.add(p);
-	}
-	
-	public void removeFila(Pessoa p) {
-		fila.fila.remove(p);
-	}
 
 	public void addDisciplina(Disciplina disciplina) {
 		listaDiciplinas.add(disciplina);

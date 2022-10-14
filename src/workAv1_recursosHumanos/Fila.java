@@ -5,16 +5,14 @@ import java.util.List;
 
 public class Fila<T> {
 	
-	T obj;
-	List<Pessoa> fila = new ArrayList<Pessoa>();
+		List<Pessoa> fila = new ArrayList<Pessoa>();
 	
 	public Fila() {
 		
 	}
 	
-	public Fila(T obj) {
-		this.obj = obj;
-		
+	public List<Pessoa> getFila(){
+		return fila;
 	}
 	
 	public void addFila(Pessoa p) {
@@ -22,52 +20,100 @@ public class Fila<T> {
 	}
 	
 	public void removeFila(Pessoa p) {
-		if(fila.indexOf(p) == 0) {
 			fila.remove(p); 
-		}
 	}
 	
-	public void atualizarFila(List<Pessoa> list) {
-		fila.addAll(list);
-	}
+	/*
+	 * public void atualizarFila(List<Pessoa> list) { fila.addAll(list); }
+	 */
 	
-	public List<Pessoa> findListaAlunosProfessor(Professor professor){
-		List<Pessoa> findList = new ArrayList<Pessoa>();		
+	/*
+	 * public List<Pessoa> findListaAlunosProfessor(Professor professor){
+	 * List<Pessoa> findList = new ArrayList<Pessoa>(); for(Pessoa p :
+	 * professor.getFilaAlunos().fila) { findList.add(p); }
+	 * 
+	 * return findList; }
+	 */
+	
+	public void listarFilaProfessor(Professor professor) {
 		for(Pessoa p : professor.getFilaAlunos().fila) {
-			findList.add(p);
+			System.out.println();
+			System.out.println("Nome da pessoa: " + p.name);
+			System.out.println("Posição da pessoa na fila: " + professor.getFilaAlunos().fila.indexOf(p));
+			System.out.println();
 		}
-		
-		return findList;
 	}
 	
-	public List<Pessoa> findListaAlunosCoordenador(Coordenador coordenador){
-		List<Pessoa> findList = new ArrayList<Pessoa>();
-		
+	/*
+	 * public List<Pessoa> findListaAlunosCoordenador(Coordenador coordenador){
+	 * List<Pessoa> findList = new ArrayList<Pessoa>();
+	 * 
+	 * for(Pessoa p : coordenador.getFilaAlunos().fila) { findList.add(p); }
+	 * 
+	 * return findList; }
+	 */
+
+	public void listarFilaCoordenadorA(Coordenador coordenador) {
 		for(Pessoa p : coordenador.getFilaAlunos().fila) {
-			findList.add(p);
+			System.out.println();
+			System.out.println("Nome da pessoa: " + p.name);
+			System.out.println("Posição da pessoa na fila: " + coordenador.getFilaAlunos().fila.indexOf(p));
+			System.out.println();
 		}
-		
-		return findList;
 	}
 	
-	public List<Pessoa> findListaProfessoresCoordenador(Coordenador coordenador){
-		List<Pessoa> findList = new ArrayList<Pessoa>();
-		
+	/*
+	 * public List<Pessoa> findListaProfessoresCoordenador(Coordenador coordenador){
+	 * List<Pessoa> findList = new ArrayList<Pessoa>();
+	 * 
+	 * for(Pessoa p : coordenador.getFilaProfessores().fila) { findList.add(p); }
+	 * 
+	 * return findList; }
+	 */
+	
+	public void listarFilaCoordenadorP(Coordenador coordenador) {
 		for(Pessoa p : coordenador.getFilaProfessores().fila) {
-			findList.add(p);
+			System.out.println();
+			System.out.println("Nome da pessoa: " + p.name);
+			System.out.println("Posição da pessoa na fila: " + coordenador.getFilaProfessores().fila.indexOf(p));
+			System.out.println();
 		}
-		
-		return findList;
 	}
 	
-	public List<Pessoa> findListPessoasSecFinancira(SecFinanceira sec){
-		List<Pessoa> findList = new ArrayList<Pessoa>();
-		
-		for(Pessoa p : sec.getFilaPessoas().fila) {
-			findList.add(p);
+	/*
+	 * public List<Pessoa> findListPessoasSecAcademica(SecAcademica sec){
+	 * List<Pessoa> findList = new ArrayList<Pessoa>();
+	 * 
+	 * for(Pessoa p : sec.getFilaAlunos().fila) { findList.add(p); }
+	 * 
+	 * return findList; }
+	 */
+	
+	public void listarFilaSecAcademica(SecAcademica sec) {
+		for(Pessoa p : sec.getFilaAlunos().fila) {
+			System.out.println();
+			System.out.println("Nome da pessoa: " + p.name);
+			System.out.println("Posição da pessoa na fila: " + sec.getFilaAlunos().fila.indexOf(p));
+			System.out.println();
 		}
-		
-		return findList;
+	}
+	
+	/*
+	 * public List<Pessoa> findListPessoasSecFinancira(SecFinanceira sec){
+	 * List<Pessoa> findList = new ArrayList<Pessoa>();
+	 * 
+	 * for(Pessoa p : sec.getFilaPessoas().fila) { findList.add(p); }
+	 * 
+	 * return findList; }
+	 */
+	
+	public void listarFilaSecFinanceira(SecFinanceira sec) {
+		for(Pessoa p : sec.getFilaPessoas().fila) {
+			System.out.println();
+			System.out.println("Nome da pessoa: " + p.name);
+			System.out.println("Posição da pessoa na fila: " + sec.getFilaPessoas().fila.indexOf(p));
+			System.out.println();
+		}
 	}
 	
 	public List<Pessoa> findListPessoasGrente(Gerente gerente){
@@ -80,29 +126,38 @@ public class Fila<T> {
 		return findList;
 	}
 	
-	public List<Pessoa> findListPessoasDiretor(Diretor diretor){
-		List<Pessoa> findList = new ArrayList<Pessoa>();
-		
-		for(Pessoa p : diretor.getFilaPessoas().fila) {
-			findList.add(p);
-		}
-		
-		return findList;		
-	}
-	
-	public void listarFila(List<? extends Pessoa> list) {
-		for(Pessoa p : list) {
+	public void listarFilaGerente(Gerente gerente) {
+		for(Pessoa p : gerente.getFilaPessoas().fila) {
 			System.out.println();
 			System.out.println("Nome da pessoa: " + p.name);
-			System.out.println("Posição da pessoa na fila: " + list.indexOf(p));
+			System.out.println("Posição da pessoa na fila: " + gerente.getFilaPessoas().fila.indexOf(p));
 			System.out.println();
 		}
 	}
-		//System.out.println("Lista de alunos aguardando atendimento: \n");
-		//for(Pessoa aluno : professor.getFila().fila) {
-			//System.out.println("Nome do aluno:              " + aluno.name);
-			//System.out.println("Posição do aluno na fila:   " + professor.getFila().fila.indexOf(aluno));
-		//}
-	//}
-
+	
+	/*
+	 * public List<Pessoa> findListPessoasDiretor(Diretor diretor){ List<Pessoa>
+	 * findList = new ArrayList<Pessoa>();
+	 * 
+	 * for(Pessoa p : diretor.getFilaPessoas().fila) { findList.add(p); }
+	 * 
+	 * return findList; }
+	 */
+	
+	public void listarFilaDiretor(Diretor diretor) {
+		for(Pessoa p : diretor.getFilaCoordenadores().fila) {
+			System.out.println();
+			System.out.println("Nome da pessoa: " + p.name);
+			System.out.println("Posição da pessoa na fila: " + diretor.getFilaCoordenadores().fila.indexOf(p));
+			System.out.println();
+		}
+	}
+	
+	/*
+	 * public void listarFila(List<? extends Pessoa> list) { for(Pessoa p : list) {
+	 * System.out.println(); System.out.println("Nome da pessoa: " + p.name);
+	 * System.out.println("Posição da pessoa na fila: " + list.indexOf(p));
+	 * System.out.println(); } }
+	 */
+	
 }

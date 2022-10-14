@@ -1,11 +1,13 @@
 package workAv1;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import exceptions.ErroOpcao;
+import anotations.Colaboradores;
+import exceptions.ErroOpcaoException;
 import workAv1_negocios.Agencia;
 import workAv1_negocios.Banco;
 import workAv1_negocios.Empresa;
@@ -26,10 +28,12 @@ import workAv1_recursosHumanos.SecAcademica;
 import workAv1_recursosHumanos.SecFinanceira;
 
 public class Main {
-
-	public static void main(String[] args) {
-		
-		Scanner sc = new Scanner(System.in);
+	@Colaboradores(
+			colaboradores = {"Glória Assunção Sousa, Mário José de Sousa"},
+			versao = "0.1"
+)
+	
+	public static void main(String[] args) throws ErroOpcaoException, Exception, IOException{
 		
 		Integer op = 0, idPessoa = 0, idAgencia = 0, matri = 100, idDis = 0, idCurso = 0, idEmpresa = 0, idConta = 0, flag = 0;
 		
@@ -241,10 +245,22 @@ public class Main {
 				
 		do {
 			
-			flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-					+ "\n01 Para consultar/criar dados da faculdade: "
-					+ "\n02 Para consultar/criar dados do banco"
-					+ "\n00 Para sair do app: "));
+			Scanner sc = new Scanner(System.in);
+			
+			try {
+				flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+						+ "\n01 Para consultar/criar dados da faculdade: "
+						+ "\n02 Para consultar/criar dados do banco"
+						+ "\n00 Para sair do app: "));
+				
+
+				if(flag < 0 || flag > 2) {
+					throw new ErroOpcaoException(0, 2);
+				}
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 			op = flag;
 			switch (op) {
@@ -264,9 +280,12 @@ public class Main {
 								+ "\n09 Para cadastrar e consultar dados de um diretor(a): "
 								+ "\n00 Para retornar ao menu anterior: "));
 						
-						throw new ErroOpcao(op);
-					}catch (Exception e) {
+						if(flag < 0 || flag > 9) {
+							throw new ErroOpcaoException(0, 9);
+						}
 						
+				
+					}catch (Exception e) {
 						e.printStackTrace();
 					}
 					
@@ -275,10 +294,19 @@ public class Main {
 					case 1: {
 						do {
 							
-							flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar uma faculdade: "
-									+ "\n02 Para consultar, alterar ou excluir dados de uma faculdade: "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar uma faculdade: "
+										+ "\n02 Para consultar, alterar ou excluir dados de uma faculdade: "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+								
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
 							
 							op = flag;
 							switch (op) {
@@ -296,9 +324,17 @@ public class Main {
 									Faculdade newFaculdade = new Faculdade(++idEmpresa, name, cnpj, diretor.getId());
 									empresa.addListaFaculdade(newFaculdade);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n01 Para cadastrar outra faculdade: "
-											+ "\n00 Para retornar ao menu anterior: "));	
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n01 Para cadastrar outra faculdade: "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 								}while(flag != 0);
 								flag = 1;
@@ -319,13 +355,22 @@ public class Main {
 								
 								do {
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-											+ "\n" 
-											+ "\n01 Para listar as contas bancárias da faculdade: "	+ findFaculdade.getName()
-											+ "\n02 Para cadastrar uma conta bancária para faculdade: " + findFaculdade.getName()
-											+ "\n03 Para listar os professores da faculdade: " + findFaculdade.getName()											
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+												+ "\n" 
+												+ "\n01 Para listar as contas bancárias da faculdade: "	+ findFaculdade.getName()
+												+ "\n02 Para cadastrar uma conta bancária para faculdade: " + findFaculdade.getName()
+												+ "\n03 Para listar os professores da faculdade: " + findFaculdade.getName()											
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 3) {
+											throw new ErroOpcaoException(0, 3);
+										}
+										
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 									op = flag;
 									switch (op) {
@@ -352,11 +397,20 @@ public class Main {
 											op = sc.nextInt();
 											Agencia findAgencia = banco.findAgencia(op, findBanco);
 											
-											op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-													+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-													+ "\n\n01 Para cadastrar uma conta corrente: "
-													+ "\n02 Para cadastrar uma conta poupança: "
-													+ "\n00 Para retornar ao menu anterior: "));
+											try {
+												op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+														+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+														+ "\n\n01 Para cadastrar uma conta corrente: "
+														+ "\n02 Para cadastrar uma conta poupança: "
+														+ "\n00 Para retornar ao menu anterior: "));
+												
+												if(flag < 0 || flag > 2) {
+													throw new ErroOpcaoException(0, 2);
+												}
+												
+											}catch (Exception e) {
+												e.printStackTrace();
+											}
 											
 											System.out.println("\n\nLista antes da criação da conta");
 											faculdade.listarContasBancarias(findFaculdade);
@@ -372,9 +426,21 @@ public class Main {
 											System.out.println("\n\nLista depois da criação da conta");
 											faculdade.listarContasBancarias(findFaculdade);
 											
-											flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-													+ "\n01 Para criar outra conta"
-													+ "\n00 Para retornar ao menu anterior"));	
+											try {
+												flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+														+ "\n\nNome do banco: " + findBanco.getName()
+														+ "\nNome da agência: " + findAgencia.getName()
+														+ "\nNome do cliente: " + findFaculdade.getName()
+														+ "\n01 Para criar outra conta"
+														+ "\n00 Para retornar ao menu anterior"));	
+												
+												if(flag < 0 || flag > 1) {
+													throw new ErroOpcaoException(0, 1);
+												}
+												
+											}catch (Exception e) {
+												e.printStackTrace();
+											}
 											
 										}while(flag != 0);
 										flag = 1;
@@ -413,10 +479,18 @@ public class Main {
 					case 2: {	
 												
 						do {
-							flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar uma disciplina: "
-									+ "\n02 Para consultar, alterar ou excluir de uma disciplina: "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar uma disciplina: "
+										+ "\n02 Para consultar, alterar ou excluir de uma disciplina: "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
 							
 							op = flag;
 							switch (op) {
@@ -454,10 +528,18 @@ public class Main {
 									System.out.println("\nDisciplinas disponíveis no curso depois da inclusão: ");
 									curso.listarDisciplinas(findCurso);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-											+ "\n\n01 Para cadastar dados de outra disciplina"
-											+ "\n00 Para retornar ao menu anterior"));	
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+												+ "\n\n01 Para cadastar dados de outra disciplina"
+												+ "\n00 Para retornar ao menu anterior"));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 								}while(flag != 0);
 								
@@ -475,10 +557,18 @@ public class Main {
 								
 								do {
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-											+ "\n\n01 Para listar as disciplinas de um curso e listar seus dados: "
-											+ "\n00 Para retornar ao menu anterior : "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+												+ "\n\n01 Para listar as disciplinas de um curso e listar seus dados: "
+												+ "\n00 Para retornar ao menu anterior : "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 									//Listar disciplinas de um curso específico
 									op =flag;
@@ -495,12 +585,20 @@ public class Main {
 											
 											curso.listarDisciplinas(findCurso);
 											
-
-											flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-													+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-													+ "\nNome do curso:        " + findCurso.getName()
-													+ "\n\n01 Para listar os dados das disciplinas deste curso: "
-													+ "\n00 Para retornar ao menu anterior : "));
+											try {
+												flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+														+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+														+ "\nNome do curso:        " + findCurso.getName()
+														+ "\n\n01 Para listar os dados das disciplinas deste curso: "
+														+ "\n00 Para retornar ao menu anterior : "));
+												
+												if(flag < 0 || flag > 1) {
+													throw new ErroOpcaoException(0, 1);
+												}
+											}catch (Exception e) {
+												e.printStackTrace();
+											}
+											
 											
 											//Consultar os dados de uma disciplina específica
 											op = flag;
@@ -516,13 +614,21 @@ public class Main {
 												
 												do {
 													
-													flag= Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-															+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-															+ "\nNome do curso:        " + findCurso.getName()
-															+ "\nNome da disciplina    " + findDisciplina.getName()
-															+ "\n\n01 Para excluir esta disciplina do curso: "
-															+ "\n02 Para execuir um aluno desta disciplina"
-															+ "\n00 Para retornar ao menu anterior: "));
+													try {
+														flag= Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+																+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+																+ "\nNome do curso:        " + findCurso.getName()
+																+ "\nNome da disciplina    " + findDisciplina.getName()
+																+ "\n\n01 Para excluir esta disciplina do curso: "
+																+ "\n02 Para execuir um aluno desta disciplina"
+																+ "\n00 Para retornar ao menu anterior: "));
+														
+														if(flag < 0 || flag > 2) {
+															throw new ErroOpcaoException(0, 2);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
 													
 													op = flag;
 													switch (op) {
@@ -565,7 +671,7 @@ public class Main {
 													
 													default:
 														
-														if(op != 0) { System.out.println("\nOpção inválida!!!!"); }
+														if(op != 0) { System.out.println("\nRepita a operação!"); }
 														 
 													}
 																																							
@@ -583,7 +689,7 @@ public class Main {
 							}
 							default:
 								if(op != 0) {
-									System.out.println("\nOpção inválida!!!!");
+									System.out.println("\nRepita a operação!");
 								}
 							}
 							op = 1;
@@ -595,10 +701,18 @@ public class Main {
 					case 3: {
 					
 						do {
-							flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar um curso: "
-									+ "\n02 Para consultar, alterar ou excluir os dados de um curso: "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar um curso: "
+										+ "\n02 Para consultar, alterar ou excluir os dados de um curso: "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
 							
 							op = flag;
 							switch (op) {
@@ -630,10 +744,18 @@ public class Main {
 									System.out.println("\nCursos ofertados antes da inclusão: ");
 									faculdade.listarCursos(findFaculdade);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-											+ "\n\n01 Para cadastrar de outro curso"
-											+ "\n00 Para retornar ao menu anterior"));	
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+												+ "\n\n01 Para cadastrar de outro curso"
+												+ "\n00 Para retornar ao menu anterior"));	
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 								}while(flag != 0);
 								flag = 1;
@@ -651,10 +773,18 @@ public class Main {
 								
 								do {
 																											
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-											+ "\n\n01 Para excluir um curso: "
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+												+ "\n\n01 Para excluir um curso: "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 									//Excluir curso
 									op = flag;
@@ -676,21 +806,27 @@ public class Main {
 										faculdade.listarCursos(findFaculdade);
 									}
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-											+ "\n\n01 Para consultar dados de outro curso: "
-											+ "\n00 Para retornar ao menu anterior: "));	
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+												+ "\n\n01 Para consultar dados de outro curso: "
+												+ "\n00 Para retornar ao menu anterior: "));	
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
-									op = 0;
+		
 									
 								}while(flag != 0);
 								flag = 1;
 								break;
 							}
 							default:
-								if(op != 0) {
-									System.out.println("\nOpção inválida!!!!");
-								}
+								System.out.println("\nRepita a operação!");
 							}
 							
 						}while(flag != 0);
@@ -701,10 +837,18 @@ public class Main {
 					case 4: {
 						
 						do {
-							flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar um aluno: "
-									+ "\n02 Para consultar,alterar ou excluir dados de um aluno: "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar um aluno: "
+										+ "\n02 Para consultar,alterar ou excluir dados de um aluno: "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
 							
 							op = flag;
 							switch (op) {
@@ -735,11 +879,19 @@ public class Main {
 									Aluno newAluno = new Aluno(++idPessoa, name, cpf, matricula);
 									
 									do {
-										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-												+ "\nNome do curso:  " + findCurso.getName()
-												+ "\n\n01 Para incluir disciplina: "
-												+ "\n00 Para retornar ao menu anterior: "));
+										try {
+											flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+													+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+													+ "\nNome do curso:  " + findCurso.getName()
+													+ "\n\n01 Para incluir disciplina: "
+													+ "\n00 Para retornar ao menu anterior: "));
+											
+											if(flag < 0 || flag > 1) {
+												throw new ErroOpcaoException(0, 1);
+											}
+										}catch (Exception e) {
+											e.printStackTrace();
+										}
 										
 										curso.listarDisciplinas(findCurso);									
 																		
@@ -751,11 +903,19 @@ public class Main {
 										
 									}while(flag != 0);
 									flag = 1;
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-											+ "\nNome do curso:  " + findCurso.getName()
-											+ "\n\n01 Para cadastrar outro aluno "
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+												+ "\nNome do curso:  " + findCurso.getName()
+												+ "\n\n01 Para cadastrar outro aluno "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 								}while(flag != 0);
 								flag = 1;
@@ -785,12 +945,20 @@ public class Main {
 									System.out.println("Disciplina:  " + findDisciplina.getName());
 									disciplina.listarAlunos(findDisciplina);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada "
-											+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-											+ "\nNome do curso:  " + findCurso.getName()
-											+ "\nNome da Disciplina:  " + findDisciplina.getName()
-											+ "\n\n01 Para listar dados de um aluno específico: "
-											+ "\n00 Para retornar ao menu anterior"));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada "
+												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+												+ "\nNome do curso:  " + findCurso.getName()
+												+ "\nNome da Disciplina:  " + findDisciplina.getName()
+												+ "\n\n01 Para listar dados de um aluno específico: "
+												+ "\n00 Para retornar ao menu anterior"));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 									//Listando dados pessoais de um aluno 
 									op = flag;
@@ -804,18 +972,27 @@ public class Main {
 										
 										do{
 											
-											flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "	
-													+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-													+ "\nNome do curso:  " + findCurso.getName()
-													+ "\nNome da Disciplina:  " + findDisciplina.getName()
-													+ "\n\n01 Para imprimir informações financeiras do aluno: "
-													+ "\n02 Para criar uma conta bancária para o aluno: "
-													+ "\n03 Para solicitar atendimento do professor: "
-													+ "\n04 Para solicitar atendimento do cooordenador: "
-													+ "\n05 Para solicitar atendimento do secretário(a) financeiro(a): "
-													+ "\n06 Para solicitar atendimento do gerente de sua agência: "
-													+ "\n07 Para excluir o cadastro de um aluno: "
-													+ "\n00 Para retornar ao menu anterior: "));
+											try {
+												flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "	
+														+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+														+ "\nNome do curso:  " + findCurso.getName()
+														+ "\nNome da Disciplina:  " + findDisciplina.getName()
+														+ "\nNome do aluno(a): " + findAluno.getName()
+														+ "\n\n01 Para imprimir informações financeiras do aluno: "
+														+ "\n02 Para criar uma conta bancária para o aluno: "
+														+ "\n03 Para solicitar atendimento do professor: "
+														+ "\n04 Para solicitar atendimento do cooordenador: "
+														+ "\n05 Para solicitar atendimento do secretário(a) financeiro(a): "
+														+ "\n06 Para solicitar atendimento do gerente de sua agência: "
+														+ "\n07 Para excluir o cadastro de um aluno: "
+														+ "\n00 Para retornar ao menu anterior: "));
+												
+												if(flag < 0 || flag > 7) {
+													throw new ErroOpcaoException(0, 7);
+												}
+											}catch (Exception e) {
+												e.printStackTrace();
+											}
 											
 											//Listando informações financeiras de um aluno
 											op = flag;
@@ -842,12 +1019,21 @@ public class Main {
 													op = sc.nextInt();
 													Agencia findAgencia = banco.findAgencia(op, findBanco);
 													
-													
-													op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-															+ "\n\nNome da faculdade:  " + findBanco.getName()
-															+ "\nNome do professor: " + findAgencia.getName()
-															+ "\n\n01 Para cadastrar uma conta corrente: "
-															+ "\n02 Para cadastrar uma conta poupança: "));										
+													try {
+														op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+																+ "\n\nNome do banco:  " + findBanco.getName()
+																+ "\nNome da agência: " + findAgencia.getName()
+																+ "\nNome do cliente: " + findAluno.getName()
+																+ "\n\n01 Para cadastrar uma conta corrente: "
+																+ "\n02 Para cadastrar uma conta poupança: "));	
+														
+														if(flag < 1 || flag > 2) {
+															throw new ErroOpcaoException(1, 2);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
+																						
 													
 													Integer id = ++idConta;
 													if(op == 1) {
@@ -859,11 +1045,20 @@ public class Main {
 														findAluno.addContaPoupanca(newContaPoupanca);
 													}
 													
-													flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-															+ "\n\nNome da faculdade:  " + findBanco.getName()
-															+ "\nNome do professor: " + findAgencia.getName()
-															+ "\n01 Para criar outra conta"
-															+ "\n00 Para retornar ao menu anterior"));	
+													try {
+														flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+																+ "\n\nNome do banco:  " + findBanco.getName()
+																+ "\nNome da agência: " + findAgencia.getName()
+																+ "\nNome do cliente: " + findAluno.getName()
+																+ "\n\n01 Para criar outra conta"
+																+ "\n00 Para retornar ao menu anterior"));	
+														
+														if(flag < 0 || flag > 1) {
+															throw new ErroOpcaoException(0, 1);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
 													
 												}while(flag != 0);
 												flag = 1;
@@ -878,16 +1073,17 @@ public class Main {
 												op = sc.nextInt();
 												Professor findProfessor = faculdade.findProfessor(op, findFaculdade);
 												
-												List<Pessoa> findList = fila.findListaAlunosProfessor(findProfessor);
+												//List<Pessoa> findList = fila.findListaAlunosProfessor(findProfessor);
 												
 												System.out.println("\nFila de alunos aguardando atendimento antes da solicitação: ");
-												professor.getFilaAlunos().listarFila(findList);												
+												//professor.getFilaAlunos().listarFila(findList);	
+												fila.listarFilaProfessor(findProfessor);
 												
+												List<Pessoa> findList = findProfessor.getFilaAlunos().getFila();
 												findList.add(findAluno);
-												findProfessor.getFilaAlunos().atualizarFila(findList);
 												
 												System.out.println("\nFila de alunos aguardando atendimento depois da solicitação: ");
-												professor.getFilaAlunos().listarFila(findList);
+												fila.listarFilaProfessor(findProfessor);
 												
 												break;
 											}
@@ -900,16 +1096,17 @@ public class Main {
 												op = sc.nextInt();
 												Coordenador findCoordenador = faculdade.findCoordenador(op, findFaculdade);
 												
-												List<Pessoa> findList = fila.findListaAlunosCoordenador(findCoordenador);
+												//List<Pessoa> findList = fila.findListaAlunosCoordenador(findCoordenador);
 												
 												System.out.println("\nFila de alunos aguardando atendimento antes da solicitação: ");
-												coordenador.getFilaAlunos().listarFila(findList);
+												//coordenador.getFilaAlunos().listarFila(findList);
+												fila.listarFilaCoordenadorA(findCoordenador);
 												
+												List<Pessoa> findList = findCoordenador.getFilaAlunos().getFila();
 												findList.add(findAluno);
-												findCoordenador.getFilaAlunos().atualizarFila(findList);
 												
 												System.out.println("\nFila de alunos aguardando atendimento depois da solicitação: ");
-												coordenador.getFilaAlunos().listarFila(findList);
+												fila.listarFilaCoordenadorA(findCoordenador);
 												
 												
 												break;
@@ -922,16 +1119,16 @@ public class Main {
 												op = sc.nextInt();												
 												SecFinanceira findSecFinanceira = faculdade.findSecFinanceira(op, findFaculdade);
 												
-												List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
+												//List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
 												
 												System.out.println("\nFila de alunos aguardando atendimento antes da solicitação: ");
-												secFinanceiro.getFilaPessoas().listarFila(findList);
+												fila.listarFilaSecFinanceira(findSecFinanceira);
 												
+												List<Pessoa> findList = findSecFinanceira.getFilaPessoas().getFila();
 												findList.add(findAluno);
-												findSecFinanceira.getFilaPessoas().atualizarFila(findList);
 												
 												System.out.println("\nFila de alunos aguardando atendimento depois da solicitação: ");
-												secFinanceiro.getFilaPessoas().listarFila(findList);
+												fila.listarFilaSecFinanceira(findSecFinanceira);
 												
 												break;
 											}
@@ -949,16 +1146,16 @@ public class Main {
 												op = sc.nextInt();
 												Gerente findGerente = banco.findGerente(op, FindBanco);
 												
-												List<Pessoa> findList = fila.findListPessoasGrente(findGerente);											
+												//List<Pessoa> findList = fila.findListPessoasGrente(findGerente);											
 																								
 												System.out.println("\nFila de alunos aguardando atendimento antes da solicitação: ");
-												gerente.getFilaPessoas().listarFila(findList);
+												fila.listarFilaGerente(findGerente);
 												
+												List<Pessoa> findList = findGerente.getFilaPessoas().getFila();
 												findList.add(findAluno);
-												findGerente.getFilaPessoas().atualizarFila(findList);
 												
 												System.out.println("\nFila de alunos aguardando atendimento depois da solicitação: ");
-												gerente.getFilaPessoas().listarFila(findList);
+												fila.listarFilaGerente(findGerente);
 												
 												break;
 											}
@@ -979,9 +1176,7 @@ public class Main {
 												break;
 											}
 											default:
-												if(op != 0) {
-													System.out.println("Opção inválida!!!!");
-												}
+												System.out.println("\nRepita a operação!");
 											}											
 											
 										}while(flag != 0);
@@ -995,9 +1190,7 @@ public class Main {
 							}
 							
 							default:
-								if(op != 0) {
-									System.out.println("Opção inválida!!!!");
-								}
+								System.out.println("\nRepita a operação!");
 							}
 							
 						}while(flag != 0);
@@ -1009,10 +1202,19 @@ public class Main {
 						
 						do {
 														
-							flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar um professor "
-									+ "\n02 Para consultar, alterar ou excluir dados de um professor "
-									+ "\n00 Para retornar ao menu anterior "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar um professor "
+										+ "\n02 Para consultar, alterar ou excluir dados de um professor "
+										+ "\n00 Para retornar ao menu anterior "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+								
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
 							
 							
 							op = flag;
@@ -1040,10 +1242,18 @@ public class Main {
 									Professor newProfessor = new Professor(++idPessoa, name, cpf, funcao);
 									findFaculdade.addProfessor(newProfessor);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-											+ "\n\n01 Para cadastrar outro(a) frofessor(a) "
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+												+ "\n\n01 Para cadastrar outro(a) frofessor(a) "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 								}while(flag != 0);
 								
@@ -1061,11 +1271,18 @@ public class Main {
 									
 									faculdade.listarProfessores(findFaculdade);									
 									
-									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-											+ "\n\n01 Para listar dados de um professor específico: "
-											+ "\n00 Para retornar ao menu anterior \n"));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+												+ "\n\n01 Para listar dados de um professor específico: "
+												+ "\n00 Para retornar ao menu anterior \n"));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}										
 									
 									//Listar dados pessoais do professor
 									op = flag;
@@ -1079,17 +1296,25 @@ public class Main {
 										
 										do {
 											
-											flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-													+ "\n\nNome da faculdade:  " + findFaculdade.getName()
-													+ "\nNome do professor: " + findProfessor.getName()
-													+ "\n\n01 Para listar dados financeiros do professor: "
-													+ "\n02 Para criar uma conta bancária para o professor: "
-													+ "\n03 Para solicitar atendimento ao coordenador: "
-													+ "\n04 Para solicitar atendimento do secretário(a) financeiro(a): "
-													+ "\n05 Para solicitar atendimento do gerente de sua agência: "
-													+ "\n06 Para listar a fila de alunos aguardando atendimento e atender alunos: "
-													+ "\n07 Para excluir os dados do professor: "
-													+ "\n00 Para ir ao próximo menu: "));
+											try {
+												flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+														+ "\n\nNome da faculdade:  " + findFaculdade.getName()
+														+ "\nNome do professor: " + findProfessor.getName()
+														+ "\n\n01 Para listar dados financeiros do professor: "
+														+ "\n02 Para criar uma conta bancária para o professor: "
+														+ "\n03 Para solicitar atendimento ao coordenador: "
+														+ "\n04 Para solicitar atendimento do secretário(a) financeiro(a): "
+														+ "\n05 Para solicitar atendimento do gerente de sua agência: "
+														+ "\n06 Para listar a fila de alunos aguardando atendimento e atender alunos: "
+														+ "\n07 Para excluir os dados do professor: "
+														+ "\n00 Para ir ao próximo menu: "));
+												
+												if(flag < 0 || flag > 7) {
+													throw new ErroOpcaoException(0, 7);
+												}
+											}catch (Exception e) {
+												e.printStackTrace();
+											}
 											
 											
 											op = flag;
@@ -1116,12 +1341,21 @@ public class Main {
 													op = sc.nextInt();
 													Agencia findAgencia = banco.findAgencia(op, findBanco);
 													
-													
-													op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-															+ "\n\nNome do banco: " + findBanco.getName()
-															+ "\nNome da agência: " + findAgencia.getNameAgencia()
-															+ "01 Para cadastrar uma conta corrente: "
-															+ "02 Para cadastrar uma conta poupança: "));										
+													try {
+														op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+																+ "\n\nNome do banco: " + findBanco.getName()
+																+ "\nNome da agência: " + findAgencia.getNameAgencia()
+																+ "\nNome do cliente: " + findProfessor.getName()
+																+ "01 Para cadastrar uma conta corrente: "
+																+ "02 Para cadastrar uma conta poupança: "));
+														
+														if(flag < 1 || flag > 2) {
+															throw new ErroOpcaoException(1, 2);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
+																							
 													
 													Integer id = ++idConta;
 													if(op == 1) {
@@ -1133,9 +1367,17 @@ public class Main {
 														findProfessor.addContaPoupanca(newContaPoupanca);
 													}
 													
-													flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-															+ "\n01 Para criar outra conta: "
-															+ "\n00 Para retornar ao menu anterior: "));
+													try {
+														flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+																+ "\n01 Para criar outra conta: "
+																+ "\n00 Para retornar ao menu anterior: "));
+														
+														if(flag < 0 || flag > 1) {
+															throw new ErroOpcaoException(0, 1);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
 													
 												}while(flag != 0);
 												flag = 1;
@@ -1149,16 +1391,17 @@ public class Main {
 												op = sc.nextInt();
 												Coordenador findCoordenador = faculdade.findCoordenador(op, findFaculdade);
 												
-												List<Pessoa> findList = fila.findListaProfessoresCoordenador(findCoordenador);  
+												//List<Pessoa> findList = fila.findListaProfessoresCoordenador(findCoordenador);  
 												
 												System.out.println("\nAntes da solicitação:");
-												coordenador.getFilaProfessores().listarFila(findList);
+												//coordenador.getFilaProfessores().listarFila(findList);
+												fila.listarFilaCoordenadorP(findCoordenador);
 												
+												List<Pessoa> findList = findCoordenador.getFilaProfessores().getFila();
 												findList.add(findProfessor);
-												findCoordenador.getFilaProfessores().atualizarFila(findList);
 												
 												System.out.println("\nDepois da solicitação:");
-												coordenador.getFilaProfessores().listarFila(findList);
+												fila.listarFilaCoordenadorP(findCoordenador);
 												
 												break;
 											}
@@ -1170,16 +1413,17 @@ public class Main {
 												op = sc.nextInt();												
 												SecFinanceira findSecFinanceira = faculdade.findSecFinanceira(op, findFaculdade);
 												
-												List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
+												//List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
 												
 												System.out.println("\nAntes da solicitação: ");
-												secFinanceiro.getFilaPessoas().listarFila(findList);
+												//secFinanceiro.getFilaPessoas().listarFila(findList);
+												fila.listarFilaSecFinanceira(findSecFinanceira);
 												
+												List<Pessoa> findList = findSecFinanceira.getFilaPessoas().getFila();
 												findList.add(findProfessor);
-												findSecFinanceira.getFilaPessoas().atualizarFila(findList);
 												
 												System.out.println("\nDepois da solicitação: ");
-												secFinanceiro.getFilaPessoas().listarFila(findList);
+												fila.listarFilaSecFinanceira(findSecFinanceira);
 												
 												break;
 											}
@@ -1197,45 +1441,54 @@ public class Main {
 												op = sc.nextInt();												
 												Gerente findGerente = banco.findGerente(op, findBanco);
 												
-												List<Pessoa> findList = fila.findListPessoasGrente(findGerente);
+												//List<Pessoa> findList = fila.findListPessoasGrente(findGerente);
 																								
 												System.out.println("\nAntes da solicitação: ");
-												findGerente.getFilaPessoas().listarFila(findList);
+												//findGerente.getFilaPessoas().listarFila(findList);
 												
+												List<Pessoa> findList = findGerente.getFilaPessoas().getFila();
 												findList.add(findProfessor);
-												findGerente.getFilaPessoas().atualizarFila(findList);
 												
 												System.out.println("\nDepois da solicitação: ");
-												findGerente.getFilaPessoas().listarFila(findList);
+												fila.listarFilaGerente(findGerente);
 												
 												break;
 											}
 											//Listar a fila de alunos aguardando atendimento e atender alunos
 											case 6: {
 												
-												List<Pessoa> findList = professor.getFilaAlunos().findListaAlunosProfessor(findProfessor);
+												//List<Pessoa> findList = professor.getFilaAlunos().findListaAlunosProfessor(findProfessor);
 												
 												System.out.println("\nFila de alunos aguardando antes do atendimento: ");
-												professor.getFilaAlunos().listarFila(findList);
+												//professor.getFilaAlunos().listarFila(findList);
+												fila.listarFilaProfessor(findProfessor);
 												
 												do {
 													
-													flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-															+ "\n01 Para atender o aluno que está ocupando a 1º posição na fila: "
-															+ "\n00 Para ir ao próximo menu: "));
+													try {
+														flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+																+ "\n01 Para atender o aluno que está ocupando a 1º posição na fila: "
+																+ "\n00 Para ir ao próximo menu: "));
+														
+														if(flag < 0 || flag > 1) {
+															throw new ErroOpcaoException(0, 1);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
 													
 													op = flag;
 													if(op == 1) {
-														
+														List<Pessoa> findList = findProfessor.getFilaAlunos().getFila();
 														for(Pessoa p : findList) {
 															if(findList.indexOf(p) == 0) {
+																Pessoa findAluno = p;
 																findList.remove(p);
 															}
-														}
-														
-														findProfessor.getFilaAlunos().atualizarFila(findList);
+														}													
+																											
 														System.out.println("\nFila de alunos aguardando depois do atendimento: ");
-														professor.getFilaAlunos().listarFila(findList);
+														fila.listarFilaProfessor(findProfessor);
 														
 													}
 													
@@ -1246,7 +1499,7 @@ public class Main {
 											//Excluir os dados do professor
 											case 7: {
 												
-												System.out.print("Informe 01 para confirmar a exclusão \n");
+												System.out.print("Informe 01 para confirmar a exclusão ");
 												op = sc.nextInt();
 												if(op == 1) {
 													faculdade.removeProfessor(findProfessor);	
@@ -1256,9 +1509,7 @@ public class Main {
 												break;
 											}
 											default:
-												if(op != 0) {
-													System.out.println("Opção inválida!!!!");
-												}
+												System.out.println("\nRepita a operação!");
 											}
 											
 											
@@ -1272,9 +1523,7 @@ public class Main {
 								break;
 							}
 							default:
-								if(op != 0) {
-									System.out.println("Opção inválida!!!!");
-								}
+								System.out.println("\nRepita a operação!");
 							}
 							
 						}while(flag != 0);							
@@ -1285,10 +1534,18 @@ public class Main {
 					case 6: {
 						do {
 							
-							flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-									+ "01 Para cadastrar um coordenador(a) \n"
-									+ "02 Para consultar, alterar ou excluir dados de um(a) coordenador(a) \n"
-									+ "00 Para retornar ao menu anterior \n"));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar um coordenador(a) \n"
+										+ "\n02 Para consultar, alterar ou excluir dados de um(a) coordenador(a): "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
 							
 							
 							op = flag;
@@ -1299,7 +1556,7 @@ public class Main {
 								do {
 									
 									empresa.listarFaculdades();
-									System.out.print("Informe o id da faculdade para cadastro do coordenador: \n");
+									System.out.print("Informe o id da faculdade para cadastro do coordenador: ");
 									op = sc.nextInt();
 									Faculdade findFaculdade = empresa.findFaculdade(op);
 									
@@ -1316,8 +1573,8 @@ public class Main {
 									findFaculdade.addListaCoordenador(newCoordenador);
 									
 									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n01 Para cadastrar outro(a) coordenador(a)"
-											+ "\n00 Para retornar ao menu anterior"));
+											+ "\n01 Para cadastrar outro(a) coordenador(a): "
+											+ "\n00 Para retornar ao menu anterior: "));
 									
 								}while(flag != 0);
 								flag = 1;
@@ -1327,15 +1584,24 @@ public class Main {
 							case 2: {
 								
 								empresa.listarFaculdades();
-								System.out.print("\nInforme id da faculdade onde o(a) coordenador(a) é cadastrado: ");
+								System.out.print("Informe id da faculdade onde o(a) coordenador(a) é cadastrado: ");
 								op = sc.nextInt();
 								Faculdade findFaculdade = empresa.findFaculdade(op);
 								
 								faculdade.listarCoordenadores(findFaculdade);
 								
-								flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-										+ "\n01 Para listar dados pessoais de um(a) coordenador(a): "
-										+ "\n00 Para retornar ao menu anterior: "));
+								try {
+									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+											+ "\n\nNome da faculdade: " + findFaculdade.getName()
+											+ "\n\n01 Para listar dados pessoais de um(a) coordenador(a): "
+											+ "\n00 Para retornar ao menu anterior: "));
+									
+									if(flag < 0 || flag > 1) {
+										throw new ErroOpcaoException(0, 1);
+									}
+								}catch (Exception e) {
+									e.printStackTrace();
+								}
 								
 								op = flag;
 								if(op == 1) {
@@ -1348,16 +1614,26 @@ public class Main {
 									
 									do {
 										
-										flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-												+ "\n01 Para listar dados financeiros do(a) coordenador(a): "
-												+ "\n02 Para criar uma conta bancária para o(a) coordenador(a): "
-												+ "\n03 Para solicitar atendimento ao diretor: "
-												+ "\n04 Para solicitar atendimento do secretário(a) financeiro(a): "
-												+ "\n05 Para solicitar atendimento do gerente de sua agência: "
-												+ "\n06 Para listar a fila de alunos aguardando atendimento e atender alunos: "
-												+ "\n07 Para listar a fila de professores aguardando atendimento e atender professores: "
-												+ "\n08 Para excluir os dados do(a) coordenador(a): "
-												+ "\n00 Para retornar ao menu anterior: "));
+										try {
+											flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+													+ "\n\nNome da faculdade: " + findFaculdade.getName()
+													+ "\nNome do coordendor: " + findCoordenador.getName()
+													+ "\n\n01 Para listar dados financeiros do(a) coordenador(a): "
+													+ "\n02 Para criar uma conta bancária para o(a) coordenador(a): "
+													+ "\n03 Para solicitar atendimento ao diretor: "
+													+ "\n04 Para solicitar atendimento do secretário(a) financeiro(a): "
+													+ "\n05 Para solicitar atendimento do gerente de sua agência: "
+													+ "\n06 Para listar a fila de alunos aguardando atendimento e atender alunos: "
+													+ "\n07 Para listar a fila de professores aguardando atendimento e atender professores: "
+													+ "\n08 Para excluir os dados do(a) coordenador(a): "
+													+ "\n00 Para retornar ao menu anterior: "));
+											
+											if(flag < 0 || flag > 8) {
+												throw new ErroOpcaoException(0, 8);
+											}
+										}catch (Exception e) {
+											e.printStackTrace();
+										}
 										
 										
 										op = flag;
@@ -1384,13 +1660,22 @@ public class Main {
 												op = sc.nextInt();
 												Agencia findAgencia = banco.findAgencia(op, findBanco);
 												
-												
-												op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-														+ "\n01 Para cadastrar uma conta corrente "
-														+ "\n02 Para cadastrar uma conta poupança"
-														+ "\n00 Para retornar ao menu anterior"));										
-												
-												
+												try {
+													op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+															+ "\n\nNome do banco: " + findBanco.getName()
+															+ "\nNome da agência: " + findAgencia.getNameAgencia()
+															+ "\nNome do cliente: " + findCoordenador.getName()
+															+ "\n\n01 Para cadastrar uma conta corrente "
+															+ "\n02 Para cadastrar uma conta poupança"
+															+ "\n00 Para retornar ao menu anterior"));	
+													
+													if(flag < 0 || flag > 2) {
+														throw new ErroOpcaoException(0, 2);
+													}
+												}catch (Exception e) {
+													e.printStackTrace();
+												}
+																																													
 												if(op == 1) {
 													ContaCorrente newContaCorrente = new ContaCorrente(++idConta, findCoordenador.getId(), findAgencia.getIdGerente(), null);
 													findCoordenador.addContaCorrente(newContaCorrente	);
@@ -1400,9 +1685,17 @@ public class Main {
 													findCoordenador.addContaPoupanca(newContaPoupanca);
 												}
 												
-												flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-														+ "\n01 Para criar outra conta"
-														+ "\n00 Para retornar ao menu anterior"));	
+												try { 
+													flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+															+ "\n01 Para criar outra conta"
+															+ "\n00 Para retornar ao menu anterior"));	
+													
+													if(flag < 0 || flag > 1) {
+														throw new ErroOpcaoException(0, 1);
+													}
+												}catch (Exception e) {
+													e.printStackTrace();
+												}
 												
 											}while(flag != 0);
 											flag = 1;
@@ -1416,16 +1709,17 @@ public class Main {
 											op = sc.nextInt();											
 											Diretor findDiretor = faculdade.findDiretor(op, findFaculdade);
 											
-											List<Pessoa> findList = fila.findListPessoasDiretor(findDiretor); 
+											//List<Pessoa> findList = fila.findListPessoasDiretor(findDiretor); 
 											
 											System.out.println("\nAntes da solicitação: ");
-											findDiretor.getFilaPessoas().listarFila(findList);
+											//findDiretor.getFilaPessoas().listarFila(findList);
+											fila.listarFilaDiretor(findDiretor);
 											
+											List<Pessoa> findList = findDiretor.getFilaCoordenadores().getFila();
 											findList.add(findCoordenador);
-											findDiretor.getFilaPessoas().atualizarFila(findList);
 											
 											System.out.println("\nDepois da solicitação: ");											
-											diretor.getFilaPessoas().listarFila(findList);
+											fila.listarFilaDiretor(findDiretor);
 											
 											break;
 										}
@@ -1437,16 +1731,17 @@ public class Main {
 											op = sc.nextInt();											
 											SecFinanceira findSecFinanceira = faculdade.findSecFinanceira(op, findFaculdade);
 											
-											List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
+											//List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
 																					
 											System.out.println("\nAntes da solicitação: ");
-											findSecFinanceira.getFilaPessoas().listarFila(findList);
+											//findSecFinanceira.getFilaPessoas().listarFila(findList);
+											fila.listarFilaSecFinanceira(findSecFinanceira);
 											
+											List<Pessoa> findList = findSecFinanceira.getFilaPessoas().getFila();
 											findList.add(findCoordenador);
-											findSecFinanceira.getFilaPessoas().atualizarFila(findList);
 											
 											System.out.println("\nDepois da solicitação: ");
-											findSecFinanceira.getFilaPessoas().listarFila(findList);
+											fila.listarFilaSecFinanceira(findSecFinanceira);
 											
 											break;
 										}
@@ -1464,42 +1759,52 @@ public class Main {
 											op = sc.nextInt();											
 											Gerente findGerente = banco.findGerente(op, findBanco);
 											
-											List<Pessoa> findList = fila.findListPessoasGrente(findGerente);
+											//List<Pessoa> findList = fila.findListPessoasGrente(findGerente);
 											
 											System.out.println("\nAntes da solicitação: ");
-											findGerente.getFilaPessoas().listarFila(findList);
+											//findGerente.getFilaPessoas().listarFila(findList);
+											fila.listarFilaGerente(findGerente);
 											
+											List<Pessoa> findList = findGerente.getFilaPessoas().getFila();
 											findList.add(findCoordenador);
-											findGerente.getFilaPessoas().atualizarFila(findList);
 											
 											System.out.println("\nDepois da solicitação: ");
-											findGerente.getFilaPessoas().listarFila(findList);
+											fila.listarFilaGerente(findGerente);
 											
 											break;
 										}										
 										//Listar a fila de alunos aguardando atendimento e atender aluno(a)
 										case 6: {
 											
-											List<Pessoa> findList = fila.findListaAlunosCoordenador(findCoordenador);
+											//List<Pessoa> findList = fila.findListaAlunosCoordenador(findCoordenador);
 											
 											System.out.println("\nAntes do atendimento");
-											findCoordenador.getFilaAlunos().listarFila(findList);
+											//findCoordenador.getFilaAlunos().listarFila(findList);
+											fila.listarFilaCoordenadorA(findCoordenador);
 											
 											do {
 												
-												flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-														+ "\n01 Para atender o aluno(a) que ocupa a 1º posição na fila: "
-														+ "\n00 Para retonar ao menu anteror: "));
+												try {
+													flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+															+ "\n\nNome da faculdade: " + findFaculdade.getName()
+															+ "\nNome do coordendor: " + findCoordenador.getName()
+															+ "\n\n01 Para atender o aluno(a) que ocupa a 1º posição na fila: "
+															+ "\n00 Para retonar ao menu anteror: "));
+													
+													if(flag < 0 || flag > 1) {
+														throw new ErroOpcaoException(0, 1);
+													}
+												}catch (Exception e) {
+													e.printStackTrace();
+												}
+												
+												List<Pessoa> findList = findCoordenador.getFilaAlunos().getFila();
 												
 												op = flag;
-												if(op == 1) {
-													for(Pessoa p : findList) {
-														if(findList.indexOf(p) == 0) {
-															findList.remove(p);
-															
-														}
+												for(Pessoa p : findList) {
+													if(findList.indexOf(p) == 0) {
+														findList.remove(p);
 													}
-													findCoordenador.getFilaAlunos().atualizarFila(findList);
 												}						
 												
 											}while(flag != 0);
@@ -1509,29 +1814,40 @@ public class Main {
 										//Listar a fila de professores aguardando atendimento e atender professor
 										case 7: {
 											
-											List<Pessoa> findList = fila.findListaProfessoresCoordenador(findCoordenador);
+											//List<Pessoa> findList = fila.findListaProfessoresCoordenador(findCoordenador);
 											
 											System.out.println("\nAntes do atendimento: ");
-											findCoordenador.getFilaProfessores().listarFila(findList);
+											//findCoordenador.getFilaProfessores().listarFila(findList);
+											fila.listarFilaCoordenadorP(findCoordenador);
 											
 											do {
 												
-												flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-														+ "\n01 Para atender o(a) professor(a) que ocupa a 1º posição na fila: "
-														+ "\n00 Para ir ao próximo menu: "));
+												try {
+													flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+															+ "\n\nNome da faculdade: " + findFaculdade.getName()
+															+ "\nNome do coordendor: " + findCoordenador.getName()
+															+ "\n\n01 Para atender o(a) professor(a) que ocupa a 1º posição na fila: "
+															+ "\n00 Para ir ao próximo menu: "));
+													
+													if(flag < 0 || flag > 1) {
+														throw new ErroOpcaoException(0, 1);
+													}
+												}catch (Exception e) {
+													e.printStackTrace();
+												}
+												
+												List<Pessoa> findList = findCoordenador.getFilaAlunos().getFila();
 												
 												op = flag;
 												if(op == 1) {
 													for(Pessoa p : findList) {
 														if(findList.indexOf(p) == 0) {
 															findList.remove(p);
-															
 														}
 													}
-													findCoordenador.getFilaAlunos().atualizarFila(findList);
 												}
 												System.out.println("\nDepois do atendimento: ");
-												findCoordenador.getFilaProfessores().listarFila(findList);
+												fila.listarFilaCoordenadorP(findCoordenador);
 												
 											}while(flag != 0);
 											flag = 1;
@@ -1549,9 +1865,7 @@ public class Main {
 										op = 0;	
 										}
 										default:
-											if(op != 0) {
-												System.out.println("Opção inválida!!!!");
-											}
+											System.out.println("\nRepita a operação!");
 										}
 										
 									}while(flag != 0);
@@ -1561,9 +1875,7 @@ public class Main {
 								break;
 							}
 							default:
-								if(op != 0) {
-									System.out.println("Opção inválida!!!!");
-								}
+								System.out.println("\nRepita a operação!");
 							}
 							
 						}while(flag !=  0);						
@@ -1575,10 +1887,18 @@ public class Main {
 						
 						do {
 							
-							flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar um(a) secretário(a) academico(a): "
-									+ "\n02 Para consultar, alterar ou excluir dados de um(a) secretário(a) academico(a): "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar um(a) secretário(a) academico(a): "
+										+ "\n02 Para consultar, alterar ou excluir dados de um(a) secretário(a) academico(a): "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
 							
 							op = flag;
 							switch (op) {
@@ -1588,7 +1908,7 @@ public class Main {
 								do {
 									
 									empresa.listarFaculdades();
-									System.out.print("Informe o id da faculdade para cadastro do(a) secretário(a) academico(a): \n");
+									System.out.print("Informe o id da faculdade para cadastro do(a) secretário(a) academico(a): ");
 									op = sc.nextInt();
 									Faculdade findFaculdade = empresa.findFaculdade(op);
 									
@@ -1604,9 +1924,18 @@ public class Main {
 									SecAcademica newSecAcademica = new SecAcademica(++idPessoa, name, cfp, funcao);
 									findFaculdade.addListaSecAcademica(newSecAcademica);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-											+ "\n01 Para cadastrar outro(a) secretário(a) academico(a): "
-											+ "\n00 Para retonar ao menu anteror: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+												+ "\n\nNome da faculdade: " + findFaculdade.getName()
+												+ "\n\n01 Para cadastrar outro(a) secretário(a) academico(a): "
+												+ "\n00 Para retonar ao menu anteror: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 								}while(flag != 0);									
 								flag = 1;
@@ -1622,9 +1951,18 @@ public class Main {
 									op = sc.nextInt();
 									Faculdade findFaculdade = empresa.findFaculdade(op);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-											+ "\n01 Para listar dados pessoais de um(a) secretário(a) academico(a): "
-											+ "\n00 Para ir ao próximo menu: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+												+ "\n\nNome da faculdade: " + findFaculdade.getName()
+												+ "\n\n01 Para listar dados pessoais de um(a) secretário(a) academico(a): "
+												+ "\n00 Para ir ao próximo menu: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 									//Listar dados pessoais de um(a) secretário(a) academico(a)
 									op = flag;
@@ -1638,14 +1976,24 @@ public class Main {
 										
 										do {
 											
-											flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-													+ "\n01 Para listar dados financeiros do(a) secretário(a) academico(a): "
-													+ "\n02 Para criar uma conta bancária para o(a) secretário(a) academico(a): "
-													+ "\n03 Para listar a fila de alunos(as) aguardando atendimento e atender alunos(as): "
-													+ "\n04 Para solicitar atendimento do secretário(a) financeiro(a): "
-													+ "\n05 Para solicitar atendimento do gerente de sua agência: "
-													+ "\n06 Para excluir os dados do secretário(a) academico(a): "
-													+ "\n00 Para retornar ao menu anterior: "));
+											try {
+												flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+														+ "\n\nNome da faculdade: " + findFaculdade.getName()
+														+ "\nNome do(a) secretário(a) academico(a): " + findSecAcademica.getName()
+														+ "\n\n01 Para listar dados financeiros do(a) secretário(a) academico(a): "
+														+ "\n02 Para criar uma conta bancária para o(a) secretário(a) academico(a): "
+														+ "\n03 Para listar a fila de alunos(as) aguardando atendimento e atender alunos(as): "
+														+ "\n04 Para solicitar atendimento do secretário(a) financeiro(a): "
+														+ "\n05 Para solicitar atendimento do gerente de sua agência: "
+														+ "\n06 Para excluir os dados do secretário(a) academico(a): "
+														+ "\n00 Para retornar ao menu anterior: "));
+												
+												if(flag < 0 || flag > 6) {
+													throw new ErroOpcaoException(0, 6);
+												}
+											}catch (Exception e) {
+												e.printStackTrace();
+											}
 											
 											op = flag;
 											switch (op) {
@@ -1662,19 +2010,30 @@ public class Main {
 												do {
 													
 													empresa.listarBancos();
-													System.out.print("Informe o id do banco: \n");
+													System.out.print("Informe o id do banco: ");
 													op = sc.nextInt();
 													Banco findBanco = empresa.findBanco(op);
 													
 													banco.listarAgencias(findBanco);
-													System.out.print("Informe o id da agência: \n");
+													System.out.print("Informe o id da agência: ");
 													op = sc.nextInt();
 													Agencia findAgencia = banco.findAgencia(op, findBanco);
 													
-													
-													op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-															+ "01 Para cadastrar uma conta corrente \n"
-															+ "02 Para cadastrar uma conta poupança"));										
+													try {
+
+														op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+																+ "\n\nNome do banco: " + findBanco.getName()
+																+ "\nNome da agência: " + findAgencia.getNameAgencia()
+																+ "\nNome do cliente: " + findSecAcademica.getName()
+																+ "\n\n01 Para cadastrar uma conta corrente: "
+																+ "\n02 Para cadastrar uma conta poupança: "));	
+														
+														if(flag < 1 || flag > 2) {
+															throw new ErroOpcaoException(1, 2);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
 													
 													Integer id = ++idConta;
 													if(op == 1) {
@@ -1686,9 +2045,17 @@ public class Main {
 														findSecAcademica.addContaPoupanca(newContaPoupanca);
 													}
 													
-													flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-															+ "\n01 Para criar outra conta"
-															+ "\n00 Para retornar ao menu anterior"));	
+													try {
+														flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+																+ "\n01 Para criar outra conta"
+																+ "\n00 Para retornar ao menu anterior"));
+														
+														if(flag < 0 || flag > 1) {
+															throw new ErroOpcaoException(0, 1);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
 													
 												}while(flag != 0);
 												flag = 1;
@@ -1697,23 +2064,44 @@ public class Main {
 											//Listar a fila de alunos aguardando atendimento e atender alunos
 											case 3: {
 												
+												//List<Pessoa> findList = fila.findListPessoasSecAcademica(findSecAcademica);
+												
 												System.out.println("\nAntes do atendimento");
-												secAcademica.listarFilaAlunos(findSecAcademica);
+												//fila.listarFila(findList);
+												fila.listarFilaSecAcademica(findSecAcademica);
 												
 												do {
 													
-													flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-															+ "\n01 Para atender o(a) aluno(a) que ocupa o 1º na fila: "
-															+ "\n00 Para ir ao próximo menu: "));
+													System.out.println("\nAntes do atendimento: ");
+													//fila.listarFila(findSecAcademica);
+													fila.listarFilaSecAcademica(findSecAcademica);
+													
+													try {
+														flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+																+ "\n\nNome da faculdade: " + findFaculdade.getName()
+																+ "\nNome do(a) secretário(a) academico(a): " + findSecAcademica.getName()
+																+ "\n\n01 Para atender o(a) aluno(a) que ocupa o 1º na fila: "
+																+ "\n00 Para ir ao próximo menu: "));
+														
+														if(flag < 0 || flag > 1) {
+															throw new ErroOpcaoException(0, 1);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
+													
+													List<Pessoa> findList = findSecAcademica.getFilaAlunos().getFila();
 													
 													op = flag;
 													if(op == 1) {
-														
-														Aluno findAluno = secAcademica.realizarAtendimentoAluno(findSecAcademica);
-														findSecAcademica.removeFilaAluno(findAluno);
+														for(Pessoa p : findList) {
+															if(findList.indexOf(p) == 0) {
+																findList.remove(p);
+															}
+														}
 														
 														System.out.println("\nDepois do atendimento: ");
-														secAcademica.listarFilaAlunos(findSecAcademica);
+														fila.listarFilaSecAcademica(findSecAcademica);
 														
 													}			
 													
@@ -1721,7 +2109,7 @@ public class Main {
 												
 												break;
 											}
-											//Solicitar atendimento do secretário(a) financeiro(a)
+											//Solicitar atendimento ao secretário(a) financeiro(a)
 											case 4: {
 												
 												faculdade.listarSecFinanceiras(findFaculdade);
@@ -1730,20 +2118,21 @@ public class Main {
 												
 												SecFinanceira findSecFinanceira = faculdade.findSecFinanceira(op, findFaculdade);
 												
-												List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
+												//List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
 												
 												System.out.println("\nAntes da solicitação: ");
-												findSecFinanceira.getFilaPessoas().listarFila(findList);
+												//findSecFinanceira.getFilaPessoas().listarFila(findList);
+												fila.listarFilaSecFinanceira(findSecFinanceira);
 												
+												List<Pessoa> findList = findSecFinanceira.getFilaPessoas().getFila();
 												findList.add(findSecAcademica);
-												findSecFinanceira.getFilaPessoas().atualizarFila(findList);
 												
 												System.out.println("\nDepois da solicitação: ");
-												findSecFinanceira.getFilaPessoas().listarFila(findList);
+												fila.listarFilaSecFinanceira(findSecFinanceira);
 												
 												break;
 											}
-											//Solicitar atendimento do gerente de sua agência
+											//Solicitar atendimento ao gerente de sua agência
 											case 5: {
 												
 												empresa.listarBancos();
@@ -1758,16 +2147,17 @@ public class Main {
 												
 												Gerente findGerente = banco.findGerente(op, findBanco);
 												
-												List<Pessoa> findList = findGerente.getFilaPessoas().findListPessoasGrente(findGerente);
+												//List<Pessoa> findList = findGerente.getFilaPessoas().findListPessoasGrente(findGerente);
 																								
 												System.out.println("\nAntes da solicitação: ");
-												findGerente.getFilaPessoas().listarFila(findList);
+												//findGerente.getFilaPessoas().listarFila(findList);
+												fila.listarFilaGerente(findGerente);
 												
+												List<Pessoa> findList = findGerente.getFilaPessoas().getFila();
 												findList.add(findSecAcademica);
-												findGerente.getFilaPessoas().atualizarFila(findList);
 												
 												System.out.println("\nDepois da solicitação: ");
-												findGerente.getFilaPessoas().listarFila(findList);
+												fila.listarFilaGerente(findGerente);
 												
 												break;
 											}
@@ -1780,14 +2170,10 @@ public class Main {
 													faculdade.removeSecAcademica(findSecAcademica);
 												}
 												
-												op = 0;	
-												
 												break;
 											}
 											default:
-												if(op != 0) {
-													System.out.println("Opção inválida!!!!");
-												}
+												System.out.println("\nRepita a operação!");
 											}
 											
 										}while(flag != 0);
@@ -1799,9 +2185,7 @@ public class Main {
 								flag = 1;
 							}								
 							default:
-								if(op != 0) {
-									System.out.println("Opção inválida!!!!");
-								}
+								System.out.println("\nRepita a operação!");
 							}
 							
 						}while(flag != 0);						
@@ -1813,10 +2197,18 @@ public class Main {
 						
 						do {
 							
-							flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar um secretário(a) financeiro(a): "
-									+ "\n02 Para consultar, alterar ou excluir dados de um secretário(a) financeiro(a): "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar um secretário(a) financeiro(a): "
+										+ "\n02 Para consultar, alterar ou excluir dados de um secretário(a) financeiro(a): "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
 							
 							op = flag;
 							switch (op) {
@@ -1824,7 +2216,7 @@ public class Main {
 							case 1: {
 																
 								empresa.listarFaculdades();
-								System.out.print("Informe o id da faculdade para cadastro do secretário(a) financeiro(a): \n");
+								System.out.print("Informe o id da faculdade para cadastro do secretário(a) financeiro(a): ");
 								op = sc.nextInt();
 								Faculdade findFaculdade = empresa.findFaculdade(op);
 								
@@ -1842,9 +2234,18 @@ public class Main {
 									SecFinanceira newSecFinaceira = new SecFinanceira(++ idPessoa, name, cfp, funcao);
 									findFaculdade.addSecFinanceira(newSecFinaceira);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n01 Para cadastrar outro(a) secretário(a) financeiro(a): "
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade: " + findFaculdade.getName()
+												+ "\n\n01 Para cadastrar outro(a) secretário(a) financeiro(a): "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 								}while(flag != 0);
 								flag = 1;
@@ -1860,12 +2261,20 @@ public class Main {
 								
 								faculdade.listarSecFinanceiras(findFaculdade);
 								
-								do {									
+								do {															
 									
-									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-											+ "\n01 Para listar dados pessoais de um(a) secretário(a) financeiro(a): "
-											+ "\n00 Para ir ao próximo menu: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade: " + findFaculdade.getName()
+												+ "\n\n01 Para listar dados pessoais de um(a) secretário(a) financeiro(a): "
+												+ "\n00 Para ir ao próximo menu: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.printStackTrace();
+									}
 									
 									//Listar dados pessoais de um(a) secretário(a) financeiro(a)
 									op = flag;
@@ -1879,13 +2288,23 @@ public class Main {
 										
 										do {
 											
-											flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-													+ "\n01 Para listar dados financeiros do secretário(a) financeiro(a): "
-													+ "\n02 Para criar uma conta bancária para o secretário(a) financeiro(a): "
-													+ "\n03 Para listar a fila de pessoas aguardando atendimento e atender pessoa: "
-													+ "\n04 Para solicitar atendimento do gerente de sua agência: "
-													+ "\n05 Para excluir os dados do secretário(a) financeiro(a): "
-													+ "\n00 Para retornar ao menu anterior: "));											
+											try {
+												flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+														+ "\n\nNome da faculdade: " + findFaculdade.getName()
+														+ "\nNome do(a) secretário(a) financeiro(a): " + findSecFinanceira.getName()
+														+ "\n\n01 Para listar dados financeiros do secretário(a) financeiro(a): "
+														+ "\n02 Para criar uma conta bancária para o secretário(a) financeiro(a): "
+														+ "\n03 Para listar a fila de pessoas aguardando atendimento e atender pessoa: "
+														+ "\n04 Para solicitar atendimento do gerente de sua agência: "
+														+ "\n05 Para excluir os dados do secretário(a) financeiro(a): "
+														+ "\n00 Para retornar ao menu anterior: "));	
+												
+												if(flag < 0 || flag > 5) {
+													throw new ErroOpcaoException(0, 5);
+												}
+											}catch (Exception e) {
+												e.printStackTrace();
+											}
 											
 											op = flag;
 											switch (op) {
@@ -1902,19 +2321,30 @@ public class Main {
 												do {
 													
 													empresa.listarBancos();
-													System.out.print("Informe o id do banco: \n");
+													System.out.print("Informe o id do banco: ");
 													op = sc.nextInt();
 													Banco findBanco = empresa.findBanco(op);
 													
 													banco.listarAgencias(findBanco);
-													System.out.print("Informe o id da agência: \n");
+													System.out.print("Informe o id da agência: ");
 													op = sc.nextInt();
 													Agencia findAgencia = banco.findAgencia(op, findBanco);
 													
 													
-													op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-															+ "01 Para cadastrar uma conta corrente \n"
-															+ "02 Para cadastrar uma conta poupança"));										
+													try {
+														op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+																+ "\n\nNome do banco: " + findBanco.getName()
+																+ "\nNome da agência: " + findAgencia.getNameAgencia()
+																+ "\nNome do cliente: " + findSecFinanceira.getName()
+																+ "\n\n01 Para cadastrar uma conta corrente: "
+																+ "\n02 Para cadastrar uma conta poupança: "));	
+														
+														if(flag < 1 || flag > 2) {
+															throw new ErroOpcaoException(1, 2);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
 													
 													Integer id = ++idConta;
 													if(op == 1) {
@@ -1926,9 +2356,17 @@ public class Main {
 														findSecFinanceira.addContaPoupanca(newContaPoupanca);
 													}
 													
-													flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-															+ "\n01 Para criar outra conta"
-															+ "\n00 Para retornar ao menu anterior"));	
+													try {
+														flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+																+ "\n\n01 Para criar outra conta: "
+																+ "\n00 Para retornar ao menu anterior: "));
+														
+														if(flag < 0 || flag > 1) {
+															throw new ErroOpcaoException(0, 1);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
 													
 												}while(flag != 0);
 												flag = 1;												
@@ -1937,30 +2375,37 @@ public class Main {
 											//Listar a fila de pessoas aguardando atendimento e atender pessoa
 											case 3: {
 												
-												List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
+												//List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
 												
 												System.out.println("\nAntes do atendimento");
-												findSecFinanceira.getFilaPessoas().listarFila(findList);
+												//findSecFinanceira.getFilaPessoas().listarFila(findList);
+												fila.listarFilaSecFinanceira(findSecFinanceira);
 												
 												do {
 													
-													flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-															+ "\n01 Para atender o(a) aluno(a) que ocupa o 1º na fila: "
-															+ "\n00 Para ir ao próximo menu: "));
+													try {
+														flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+																+ "\n\nNome da faculdade: " + findFaculdade.getName()
+																+ "\nNome do(a) secretário(a) financeiro(a): " + findSecFinanceira.getName()
+																+ "\n\n01 Para atender o(a) aluno(a) que ocupa o 1º na fila: "
+																+ "\n00 Para ir ao próximo menu: "));
+														
+														if(flag < 0 || flag > 1) {
+															throw new ErroOpcaoException(0, 1);
+														}
+													}catch (Exception e) {
+														e.printStackTrace();
+													}
+													
+													List<Pessoa> findList = findSecFinanceira.getFilaPessoas().getFila();
 													
 													op = flag;
 													if(op == 1) {
-														
 														for(Pessoa p : findList) {
 															if(findList.indexOf(p) == 0) {
-																findList.remove(p);
+																findSecFinanceira.getFilaPessoas().getFila().remove(p);
 															}
 														}
-														
-														System.out.println("\nDepois do atendimento: ");
-														findSecFinanceira.getFilaPessoas().listarFila(findList);
-														
-														findSecFinanceira.getFilaPessoas().atualizarFila(findList);
 													}			
 													
 												}while(flag != 0);
@@ -1982,16 +2427,17 @@ public class Main {
 												
 												Gerente findGerente = banco.findGerente(op, findBanco);
 												
-												List<Pessoa> findList = fila.findListPessoasGrente(findGerente);
+												//List<Pessoa> findList = fila.findListPessoasGrente(findGerente);
 																								
 												System.out.println("\nAntes da solicitação: ");
-												findGerente.getFilaPessoas().listarFila(findList);
+												//findGerente.getFilaPessoas().listarFila(findList);
+												fila.listarFilaGerente(findGerente);
 												
+												List<Pessoa> findList = findGerente.getFilaPessoas().getFila();
 												findList.add(findSecFinanceira);
-												findGerente.getFilaPessoas().atualizarFila(findList);
 												
 												System.out.println("\nDepois da solicitação: ");
-												findGerente.getFilaPessoas().listarFila(findList);
+												fila.listarFilaGerente(findGerente);
 												
 												break;
 											}
@@ -2002,16 +2448,12 @@ public class Main {
 												op = sc.nextInt();
 												if(op == 1) {
 													findFaculdade.removeSecFinanceira(findSecFinanceira);
-												}
-												
-												op = 0;	
+												}	
 												
 												break;
 											}
 											default:
-												if(op != 0) {
-													System.out.println("Opção inválida!!!!");
-												}
+												System.out.println("\nRepita a operação!");
 											}
 											
 										}while(flag != 0);
@@ -2023,9 +2465,7 @@ public class Main {
 								break;
 							}
 							default:
-								if(op != 0) {
-									System.out.println("Opção inválida!!!!");
-								}
+								System.out.println("\nRepita a operação!");
 							}
 							
 						}while(flag != 0);
@@ -2037,10 +2477,18 @@ public class Main {
 						
 						do {
 							
-							flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar um(a) diretor(a): "
-									+ "\n02 Para consultar, alterar ou excluir dados de um(a) diretor(a): "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar um(a) diretor(a): "
+										+ "\n02 Para consultar, alterar ou excluir dados de um(a) diretor(a): "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 1) {
+									throw new ErroOpcaoException(0, 1);
+								}
+							}catch (Exception e) {
+								e.getMessage();
+							}
 							
 							op = flag;
 							switch (op) {
@@ -2055,10 +2503,10 @@ public class Main {
 									
 									Faculdade findFaculdade = faculdade.findFaculdade(op);
 									
-									System.out.println("\nInforme o nome do diretor: ");
+									System.out.print("\nInforme o nome do diretor: ");
 									sc.nextLine();
 									String name = sc.nextLine();
-									System.out.println("\nInforme o CPF: ");
+									System.out.print("\nInforme o CPF: ");
 									sc.nextLine();
 									String cpf = sc.nextLine();
 									String funcao = "Diretor";
@@ -2067,9 +2515,18 @@ public class Main {
 									
 									findFaculdade.addListaDiretor(newDiretor);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n01 Para cadastrar outro(a) diretor(a)"
-											+ "\n00 Para retornar ao menu anterior"));	
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n\nNome da faculdade: " + findFaculdade.getName()
+												+ "\n\n01 Para cadastrar outro(a) diretor(a): "
+												+ "\n00 Para retornar ao menu anterior: " ));	
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.getMessage();
+									}
 									
 								}while(flag != 0);
 								flag = 1;
@@ -2079,19 +2536,28 @@ public class Main {
 							case 2: {
 								
 								empresa.listarFaculdades();
-								System.out.println("\nInforme id da faculdade onde o(a) diretor(a) é cadastrado(a): ");
+								System.out.print("\nInforme id da faculdade onde o(a) diretor(a) é cadastrado(a): ");
 								op = sc.nextInt();
 								Faculdade findFaculdade = empresa.findFaculdade(op);
 								
 								faculdade.listarDiretores(findFaculdade);
 								
-								op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-										+ "\n01 Para listar dados pessoais de um(a) diretor(a): "
-										+ "\n00 Para retornar ao menu anterior"));	
+								try {
+									op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+											+ "\n\nNome da faculdade: " + findFaculdade.getName()
+											+ "\n\n01 Para listar dados pessoais de um(a) diretor(a): "
+											+ "\n00 Para retornar ao menu anterior: "));	
+									
+									if(flag < 0 || flag > 1) {
+										throw new ErroOpcaoException(0, 1);
+									}
+								}catch (Exception e) {
+									e.getMessage();
+								}
 								
 								if(op == 1) {
 									
-									System.out.println("\nInforme o id do(a) diretor(a) para listar os dados pessoais: ");
+									System.out.print("\nInforme o id do(a) diretor(a) para listar os dados pessoais: ");
 									op = sc.nextInt();
 									
 									Diretor findDiretor = faculdade.findDiretor(op, findFaculdade);
@@ -2100,13 +2566,24 @@ public class Main {
 									
 									do {
 										
-										flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-												+ "\n01 Para listar dados financeiros do diretor: "
-												+ "\n02 Para criar uma conta bancária para o diretor: "
-												+ "\n03 Para listar a fila de coordenadores aguardando atendimento e atender coordenador: "
-												+ "\n04 Para solicitar atendimento do gerente de sua agência: "
-												+ "\n05 Para excluir os dados do diretor: "
-												+ "\n00 Para retornar ao menu anterior: "));
+										try {
+											flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+													+ "\n\nNome da faculdade: " + findFaculdade.getName()
+													+ "\nNome do diretor: " + findDiretor.getName()
+													+ "\n\n01 Para listar dados financeiros do diretor: "
+													+ "\n02 Para criar uma conta bancária para o diretor: "
+													+ "\n03 Para listar a fila de coordenadores aguardando atendimento e atender coordenador: "
+													+ "\n04 Para solicitar atendimento do gerente de sua agência: "
+													+ "\n05 Para excluir os dados do diretor: "
+													+ "\n00 Para retornar ao menu anterior: "));
+											
+											if(flag < 0 || flag > 5) {
+												throw new ErroOpcaoException(0, 5);
+											}
+											
+										}catch (Exception e) {
+											e.getMessage();
+										}
 										
 										op = flag;
 										switch (op) {
@@ -2123,19 +2600,30 @@ public class Main {
 											do {
 												
 												empresa.listarBancos();
-												System.out.println("Informe o id do banco: \n");
+												System.out.print("Informe o id do banco: ");
 												op = sc.nextInt();
 												Banco findBanco = empresa.findBanco(op);
 												
 												banco.listarAgencias(findBanco);
-												System.out.println("Informe o id da agência: \n");
+												System.out.print("Informe o id da agência: ");
 												op = sc.nextInt();
 												Agencia findAgencia = banco.findAgencia(op, findBanco);
 												
-												
-												op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-														+ "01 Para cadastrar uma conta corrente \n"
-														+ "02 Para cadastrar uma conta poupança"));										
+												try {
+													op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+															+ "\n\nNome do banco: " + findBanco.getName()
+															+ "\nNome da agência: " + findAgencia.getNameAgencia()
+															+ "\nNome do cliente: " + findDiretor.getName()
+															+ "\n\n01 Para cadastrar uma conta corrente: "
+															+ "\n02 Para cadastrar uma conta poupança: "));	
+													
+													if(flag < 1 || flag > 2) {
+														throw new ErroOpcaoException(1, 2);
+													}
+												}catch (Exception e) {
+													e.getMessage();
+												}
+																					
 												
 												Integer id = ++idConta;
 												if(op == 1) {
@@ -2147,9 +2635,17 @@ public class Main {
 													findDiretor.addContaPoupanca(newContaPoupanca);
 												}
 												
-												flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-														+ "\n01 Para criar outra conta"
-														+ "\n00 Para retornar ao menu anterior"));	
+												try {
+													flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+															+ "\n01 Para criar outra conta"
+															+ "\n00 Para retornar ao menu anterior"));	
+													
+													if(flag < 0 || flag > 1) {
+														throw new ErroOpcaoException(0, 1);
+													}
+												}catch (Exception e) {
+													e.getMessage();
+												}
 												
 											}while(flag != 0);
 											flag = 1;
@@ -2158,14 +2654,27 @@ public class Main {
 										//Listar a fila de coordenadores aguardando atendimento e atender coordenador
 										case 3: {
 											
-											List<Pessoa> findList = fila.findListPessoasDiretor(findDiretor); 
+											//List<Pessoa> findList = fila.findListPessoasDiretor(findDiretor); 
 											
 											System.out.println("\nAntes do atendimento: ");
-											findDiretor.getFilaPessoas().listarFila(findList);
+											//findDiretor.getFilaPessoas().listarFila(findList);
+											fila.listarFilaDiretor(findDiretor);
 											
-											op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-													+ "\n01 Para atender ao 1º coordenador da fila: "
-													+ "\n00 Para ir ao próximo menu: "));
+											try {
+												op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+														+ "\n\nNome da faculdade: " + findFaculdade.getName()
+														+ "\nNome do(a) Diretor(a): " + findDiretor.getName()
+														+ "\n\n01 Para atender ao 1º coordenador da fila: "
+														+ "\n00 Para ir ao próximo menu: "));
+												
+												if(flag < 0 || flag > 1) {
+													throw new ErroOpcaoException(0, 1);
+												}
+											}catch (Exception e) {
+												e.getMessage();
+											}
+											
+											List<Pessoa> findList = findDiretor.getFilaCoordenadores().getFila();
 											
 											if(op == 1) {
 												for(Pessoa p : findList) {
@@ -2173,11 +2682,10 @@ public class Main {
 														findList.remove(p);
 													}
 												}
-												findDiretor.getFilaPessoas().atualizarFila(findList);
 											}
 											
 											System.out.println("\nDepois do atendimento: ");
-											findDiretor.getFilaPessoas().listarFila(findList);
+											fila.listarFilaDiretor(findDiretor);
 											
 											break;
 										}
@@ -2196,16 +2704,17 @@ public class Main {
 											
 											Gerente findGerente = banco.findGerente(op, findBanco);
 											
-											List<Pessoa> findList = fila.findListPessoasDiretor(findDiretor);
+											//List<Pessoa> findList = fila.findListPessoasDiretor(findDiretor);
 																							
 											System.out.println("\nAntes da solicitação: ");
-											findGerente.getFilaPessoas().listarFila(findList);
+											//findGerente.getFilaPessoas().listarFila(findList);
+											fila.listarFilaGerente(findGerente);
 											
+											List<Pessoa> findList = findGerente.getFilaPessoas().getFila();
 											findList.add(findDiretor);
-											findDiretor.getFilaPessoas().atualizarFila(findList);
 											
 											System.out.println("\nDepois da solicitação: ");
-											findGerente.getFilaPessoas().listarFila(findList);
+											fila.listarFilaGerente(findGerente);
 											
 											break;
 										} 
@@ -2217,15 +2726,11 @@ public class Main {
 											if(op == 1) {
 												faculdade.removeListaDiretor(findDiretor);
 											}
-											
-											op = 0;	
-											
+										
 											break;
 										}
 										default:
-											if(op != 0) {
-												System.out.println("Opção inválida!!!!");
-											}
+											System.out.println("\nRepita a operação!");
 										}
 										
 									}while(flag != 0);
@@ -2235,9 +2740,7 @@ public class Main {
 								break;
 							}
 							default:
-								if(op != 0) {
-									System.out.println("Opção inválida!!!!");
-								}
+								System.out.println("\nRepita a operação!");
 							}
 							
 						}while(flag != 0);
@@ -2245,9 +2748,7 @@ public class Main {
 						break;
 					}
 					default:
-						if(op != 0) {
-							System.out.println("Opção inválida!!!!");
-						}
+						System.out.println("\nRepita a operação!");
 					}
 					
 					
@@ -2260,12 +2761,20 @@ public class Main {
 				//Cadastrar e consultar dados de um banco
 				do {
 					
-					flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-							+ "\n01 Para cadastrar e consultar dados de um banco: "
-							+ "\n02 Para cadastrar e consultar dados de uma agência: "
-							+ "\n03 Para cadastrar e consultar dados de um presidente: "
-							+ "\n04 Para cadastrar e consultar dados de um gerente: "
-							+ "\n00 Para retornar ao menu anterior: "));
+					try {
+						flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+								+ "\n01 Para cadastrar e consultar dados de um banco: "
+								+ "\n02 Para cadastrar e consultar dados de uma agência: "
+								+ "\n03 Para cadastrar e consultar dados de um presidente: "
+								+ "\n04 Para cadastrar e consultar dados de um gerente: "
+								+ "\n00 Para retornar ao menu anterior: "));
+						
+						if(flag < 0 || flag > 4) {
+							throw new ErroOpcaoException(0, 4);
+						}
+					}catch (Exception e) {
+						e.getMessage();
+					}
 					
 					op = flag;
 					switch (op) {
@@ -2274,10 +2783,18 @@ public class Main {
 						
 						do {
 							
-							flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
-									+ "\n01 Para cadastrar os dados do banco: "
-									+ "\n02 Para nomear o presidente de uma empresa: "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+										+ "\n01 Para cadastrar os dados do banco: "
+										+ "\n02 Para nomear o presidente de uma empresa: "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+							}catch (Exception e) {
+								e.getMessage();
+							}
 							
 							//Cadastrar um banco
 							op = flag;
@@ -2296,9 +2813,17 @@ public class Main {
 									Banco newBanco = new Banco(++idEmpresa, name, cnpj);
 									empresa.addListaBanco(newBanco);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n01 Para cadastrar outro banco: "
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n01 Para cadastrar outro banco: "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.getMessage();
+									}
 									
 								}while(flag != 0);
 								flag = 1;
@@ -2332,10 +2857,18 @@ public class Main {
 					case 2: {
 						do {
 							
-							flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar uma agêcia bancária: "
-									+ "\n02 Para consultar, alterar ou excluir dados de uma agêcia bancária: "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar uma agêcia bancária: "
+										+ "\n02 Para consultar, alterar ou excluir dados de uma agêcia bancária: "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+							}catch (Exception e) {
+								e.getMessage();
+							}
 							
 							op = flag;
 							switch (op) {
@@ -2362,9 +2895,17 @@ public class Main {
 									banco.addListaAgencia(newAgencia);
 									newAgencia.setGerente(findGerente);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n01 Para cadastrar outra agência: "
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n01 Para cadastrar outra agência: "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.getMessage();
+									}
 									
 								}while(flag != 0);
 								flag = 1;
@@ -2389,9 +2930,7 @@ public class Main {
 								
 							}
 							default:
-								if(op != 0) {
-									System.out.println("Opção inválida!!!!");
-								}
+								System.out.println("\nRepita a operação!");
 							}
 							
 							
@@ -2404,10 +2943,18 @@ public class Main {
 						
 						do {
 							
-							op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar um presidente: "
-									+ "\n02 Para consultar, alterar ou excluir dados de um presidente: "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar um presidente: "
+										+ "\n02 Para consultar, alterar ou excluir dados de um presidente: "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+							}catch (Exception e) {
+								e.getMessage();
+							}
 							
 							switch (op) {
 							//Cadastrar um presidente
@@ -2427,9 +2974,17 @@ public class Main {
 									Presidente newPresidente = new Presidente(++idPessoa, name, cpf, funcao);
 									empresa.addPresidente(newPresidente);
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n01 Para cadastrar outro presidente: "
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n01 Para cadastrar outro presidente: "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.getMessage();
+									}
 									
 								}while(flag != 0);
 								flag = 1;
@@ -2448,11 +3003,20 @@ public class Main {
 								
 								do {
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "												
-											+ "\n01 Para listar informações financeiras do presidende: "
-											+ "\n02 Para criar uma conta bancária para o presidente: "
-											+ "\n03 Para excluir os dados de um presidente: "
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "	
+												+ "\n\nNome do presidente: " + findPresidente.getName()
+												+ "\n\n01 Para listar informações financeiras do presidende: "
+												+ "\n02 Para criar uma conta bancária para o presidente: "
+												+ "\n03 Para excluir os dados de um presidente: "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 3) {
+											throw new ErroOpcaoException(0, 3);
+										}
+									}catch (Exception e) {
+										e.getMessage();
+									}
 									
 									op = flag;
 									switch (op) {
@@ -2481,9 +3045,20 @@ public class Main {
 											Agencia findAgencia = banco.findAgencia(op, findBanco);
 											
 											
-											op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-													+ "01 Para cadastrar uma conta corrente \n"
-													+ "02 Para cadastrar uma conta poupança"));										
+											try { 
+												op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
+														+ "\n\nNome do banco: " + findBanco.getName()
+														+ "\nNome da agência: " + findAgencia.getNameAgencia()
+														+ "\nNome do cliente: " + findPresidente.getName()
+														+ "01 Para cadastrar uma conta corrente \n"
+														+ "02 Para cadastrar uma conta poupança"));			
+												
+												if(flag < 1 || flag > 2) {
+													throw new ErroOpcaoException(1, 2);
+												}
+											}catch (Exception e) {
+												e.getMessage();
+											}
 											
 											if(op == 1) {
 												ContaCorrente newContaCorrente = new ContaCorrente(++idConta, findPresidente.getId(), findAgencia.getIdGerente(), null);
@@ -2494,9 +3069,17 @@ public class Main {
 												findPresidente.addContaPoupanca(newContaPoupanca);
 											}
 											
-											flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-													+ "\n01 Para criar outra conta"
-													+ "\n00 Para retornar ao menu anterior"));	
+											try {
+												flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+														+ "\n01 Para criar outra conta"
+														+ "\n00 Para retornar ao menu anterior"));
+												
+												if(flag < 0 || flag > 1) {
+													throw new ErroOpcaoException(0, 1);
+												}
+											}catch (Exception e) {
+												e.getMessage();
+											}
 											
 										}while(flag != 0);
 										flag = 1;
@@ -2516,9 +3099,7 @@ public class Main {
 										break;
 									}
 									default:
-										if(op != 0) {
-											System.out.println("Opção inválida!!!!");
-										}
+										System.out.println("\nRepita a operação!");
 									}
 									
 								}while(flag != 0);
@@ -2526,9 +3107,7 @@ public class Main {
 								break;
 							}
 							default:
-								if(op != 0) {
-									System.out.println("Opção inválida!!!!");
-								}
+								System.out.println("\nRepita a operação!");
 							}
 							
 							
@@ -2541,10 +3120,18 @@ public class Main {
 						
 						do { 
 							
-							flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-									+ "\n01 Para cadastrar um gerente: "
-									+ "\n02 Para consultar, alterar ou excluir dados de um gerente: "
-									+ "\n00 Para retornar ao menu anterior: "));
+							try {
+								flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+										+ "\n01 Para cadastrar um gerente: "
+										+ "\n02 Para consultar, alterar ou excluir dados de um gerente: "
+										+ "\n00 Para retornar ao menu anterior: "));
+								
+								if(flag < 0 || flag > 2) {
+									throw new ErroOpcaoException(0, 2);
+								}
+							}catch (Exception e) {
+								e.getMessage();
+							}
 							
 							op = flag;
 							switch (op) {
@@ -2580,9 +3167,17 @@ public class Main {
 									findAgencia.setGerente(newGerente);
 									FindBanco.addListaGerente(newGerente);		
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-											+ "\n01 Para cadastrar outro gerente: "
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+												+ "\n01 Para cadastrar outro gerente: "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 1) {
+											throw new ErroOpcaoException(0, 1);
+										}
+									}catch (Exception e) {
+										e.getMessage();
+									}
 									
 								}while(flag != 0);
 								flag = 1;															
@@ -2607,18 +3202,29 @@ public class Main {
 								
 								do {
 									
-									flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "												
-											+ "\n01 Para listar informações financeiras do gerente: "
-											+ "\n02 Para criar uma conta bancária para o gerente: "
-											+ "\n03 Para excluir os dados de um gerente: "
-											+ "\n00 Para retornar ao menu anterior: "));
+									try {
+										flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "	
+												+ "\n\nNome do banco: " + FindBanco.getName()
+												+ "\nNome do gerente: " + findGerente.getName()
+												+ "\n\n01 Para listar informações financeiras do gerente: "
+												+ "\n02 Para criar uma conta bancária para o gerente: "
+												+ "\n03 Para listar pessoas aguardando na fila e realizar atendimento: "
+												+ "\n04 Para excluir os dados de um gerente: "
+												+ "\n00 Para retornar ao menu anterior: "));
+										
+										if(flag < 0 || flag > 3) {
+											throw new ErroOpcaoException(0, 3);
+										}
+									}catch (Exception e) {
+										e.getMessage();
+									}
 									
 									op = flag;
 									switch (op) {
 									//Listar informações financeiras do gerente
 									case 1: {
 										
-										//gerente.listarContasGernte(findGerente);
+										gerente.listarContasGernte(findGerente);
 										
 										break;
 									}
@@ -2639,10 +3245,20 @@ public class Main {
 											op = sc.nextInt();
 											Agencia findAgencia = banco.findAgencia(op, findBanco);
 											
-											
-											op = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: \n"
-													+ "01 Para cadastrar uma conta corrente \n"
-													+ "02 Para cadastrar uma conta poupança"));										
+											try {
+
+												op = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+														+ "\n\nNome do banco: " + FindBanco.getName()
+														+ "\nNome do gerente: " + findGerente.getName()
+														+ "\n\n01 Para cadastrar uma conta corrente: "
+														+ "\n02 Para cadastrar uma conta poupança: "));		
+												
+												if(flag < 1 || flag > 2) {
+													throw new ErroOpcaoException(1, 2);
+												}
+											}catch (Exception e) {
+												e.getMessage();
+											}
 											
 											if(op == 1) {
 												ContaCorrente newContaCorrente = new ContaCorrente(++idConta, findGerente.getId(), findAgencia.getIdGerente(), null);
@@ -2653,29 +3269,79 @@ public class Main {
 												findGerente.addContaPoupanca(newContaPoupanca);
 											}
 											
-											flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
-													+ "\n01 Para criar outra conta"
-													+ "\n00 Para retornar ao menu anterior"));	
+											try {
+												flag = Integer.parseInt(JOptionPane.showInputDialog("\nInforme a opção desejada: "
+														+ "\n01 Para criar outra conta: "
+														+ "\n00 Para retornar ao menu anterior: "));	
+												
+												if(flag < 0 || flag > 1) {
+													throw new ErroOpcaoException(0, 1);
+												}
+											}catch (Exception e) {
+												e.getMessage();
+											}
 											
 										}while(flag != 0);
 										flag = 1;
 										break;
 									}
-									//Excluir os dados de um gerente
+									//Listar pessoas aguardando na fila e realizar atendimento
 									case 3: {
 										
-										System.out.print("Informe 01 para confirmar a exclusão \n");
+										//List<Pessoa> findList = fila.findListPessoasSecFinancira(findSecFinanceira);
+										
+										System.out.println("\nAntes do atendimento");
+										//findSecFinanceira.getFilaPessoas().listarFila(findList);
+										fila.listarFilaGerente(findGerente);
+										
+										do {
+											
+											try {
+												flag = Integer.parseInt(JOptionPane.showInputDialog("Informe a opção desejada: "
+														+ "\n\nNome do banco: " + FindBanco.getName()
+														+ "\nNome do(a) gerente: " + findGerente.getName()
+														+ "\n\n01 Para atender a pessoa que ocupa o 1º na fila: "
+														+ "\n00 Para ir ao próximo menu: "));
+												
+												if(flag < 0 || flag > 1) {
+													throw new ErroOpcaoException(0, 1);
+												}
+											}catch (Exception e) {
+												e.printStackTrace();
+											}
+											
+											List<Pessoa> findList = findGerente.getFilaPessoas().getFila();
+											
+											op = flag;
+											if(op == 1) {
+												for(Pessoa p : findList) {
+													if(findList.indexOf(p) == 0) {
+														findGerente.getFilaPessoas().getFila().remove(p);
+													}
+												}
+											}	
+											
+											System.out.println("\nDepois do atendimento");
+											//findSecFinanceira.getFilaPessoas().listarFila(findList);
+											fila.listarFilaGerente(findGerente);
+											
+										}while(flag != 0);
+										
+										break;
+									}
+									//Excluir os dados de um gerente
+									case 4: {
+										
+										System.out.print("Informe 01 para confirmar a exclusão: ");
 										op = sc.nextInt();
 										if(op == 1) {
-											//banco.removeListaGerente(findGerente);	
+											banco.removeListaGerente(findGerente);	
 										}
-										
-									op = 0;	
 										
 										break;
 									}
 									default:
-										throw new IllegalArgumentException("Unexpected value: " + op);
+										System.out.println("\nRepita a operação!");
 									}
 									
 								}while(flag != 0);
@@ -2683,9 +3349,7 @@ public class Main {
 								break;
 							}
 							default:
-								if(op != 0) {
-									System.out.println("Opção inválida!!!!");
-								}
+								System.out.println("\nRepita a operação!");
 							}
 							 
 							
@@ -2694,9 +3358,7 @@ public class Main {
 						break;
 					}
 					default:
-						if(op != 0) {
-							System.out.println("Opção inválida!!!!");
-						}
+						System.out.println("\nRepita a operação!");
 					}
 					
 				}while(flag != 0);
@@ -2704,15 +3366,13 @@ public class Main {
 				break;
 			}
 			default:
-				if(op != 0) {
-					System.out.println("Opção inválida!!!!");
-				}
+				System.out.println("\nRepita a operação!");
 			}
-				
-		}while(flag != 0);
-		
-		sc.close();
+			
+			sc.close();
 
+				
+		}while(flag != 0);	
 	}
 
 }

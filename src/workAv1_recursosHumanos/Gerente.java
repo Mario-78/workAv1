@@ -1,8 +1,5 @@
 package workAv1_recursosHumanos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import workAv1_negociosProdutos.ContaCorrente;
 import workAv1_negociosProdutos.ContaPoupanca;
 

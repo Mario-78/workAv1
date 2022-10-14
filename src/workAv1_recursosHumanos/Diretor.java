@@ -15,7 +15,7 @@ public class Diretor extends Funcionario {
 		super(id, name, cpf, função);
 	}
 	
-	public Fila<Pessoa> getFilaPessoas(){
+	public Fila<Pessoa> getFilaCoordenadores(){
 		return filaCoordenadores;
 	}
 	

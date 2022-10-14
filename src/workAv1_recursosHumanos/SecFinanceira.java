@@ -15,22 +15,6 @@ public class SecFinanceira extends Funcionario {
 		super(id, name, cpf, função);
 	}
 	
-	/*public void listarFilaPessoas(SecFinanceira sec) {
-		System.out.println("\nPessoas na fila aguardando atendimento do(a) secretário(a) financeiro(a)");
-		System.out.println();
-		if(sec.filaPessoas.isEmpty()) {
-			System.out.println("\nNão há pessoas aguardando na fila!!!!!");
-		}else {
-			for(Pessoa p : sec.filaPessoas) {
-				System.out.println("\nNome:                         " + p.name);
-				System.out.println("\nCPF:                          " + p.cpf_cnpj);
-				System.out.println("\nPosição da pessoa na fila:    " + sec.filaPessoas.indexOf(p));
-			System.out.println();
-			}
-		}
-		System.out.println();
-	}*/
-	
 	public Fila<Pessoa> getFilaPessoas(){
 		return filaPessoas;
 	}
@@ -56,26 +40,6 @@ public class SecFinanceira extends Funcionario {
 		}
 		System.out.println();
 	}	
-	
-	/*public Integer findIdPrimeiraPessoaFila(SecFinanceira sec) {
-		Integer i = 0, findId = 0;
-		for(Pessoa p : sec.filaPessoas) {
-			if(i == sec.filaPessoas.size()) {
-				findId = p.id;
-			}
-			i++;
-		}
-		
-		return findId;
-	}
-	
-	public void realizarAtendimento(Integer id, SecFinanceira sec) {
-		for(Pessoa p : sec.filaPessoas) {
-			if(p.id == id) {
-				sec.removeFilaPessoa(p);
-			}
-		}
-	}*/
 
 	@Override
 	public boolean pessoaFisica() {

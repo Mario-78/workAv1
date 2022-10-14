@@ -1,5 +1,7 @@
 package workAv1_negociosProdutos;
 
+import exceptions.SaldoInsuficienteException;
+
 public class ContaCorrente implements Conta {
 	
 	private Integer id;
@@ -58,8 +60,18 @@ public class ContaCorrente implements Conta {
 	}
 
 	@Override
-	public void saque(Double valor) {
-		this.saldo -= valor;
+	public void saque(Double valor) throws SaldoInsuficienteException {
+		try {
+			
+			if((this.saldo -= valor) < 0) {
+				throw new SaldoInsuficienteException(this.saldo, valor);
+			}else {
+				this.saldo -= valor;			
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
