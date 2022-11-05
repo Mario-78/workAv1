@@ -9,20 +9,20 @@ public class Presidente extends Funcionario {
 		
 	}
 
-	public Presidente(Integer id, String name, String cpf, String função) {
-		super(id, name, cpf, função);		
+	public Presidente(Integer id, String name, String cpf, String funcao) {
+		super(id, name, cpf, funcao);		
 	}
 	
 	public void listarContasPresidente(Presidente presidente) {
 		System.out.println("Dados financeiros do presidente: \n");
 		for(ContaCorrente cc : presidente.listaContaC) {
 			System.out.println("Nome do titular:      " + presidente.getName());
-			System.out.println("Conta corrente nº:    " + cc.getId());
+			System.out.println("Conta corrente nï¿½:    " + cc.getId());
 		}
 		System.out.println();
 		for(ContaPoupanca cp : presidente.listaContaP) {
 			System.out.println("Nome do titular:      " + presidente.getName());
-			System.out.println("Conta poupança nº:    " + cp.getId());
+			System.out.println("Conta poupanï¿½a nï¿½:    " + cp.getId());
 		}
 	}
 	

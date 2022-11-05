@@ -11,8 +11,8 @@ public class SecAcademica extends Funcionario {
 		
 	}
 
-	public SecAcademica(Integer id, String name, String cpf, String função) {
-		super(id, name, cpf, função);
+	public SecAcademica(Integer id, String name, String cpf, String funcao) {
+		super(id, name, cpf, funcao);
 	}
 	
 	public Fila<Pessoa> getFilaAlunos(){
@@ -20,7 +20,7 @@ public class SecAcademica extends Funcionario {
 	}
 	
 	public void listarDadosSecAcademica(SecAcademica sec) {
-		System.out.println("\nDados pessoais do secretário(a) academico(a)");
+		System.out.println("\nDados pessoais do secretï¿½rio(a) academico(a)");
 		System.out.println("\nNome:                     " + sec.name);
 		System.out.println("\nId:                       " + sec.id);
 		System.out.println("\nCPF:                      " + sec.cpf_cnpj);
@@ -28,14 +28,14 @@ public class SecAcademica extends Funcionario {
 	}
 	
 	public void listarContasSecAcad(SecAcademica sec) {
-		System.out.println("\nDados financeiros do secretário(a) academico(a)");
+		System.out.println("\nDados financeiros do secretï¿½rio(a) academico(a)");
 		for(ContaCorrente cc : sec.listaContaC) {
 			System.out.println("Nome do titular:      " + sec.name);
-			System.out.println("Conta corrente nº     " + cc.getId());
+			System.out.println("Conta corrente nï¿½     " + cc.getId());
 		}
 		for(ContaPoupanca cp : sec.listaContaP) {
 			System.out.println("Nome do titular:      " + sec.name);
-			System.out.println("Conta corrente nº     " + cp.getId());
+			System.out.println("Conta corrente nï¿½     " + cp.getId());
 		}
 		System.out.println();
 	}

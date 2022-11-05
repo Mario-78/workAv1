@@ -11,8 +11,8 @@ public class Diretor extends Funcionario {
 		
 	}
 	
-	public Diretor(Integer id, String name, String cpf, String função) {
-		super(id, name, cpf, função);
+	public Diretor(Integer id, String name, String cpf, String funcao) {
+		super(id, name, cpf, funcao);
 	}
 	
 	public Fila<Pessoa> getFilaCoordenadores(){
@@ -23,12 +23,12 @@ public class Diretor extends Funcionario {
 		System.out.println("Dados financeiros do diretor: \n");
 		for(ContaCorrente cc : diretor.listaContaC) {
 			System.out.println("Nome do titular:      " + diretor.getName());
-			System.out.println("Conta corrente nº:    " + cc.getId());
+			System.out.println("Conta corrente nï¿½:    " + cc.getId());
 		}
 		System.out.println();
 		for(ContaPoupanca cp : diretor.listaContaP) {
 			System.out.println("Nome do titular:      " + diretor.getName());
-			System.out.println("Conta poupança nº:    " + cp.getId());
+			System.out.println("Conta poupanï¿½a nï¿½:    " + cp.getId());
 		}
 	}
 

@@ -17,8 +17,8 @@ public class Professor extends Funcionario implements PessoaFisica {
 		
 	}
 
-	public Professor(Integer id, String name, String cpf, String função) {
-		super(id, name, cpf, função);		
+	public Professor(Integer id, String name, String cpf, String funcao) {
+		super(id, name, cpf, funcao);		
 	}
 	
 	public Fila<Aluno> getFilaAlunos() {
@@ -44,12 +44,12 @@ public class Professor extends Funcionario implements PessoaFisica {
 		System.out.println("Dados financeiros do professor: \n");
 		for(ContaCorrente cc : professor.listaContaC) {
 			System.out.println("Nome do titular:      " + professor.name);
-			System.out.println("Conta corrente nº     " + cc.getId());
+			System.out.println("Conta corrente nï¿½     " + cc.getId());
 		}
 		System.out.println();
 		for(ContaPoupanca cp : professor.listaContaP) {
 			System.out.println("Nome do titular:      " + professor.name);
-			System.out.println("Conta corrente nº     " + cp.getId());
+			System.out.println("Conta corrente nï¿½     " + cp.getId());
 		}
 	}
 	

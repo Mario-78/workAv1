@@ -5,23 +5,23 @@ import workAv1_estruturaOrganizacional.Secretaria;
 
 public abstract class Funcionario extends Pessoa implements PessoaFisica, Diretoria, Secretaria{
 	
-	protected String função;
+	protected String funcao;
 	
 	public Funcionario() {
 		
 	}
 
-	public Funcionario(Integer id, String name, String cpf, String função) {
+	public Funcionario(Integer id, String name, String cpf, String funcao) {
 		super(id, name, cpf);
-		this.função = função;
+		this.funcao = funcao;
 	}
 
-	public String getFunção() {
-		return função;
+	public String getFuncao() {
+		return funcao;
 	}
 
-	public void setFunção(String função) {
-		this.função = função;
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
 	}	
 	
 }
